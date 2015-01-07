@@ -99,7 +99,7 @@ Parts of the data structure might be omitted if the information is not available
 # Group Parking
 This is a group of all parking related rest resources including Parking Garages and On-street Parking Vacancies.
     
-## Parking Garages with Basic Info [/imp-endpoint/api/V1/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages={categoryJson}]  
+## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages={categoryJson}]  
 This collection contains a list of all parking garages in an area of interest specified by query parameters together with an URI to acquire more details. Parking garages can be filtered by category.
 The area of interest can be defined as:
 
@@ -182,9 +182,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "ParkingGarage",
                     "uri": "Resources/Parking/Garages/50368",
                     "location": {
-                        "latitude": 52.439266204834,
-                        "longitude": 13.3900337219238,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.3900337219238,
+                            52.439266204834
+                        ]
                     },
                     "provider": "vmzParking",
                     "availability": null,
@@ -209,9 +211,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "ParkingGarage",
                     "uri": "Resources/Parking/Garages/50050",
                     "location": {
-                        "latitude": 52.4693984985352,
-                        "longitude": 13.3851003646851,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.3851003646851,
+                            52.4693984985352
+                        ]
                     },
                     "provider": "vmzParking",
                     "availability": null,
@@ -236,9 +240,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "ParkingGarage",
                     "uri": "Resources/Parking/Garages/50399",
                     "location": {
-                        "latitude": 52.4807777404785,
-                        "longitude": 13.3121109008789,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.3121109008789,
+                            52.4807777404785
+                        ]
                     },
                     "provider": "vmzParking",
                     "availability": null,
@@ -254,7 +260,7 @@ Parts of the data structure might be omitted if the information is not available
         }
 
 
-## Parking Garage with Detailed Info [/imp-endpoint/api/V1/Resources/Parking/Garages/{id}]
+## Parking Garage with Detailed Info [/imp-endpoint/api/V2/Resources/Parking/Garages/{id}]
 
 A single parking garage object with Detailed Information. 
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
@@ -281,7 +287,7 @@ entrance | String |
 @nottestable
 
 + Parameters
-    + id (string, `878`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}]* .
+    + id (string, `878`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}]* .
         
 + Response 200 (application/json)
 
@@ -300,9 +306,11 @@ entrance | String |
                 "type": "ParkingGarageDetails",
                 "uri": "Resources/Parking/Garages/878",
                 "location": {
-                    "latitude": 52.515930000000004,
-                    "longitude": 13.39694,
-                    "system": "WGS_84"
+                    "type": "Point",
+                        "coordinates": [
+                            13.39694,
+                            52.515930000000004
+                        ]
                 },
                 "provider": "vmzParking",
                 "availability": null,
@@ -341,7 +349,7 @@ entrance | String |
                 "entrance": null
             }
 
-## OnStreet Parking Spaces [/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}]
+## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}]
 This collection contains a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet spaces can be filtered by the space size.
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -360,7 +368,7 @@ id | Number | Internal OnStreet parking space identification number
 description | String | Approximate location
 type | String | (="ParkingOnStreetSpace")
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  } 
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Parking service provider (usually equals operator)
 availability | Double | Availability in percentage
 operator | String | Parking space operator (usually equals provider)
@@ -413,9 +421,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "ParkingOnStreetSpace",
                     "uri": "Resources/Parking/OnStreetSpaces/239",
                     "location": {
-                        "latitude": 52.502795,
-                        "longitude": 13.352953,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.352953,
+                            52.502795
+                        ]
                     },
                     "provider": "parkUParking",
                     "availability": 100,
@@ -426,7 +436,7 @@ Parts of the data structure might be omitted if the information is not available
             ]
         }
 
-## OnStreet Space with Detailed Info [/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces/{id}]
+## OnStreet Space with Detailed Info [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces/{id}]
 
 A single OnStreet Space object with Detailed Information. 
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
@@ -446,7 +456,7 @@ usage | String |
 @nottestable
 
 + Parameters
-    + id (string, `907`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}]* .
+    + id (string, `907`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}]* .
         
 + Response 200 (application/json)
 
@@ -459,9 +469,11 @@ usage | String |
                 "type": "ParkingOnStreetSpaceDetails",
                 "uri": "Resources/Parking/OnStreetSpaces/907",
                 "location": {
-                    "latitude": 52.528512,
-                    "longitude": 13.403188,
-                    "system": "WGS_84"
+                    "type": "Point",
+                        "coordinates": [
+                            13.403188,
+                            52.528512
+                        ]
                 },
                 "provider": "parkUParking",
                 "availability": 100,
@@ -490,7 +502,7 @@ usage | String |
             }
             
         
-## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V1/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}]    
+## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}]    
 This collection contains a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -541,9 +553,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "OnStreetSpaces",
                     "uri": "Resources/Parking/OnStreetSpaces/2838",
                     "location": {
-                        "latitude": 52.517519,
-                        "longitude": 13.301087,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.301087,
+                            52.517519
+                        ]
                     },
                     "provider": "parkUParking",
                     "availability": 100,
@@ -556,9 +570,11 @@ Parts of the data structure might be omitted if the information is not available
                     "type": "OnStreetSpaces",
                     "uri": "Resources/Parking/OnStreetSpaces/239",
                     "location": {
-                        "latitude": 52.502795,
-                        "longitude": 13.352953,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.352953,
+                            52.502795
+                        ]
                     },
                     "provider": "parkUParking",
                     "availability": 100,
@@ -712,7 +728,7 @@ origin | Object | start point specified by a geo location (optionally can also i
 destination | Object | end point specified by a geo location (optional can also include endtime). Note if time in the origin is specified, time in the destination is discarded! If no time is specified current time is taken.
 viapoints | Array of Objects | list of geolocations the route should pass
 costfunctions | Array of Objects | list of cost factors, (such as Distance, Duration, Price, Emission), each with a percentual weight. Sample custfunction: {"costType":"Duration","percentage":"100"}
-ownVehicles | Array of Objects | list of own vehicles which should be included into trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"longitude":13.064472900000055,"latitude":52.3905689,"system":"WGS84"}}
+ownVehicles | Array of Objects | list of own vehicles which should be included into trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
 userId | String | traveller id that requests a trip. Note: currently not used by IMP and can be any string
 trafficTypes | Array | list of traffic types wich should be included into trip proposal calculation. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking
 routingConstraints | Array of Objects | list of constraints to be taken into account for various traffic types, specified by min/max values. E.q. maximal distance in meters the traveller agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "Meter" }, "max":{"value":600, "unit":"Meter"}}
@@ -1778,9 +1794,11 @@ departures | String | Departures info containing direction, line and departure t
                         "type": "PublicTransportStation",
                         "uri": "Resources/PublicTransport/Stations/2532/TimeTables/2532",
                         "location": {
-                            "latitude": 52.505154,
-                            "longitude": 13.405322,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.405322,
+                                52.505154
+                            ]
                         },
                         "provider": "vmzStation",
                         "availability": 100,
