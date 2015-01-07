@@ -49,7 +49,7 @@ id | Number | Internal bike sharing station identification number
 description | String | Approximate location
 type | String | Type of bike sharing station
 uri | URI | URI to request more details.
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | service provider
 availability | Double | Availability in percentage
 operator | String | resource operator
@@ -122,7 +122,7 @@ id | Number | Internal parking garage identification number
 description | String | Approximate location
 type | String | (="ParkingGarage")
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  } 
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider (usually equals operator)
 availability | Double | Availability in percentage
 operator | String | Parking space operator (usually equals provider)
@@ -1635,45 +1635,53 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
             {
                 "metaData": [
                     {
-                        "serviceAlias": "vmzStation",
-                        "lastUpdateTime": "2014-10-14T07:48:27+02:00",
-                        "messages": []
+                      "serviceAlias": "vmzStation",
+                      "lastUpdateTime": "2015-01-07T07:14:23+00:00",
+                      "messages": [ ]
                     }
                 ],
                 "resources": [
                     {
-                        "actions": [],
-                        "id": 52696,
-                        "description": "Berlin, Wiebestr./Huttenstr.",
-                        "type": "PublicTransportStation",
-                        "uri": "Resources/PublicTransport/Stations/PublicTransportStation/52696",
-                        "location": {
-                            "latitude": 52.528315,
-                            "longitude": 13.320255,
-                            "system": "WGS_84"
-                        },
-                        "provider": "vmzStation",
-                        "availability": 100,
-                        "operator": "VBBStation",
-                        "modFlag": "Modified"
+                      "actions": [
+                        
+                      ],
+                      "id": 4498,
+                      "description": "HÃ¶now, Erikastr.",
+                      "type": "PublicTransportStation",
+                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/4498",
+                      "location": {
+                        "type": "Point",
+                        "coordinates": [
+                          13.627082,
+                          52.530892
+                        ]
+                      },
+                      "provider": "vmzStation",
+                      "availability": 100.0,
+                      "operator": "VBBStation",
+                      "modFlag": "Modified"  
                     },
                     {
-                        "actions": [],
-                        "id": 51655,
-                        "description": "Berlin, Waltersdorfer Str./Krumme Str.",
-                        "type": "PublicTransportStation",
-                        "uri": "Resources/PublicTransport/Stations/PublicTransportStation/51655",
-                        "location": {
-                            "latitude": 52.398914,
-                            "longitude": 13.574981,
-                            "system": "WGS_84"
-                        },
-                        "provider": "vmzStation",
-                        "availability": 100,
-                        "operator": "VBBStation",
-                        "modFlag": "Modified"
+                      "actions": [
+                        
+                      ],
+                      "id": 1306,
+                      "description": "S+U Karl-Bonhoeffer-Nervenklinik (Berlin)",
+                      "type": "PublicTransportStation",
+                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/1306",
+                      "location": {
+                        "type": "Point",
+                        "coordinates": [
+                          13.332921,
+                          52.578169
+                        ]
+                      },
+                      "provider": "vmzStation",
+                      "availability": 100.0,
+                      "operator": "VBBStation",
+                      "modFlag": "Modified"
                     }
-                ]
+                ]    
             }
 
 
@@ -1689,48 +1697,56 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
 + Response 200
 
             {
-                        "metaData": [
-                            {
-                                "serviceAlias": "vmzStation",
-                                "lastUpdateTime": "2014-10-14T07:48:27+02:00",
-                                "messages": []
-                            }
-                        ],
-                        "resources": [
-                            {
-                                "actions": [],
-                                "id": 52696,
-                                "description": "Berlin, Wiebestr./Huttenstr.",
-                                "type": "PublicTransportStation",
-                                "uri": "Resources/PublicTransport/Stations/PublicTransportStation/52696",
-                                "location": {
-                                    "latitude": 52.528315,
-                                    "longitude": 13.320255,
-                                    "system": "WGS_84"
-                                },
-                                "provider": "vmzStation",
-                                "availability": 100,
-                                "operator": "VBBStation",
-                                "modFlag": "Modified"
-                            },
-                            {
-                                "actions": [],
-                                "id": 51655,
-                                "description": "Berlin, Waltersdorfer Str./Krumme Str.",
-                                "type": "PublicTransportStation",
-                                "uri": "Resources/PublicTransport/Stations/PublicTransportStation/51655",
-                                "location": {
-                                    "latitude": 52.398914,
-                                    "longitude": 13.574981,
-                                    "system": "WGS_84"
-                                },
-                                "provider": "vmzStation",
-                                "availability": 100,
-                                "operator": "VBBStation",
-                                "modFlag": "Modified"
-                            }
-                        ]
+                "metaData": [
+                    {
+                      "serviceAlias": "vmzStation",
+                      "lastUpdateTime": "2015-01-07T07:14:23+00:00",
+                      "messages": [ ]
                     }
+                ],
+                "resources": [
+                    {
+                      "actions": [
+                        
+                      ],
+                      "id": 4498,
+                      "description": "HÃ¶now, Erikastr.",
+                      "type": "PublicTransportStation",
+                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/4498",
+                      "location": {
+                        "type": "Point",
+                        "coordinates": [
+                          13.627082,
+                          52.530892
+                        ]
+                      },
+                      "provider": "vmzStation",
+                      "availability": 100.0,
+                      "operator": "VBBStation",
+                      "modFlag": "Modified"  
+                    },
+                    {
+                      "actions": [
+                        
+                      ],
+                      "id": 1306,
+                      "description": "S+U Karl-Bonhoeffer-Nervenklinik (Berlin)",
+                      "type": "PublicTransportStation",
+                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/1306",
+                      "location": {
+                        "type": "Point",
+                        "coordinates": [
+                          13.332921,
+                          52.578169
+                        ]
+                      },
+                      "provider": "vmzStation",
+                      "availability": 100.0,
+                      "operator": "VBBStation",
+                      "modFlag": "Modified"
+                    }
+                ]    
+            }
 
 ## Time Table of a specific Station [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/{id}/TimeTables]
 
