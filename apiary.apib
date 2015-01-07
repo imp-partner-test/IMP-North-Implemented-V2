@@ -70,7 +70,7 @@ Parts of the data structure might be omitted if the information is not available
 + Parameters
     + lat (number, `52.52`) ... latitude value. Has example value.
     + lng (number, `13.39`) ... longitude value. Has example value.
-    + radius (number, `5000`) ... radius value. Has example value.
+    + radius (number, `5000`) ... radius in meter. Has example value.
     
 + Request
 
@@ -94,6 +94,477 @@ Parts of the data structure might be omitted if the information is not available
                 }
             ],
             "resources": [ ]
+        }
+
+# Group Parking
+This is a group of all parking related rest resources including Parking Garages and On-street Parking Vacancies.
+    
+## Parking Garages with Basic Info [/imp-endpoint/api/V1/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages={categoryJson}]  
+This collection contains a list of all parking garages in an area of interest specified by query parameters together with an URI to acquire more details. Parking garages can be filtered by category.
+The area of interest can be defined as:
+
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
+Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
+
+The data structure of the response contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+actions | Array | List of available actions on this resource (book, cancel, etc.)
+id | Number | Internal parking garage identification number
+description | String | Approximate location
+type | String | (="ParkingGarage")
+uri | URI | URI to request more details
+location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  } 
+provider | String | Service provider (usually equals operator)
+availability | Double | Availability in percentage
+operator | String | Parking space operator (usually equals provider)
+totalnumber | Object | Number of lots for different categories { "handicappedOnly":Int, "womenOnly":Int, "others":Int }
+lottype | Enum | Type of garage {"Parking garage", "Parking zone", "Underground car park", "Parking lot"} 
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
+
+Parts of the data structure might be omitted if the information is not available. 
+    
+### Getting parking garages [GET]
+@testable
+
++ Parameters
+    + lat (optional, number, `52.52`) ... latitude value. Has example value.
+    + lng (optional, number, `13.39`) ... longitude value. Has example value.
+    + radius (optional, number, `10000`) ... radius in meter. Has example value.
+    + categoryJson (optional, string, `{"category": ["P%2BR"]}`) ... String `categoryJson` category json data, containing a list of possible category values combined by OR. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
+
+    
++ Request
+
+    + Headers
+    
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
+        
++ Response 200 (application/json)   
+
+        {
+            "metaData": [
+                {
+                    "serviceAlias": "vmzParking",
+                    "lastUpdateTime": "2014-12-16T10:14:46+01:00",
+                    "messages": []
+                },
+                {
+                    "serviceAlias": "city2eParking",
+                    "lastUpdateTime": "2014-12-16T10:35:46+01:00",
+                    "messages": []
+                },
+                {
+                    "serviceAlias": "parkUParking",
+                    "lastUpdateTime": "2014-12-16T10:35:46+01:00",
+                    "messages": []
+                }
+            ],
+            "resources": [
+                {
+                    "actions": [
+                        {
+                            "name": "consume",
+                            "method": "POST",
+                            "uri": "Resources/Parking/Garages/50368/Process?action=consume"
+                        }
+                    ],
+                    "id": 50368,
+                    "description": "P+R Alt-Mariendorf (U)",
+                    "type": "ParkingGarage",
+                    "uri": "Resources/Parking/Garages/50368",
+                    "location": {
+                        "latitude": 52.439266204834,
+                        "longitude": 13.3900337219238,
+                        "system": "WGS_84"
+                    },
+                    "provider": "vmzParking",
+                    "availability": null,
+                    "operator": "PR",
+                    "totalnumber": {
+                        "others": 125,
+                        "handicappedOnly": null,
+                        "womenOnly": null
+                    },
+                    "lottype": null
+                },
+                {
+                    "actions": [
+                        {
+                            "name": "consume",
+                            "method": "POST",
+                            "uri": "Resources/Parking/Garages/50050/Process?action=consume"
+                        }
+                    ],
+                    "id": 50050,
+                    "description": "P+R Tempelhof (S + U)",
+                    "type": "ParkingGarage",
+                    "uri": "Resources/Parking/Garages/50050",
+                    "location": {
+                        "latitude": 52.4693984985352,
+                        "longitude": 13.3851003646851,
+                        "system": "WGS_84"
+                    },
+                    "provider": "vmzParking",
+                    "availability": null,
+                    "operator": "PR",
+                    "totalnumber": {
+                        "others": 70,
+                        "handicappedOnly": null,
+                        "womenOnly": null
+                    },
+                    "lottype": null
+                },
+                {
+                    "actions": [
+                        {
+                            "name": "consume",
+                            "method": "POST",
+                            "uri": "Resources/Parking/Garages/50399/Process?action=consume"
+                        }
+                    ],
+                    "id": 50399,
+                    "description": "P+R Heidelberger Platz (S + U)",
+                    "type": "ParkingGarage",
+                    "uri": "Resources/Parking/Garages/50399",
+                    "location": {
+                        "latitude": 52.4807777404785,
+                        "longitude": 13.3121109008789,
+                        "system": "WGS_84"
+                    },
+                    "provider": "vmzParking",
+                    "availability": null,
+                    "operator": "PR",
+                    "totalnumber": {
+                        "others": 140,
+                        "handicappedOnly": null,
+                        "womenOnly": null
+                    },
+                    "lottype": null
+                }
+            ]
+        }
+
+
+## Parking Garage with Detailed Info [/imp-endpoint/api/V1/Resources/Parking/Garages/{id}]
+
+A single parking garage object with Detailed Information. 
+The data structure of the response contains the attributes with the basic information and additionally the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+... | ... | ...
+address | Object | Address {"citycode": String, "city": String, "street": String, "houseno": String }
+pricing | String | Price structure 
+payment | Array | Payment options {COINPAY, BANKNOTEPAY, BANKCARDPAY, CREDICARDPAY, PREPAIDCARDPAY, PAYCARDPAY, DEBITPAY}
+category | Enum | P - parking, P+R park and ride, etc. { "P+R","B+R", "P", ... } 
+openingHours | String | Opening hours
+bookable | Boolean |  
+heightLimit | Object | Height limit { "value": Number, "unit": String } 
+occupancyRate | Number | Occupancy rate in percent (real time data) 
+allowedStay | Object | Allowed stay { "value": Number, "unit": String } 
+generalInformations | String |
+restrictions | Array | Usage restrictions {"VisitorsOnly","GuestsOnly"}
+services | Array | Special services { "WomenParking", "DisabledParking", "Monitored", "ChargingStation", "ParentChild", "MotorCycle", ... } 
+securityComment | String |  Security features
+entrance | String |
+
+### Getting a specific garage [GET] 
+@nottestable
+
++ Parameters
+    + id (string, `878`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}]* .
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "actions": [
+                    {
+                        "name": "consume",
+                        "method": "POST",
+                        "uri": "Resources/Parking/Garages/878/Process?action=consume"
+                    }
+                ],
+                "id": 878,
+                "description": "Mitte, An der Friedrichswerderschen Kirche",
+                "type": "ParkingGarageDetails",
+                "uri": "Resources/Parking/Garages/878",
+                "location": {
+                    "latitude": 52.515930000000004,
+                    "longitude": 13.39694,
+                    "system": "WGS_84"
+                },
+                "provider": "vmzParking",
+                "availability": null,
+                "operator": "P",
+                "totalnumber": {
+                    "others": 75,
+                    "handicappedOnly": 0,
+                    "womenOnly": 0
+                },
+                "lottype": "Parking lot",
+                "address": {
+                    "citycode": "10117",
+                    "city": "Berlin",
+                    "street": "Oberwallstr.",
+                    "houseno": null,
+                    "district": null,
+                    "region": null,
+                    "country": null
+                },
+                "pricing": "EUR 0,25 pro 15 min.<br>Mo-Fr von 19 - 9 Uhr: kostenlos<br>Sa von 14 - 9 Uhr: kostenlos<br>So: kostenlos",
+                "payment": [
+                    "COINPAY"
+                ],
+                "category": [
+                    "P"
+                ],
+                "openingHours": null,
+                "bookable": false,
+                "heightLimit": null,
+                "occupancyRate": null,
+                "allowedStay": null,
+                "generalInformations": null,
+                "restrictions": null,
+                "services": null,
+                "securityComment": null,
+                "entrance": null
+            }
+
+## OnStreet Parking Spaces [/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}]
+This collection contains a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet spaces can be filtered by the space size.
+
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
+Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
+
+The data structure of the response contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+actions | Array | List of available actions on this resource (currently no actions available)
+id | Number | Internal OnStreet parking space identification number
+description | String | Approximate location
+type | String | (="ParkingOnStreetSpace")
+uri | URI | URI to request more details
+location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  } 
+provider | String | Parking service provider (usually equals operator)
+availability | Double | Availability in percentage
+operator | String | Parking space operator (usually equals provider)
+size | Enum | Size of OnStreet parking space {"Large", "Medium", "Small", "Unknown"} 
+accessibility | Enum | Accessibility of OnStreet parking space {"Private","Public","SemiPublic","Unknown"}
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
+
+Parts of the data structure might be omitted if the information is not available. 
+
+### Getting OnStreet parking [GET]
+@testable
+
++ Parameters
+    + lat (optional, number, `52.50`) ... latitude value. Has example value.
+    + lng (optional, number, `13.35`) ... longitude value. Has example value.
+    + radius (optional, number, `5000`) ... radius in meter. Has example value.
+    + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`
+
++ Request
+
+    + Headers
+
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
+
++ Response 200 (application/json)   
+
+        {
+            "metaData": [
+                {
+                    "serviceAlias": "vmzParking",
+                    "lastUpdateTime": "2014-12-02T15:59:01+01:00",
+                    "messages": []
+                },
+                {
+                    "serviceAlias": "city2eParking",
+                    "lastUpdateTime": "2014-12-02T16:27:45+01:00",
+                    "messages": []
+                },
+                {
+                    "serviceAlias": "parkUParking",
+                    "lastUpdateTime": "2014-12-02T16:27:50+01:00",
+                    "messages": []
+                }
+            ],
+            "resources": [
+                {
+                    "actions": [],
+                    "id": 239,
+                    "description": "Einemstraße",
+                    "type": "ParkingOnStreetSpace",
+                    "uri": "Resources/Parking/OnStreetSpaces/239",
+                    "location": {
+                        "latitude": 52.502795,
+                        "longitude": 13.352953,
+                        "system": "WGS_84"
+                    },
+                    "provider": "parkUParking",
+                    "availability": 100,
+                    "operator": "ParkU",
+                    "size": "Large",
+                    "accessibility": null
+                }
+            ]
+        }
+
+## OnStreet Space with Detailed Info [/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces/{id}]
+
+A single OnStreet Space object with Detailed Information. 
+The data structure of the response contains the attributes with the basic information and additionally the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+... | ... | ...
+address | Object | Address {"citycode": String, "city": String, "street": String, "houseno": String }
+barrier | boolean |  
+indoor | boolean | 
+patio | String | 
+barrierFree | boolean | 
+category | Enum |  
+usage | String |  
+
+### Getting a specific OnStreet Space [GET] 
+@nottestable
+
++ Parameters
+    + id (string, `907`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}]* .
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "actions": [],
+                "id": 907,
+                "description": "Kleine Rosenthaler Str.",
+                "type": "ParkingOnStreetSpaceDetails",
+                "uri": "Resources/Parking/OnStreetSpaces/907",
+                "location": {
+                    "latitude": 52.528512,
+                    "longitude": 13.403188,
+                    "system": "WGS_84"
+                },
+                "provider": "parkUParking",
+                "availability": 100,
+                "operator": "ParkU",
+                "size": "Large",
+                "accessibility": null,
+                "address": {
+                    "citycode": "10119",
+                    "city": "Berlin",
+                    "street": "Kleine Rosenthaler Str.",
+                    "houseno": "12",
+                    "district": null,
+                    "region": null,
+                    "country": "DE"
+                },
+                "barrier": true,
+                "indoor": true,
+                "patio": null,
+                "barrierFree": true,
+                "category": [
+                    "attribute/available/true",
+                    "attribute/traffic/sharingOperator/ParkU",
+                    "point/traffic/parking/p/dynamic"
+                ],
+                "usage": "Tiefgarage Hotel  AMANO, kameraüberwacht, freie Platzwahl, Ausfahrt Rosenthaler Straße (QR-Code auf Rezeptionsklingel); zum Öffnen der Tore benötigen Sie die parku-App.\r\n\r\n5 Minuten zum Hackeschen Markt oder Rosenthaler Platz."
+            }
+            
+        
+## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V1/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}]    
+This collection contains a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
+
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
+Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
+
+The response contains attributes from parking garages or OnStreet parking spaces or both.
+
+Parts of the data structure might be omitted if the information is not available. 
+    
+### Getting all parking garages or OnStreet parking spaces or both with specified size and category [GET]
+@testable
+
++ Parameters
+    + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
+    + categoryJson (optional, string, `{"category": ["P%2BR"]}`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
+    
++ Request
+
+    + Headers
+    
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
+        
++ Response 200 (application/json)   
+
+        {
+            "metaData": [
+                {
+                    "serviceAlias": "vmzParking",
+                    "lastUpdateTime": "2014-11-20T12:55:14+01:00",
+                    "messages": []
+                                    },
+                {
+                    "serviceAlias": "city2eParking",
+                    "lastUpdateTime": "2014-11-20T13:22:50+01:00",
+                    "messages": []
+                },
+                {
+                    "serviceAlias": "parkUParking",
+                    "lastUpdateTime": "2014-11-20T13:22:54+01:00",
+                    "messages": []
+                }
+            ],
+            "resources": [
+                {
+                    "actions": [],
+                    "id": 2838,
+                    "description": "Lohmeyerstraße",
+                    "type": "OnStreetSpaces",
+                    "uri": "Resources/Parking/OnStreetSpaces/2838",
+                    "location": {
+                        "latitude": 52.517519,
+                        "longitude": 13.301087,
+                        "system": "WGS_84"
+                    },
+                    "provider": "parkUParking",
+                    "availability": 100,
+                    "operator": "ParkU"
+                },
+                {
+                    "actions": [],
+                    "id": 239,
+                    "description": "Einemstraße",
+                    "type": "OnStreetSpaces",
+                    "uri": "Resources/Parking/OnStreetSpaces/239",
+                    "location": {
+                        "latitude": 52.502795,
+                        "longitude": 13.352953,
+                        "system": "WGS_84"
+                    },
+                    "provider": "parkUParking",
+                    "availability": 100,
+                    "operator": "ParkU"
+                }
+            ]
         }
 
 # Group Journey Planner. IMR
@@ -1011,7 +1482,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
 + Parameters
     + lat (number, `52.52`) ... latitude value. Has example value.
     + lng (number, `13.39`) ... longitude value. Has example value.
-    + radius (number, `1000`) ... radius value. Has example value.
+    + radius (number, `1000`) ... radius in meter. Has example value.
     + f_stations (optional, string, `{"stationType":"BusTramStation"}`) ... String `f_stations` filter value. Has example value.
 + Model (application/json)
 
