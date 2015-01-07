@@ -1468,7 +1468,7 @@ resources | Array | Array of resources within the search area
 description | String | Approximate location
 type | String | (="PublicTransportStation")
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
@@ -1503,21 +1503,6 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                     {
                         "serviceAlias": "osmMunichStation",
                         "lastUpdateTime": "2015-01-07T07:12:46+00:00",
-                        "messages": []
-                    },
-                    {
-                        "serviceAlias": "osmHamburgStation",
-                        "lastUpdateTime": "2015-01-07T07:13:39+00:00",
-                        "messages": []
-                    },
-                    {
-                        "serviceAlias": "osmCologneStation",
-                        "lastUpdateTime": "2015-01-06T12:36:58+00:00",
-                        "messages": []
-                    },
-                    {
-                        "serviceAlias": "osmDusseldorfStation",
-                        "lastUpdateTime": "2015-01-07T07:14:18+00:00",
                         "messages": []
                     }
                 ],
@@ -1622,7 +1607,7 @@ resources | Array | Array of resources within the search area
 description | String | Approximate location
 type | String | (="PublicTransportStation")
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
