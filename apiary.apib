@@ -973,5 +973,492 @@ Notes:
                 ]
             }
 
+# Group Public Transport
+This is a group of all public transportation related rest resources.
+
+## List of Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}] 
+
+This collection contains list stations (U-Bahn/S-Bahn/train/bus/tram) in a specific area with basic information and a URI to get more details.
+Note: The area of interest can be defined as:
+
+* a bounding circle (lat={lat}&lng={lng}&radius={radius})
+* a bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+
+The optional filter `f_stations` can be used to get the stations with a particular   `stationType`
+
+The If-Modified-Since (optional) can be set to a specific date-time in order to request only resources modified after a particular date-time. Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+description | String | Approximate location
+type | String | (="PublicTransportStation")
+uri | URI | URI to request more details
+location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+availability | Double | Availability in percentage
+operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+stationType | String | BusTramStation, MetroStation, CityTrainStation
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request 
+
+
++ Parameters
+    + lat (number, `52.52`) ... latitude value. Has example value.
+    + lng (number, `13.39`) ... longitude value. Has example value.
+    + radius (number, `1000`) ... radius value. Has example value.
+    + f_stations (optional, string, `{"stationType":"BusTramStation"}`) ... String `f_stations` filter value. Has example value.
++ Model (application/json)
+
+    + Body
+    
+            {
+                "metaData": [
+                    {
+                        "serviceAlias": "vmzStation",
+                        "lastUpdateTime": "2015-01-07T07:14:23+00:00",
+                        "messages": []
+                    },
+                    {
+                        "serviceAlias": "osmBerlinStation",
+                        "lastUpdateTime": "2015-01-07T07:10:41+00:00",
+                        "messages": []
+                    },
+                    {
+                        "serviceAlias": "osmMunichStation",
+                        "lastUpdateTime": "2015-01-07T07:12:46+00:00",
+                        "messages": []
+                    },
+                    {
+                        "serviceAlias": "osmHamburgStation",
+                        "lastUpdateTime": "2015-01-07T07:13:39+00:00",
+                        "messages": []
+                    },
+                    {
+                        "serviceAlias": "osmCologneStation",
+                        "lastUpdateTime": "2015-01-06T12:36:58+00:00",
+                        "messages": []
+                    },
+                    {
+                        "serviceAlias": "osmDusseldorfStation",
+                        "lastUpdateTime": "2015-01-07T07:14:18+00:00",
+                        "messages": []
+                    }
+                ],
+                "resources": [
+                    {
+                        "actions": [],
+                        "id": 10573,
+                        "description": "Peter-Auzinger-StraÃe",
+                        "type": "PublicTransportStation",
+                        "uri": null,
+                        "location": {
+                            "type": "Point",
+                            "coordinates": [
+                                11.58288,
+                                48.098793
+                            ]
+                        },
+                        "provider": "osmMunichStation",
+                        "availability": 100,
+                        "operator": null,
+                        "stationType": "BusTramStation",
+                        "platforms": null,
+                        "wheelChair": null,
+                        "lines": [
+                            {
+                                "name": "139",
+                                "trafficType": "Bus"
+                            },
+                            {
+                                "name": "220",
+                                "trafficType": "Bus"
+                            },
+                            {
+                                "name": "147",
+                                "trafficType": "Bus"
+                            }
+                        ]
+                    },
+                    {
+                        "actions": [],
+                        "id": 10634,
+                        "description": "LincolnstraÃe",
+                        "type": "PublicTransportStation",
+                        "uri": null,
+                        "location": {
+                            "type": "Point",
+                            "coordinates": [
+                                11.5904131,
+                                48.094374
+                            ]
+                        },
+                        "provider": "osmMunichStation",
+                        "availability": 100,
+                        "operator": null,
+                        "stationType": "BusTramStation",
+                        "platforms": null,
+                        "wheelChair": null,
+                        "lines": [
+                            {
+                                "name": "220",
+                                "trafficType": "Bus"
+                            },
+                            {
+                                "name": "220",
+                                "trafficType": "Bus"
+                            },
+                            {
+                                "name": "147",
+                                "trafficType": "Bus"
+                            }
+                        ]
+                    }
+            }
+
+
+### Getting all stations in a specific area [GET]
+@testable
+
++ Request
+
+    + Headers
+        
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT
+
++ Response 200
+
+    [List of Public Transport Stations with Basic Info][]
+    
+    
+## List of All Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/All] 
+
+This collection contains list stations (U-Bahn/S-Bahn/train/bus/tram)
+
+The If-Modified-Since (optional) can be set to a specific date-time in order to request only resources modified after a particular date-time. Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+description | String | Approximate location
+type | String | (="PublicTransportStation")
+uri | URI | URI to request more details
+location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+availability | Double | Availability in percentage
+operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request 
+
++ Model (application/json)
+
+    + Body
+    
+            {
+                "metaData": [
+                    {
+                        "serviceAlias": "vmzStation",
+                        "lastUpdateTime": "2014-10-14T07:48:27+02:00",
+                        "messages": []
+                    }
+                ],
+                "resources": [
+                    {
+                        "actions": [],
+                        "id": 52696,
+                        "description": "Berlin, Wiebestr./Huttenstr.",
+                        "type": "PublicTransportStation",
+                        "uri": "Resources/PublicTransport/Stations/PublicTransportStation/52696",
+                        "location": {
+                            "latitude": 52.528315,
+                            "longitude": 13.320255,
+                            "system": "WGS_84"
+                        },
+                        "provider": "vmzStation",
+                        "availability": 100,
+                        "operator": "VBBStation",
+                        "modFlag": "Modified"
+                    },
+                    {
+                        "actions": [],
+                        "id": 51655,
+                        "description": "Berlin, Waltersdorfer Str./Krumme Str.",
+                        "type": "PublicTransportStation",
+                        "uri": "Resources/PublicTransport/Stations/PublicTransportStation/51655",
+                        "location": {
+                            "latitude": 52.398914,
+                            "longitude": 13.574981,
+                            "system": "WGS_84"
+                        },
+                        "provider": "vmzStation",
+                        "availability": 100,
+                        "operator": "VBBStation",
+                        "modFlag": "Modified"
+                    }
+                ]
+            }
+
+
+### Getting all stations [GET]
+@testable
+
++ Request
+
+    + Headers
+        
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT
+
++ Response 200
+
+            {
+                        "metaData": [
+                            {
+                                "serviceAlias": "vmzStation",
+                                "lastUpdateTime": "2014-10-14T07:48:27+02:00",
+                                "messages": []
+                            }
+                        ],
+                        "resources": [
+                            {
+                                "actions": [],
+                                "id": 52696,
+                                "description": "Berlin, Wiebestr./Huttenstr.",
+                                "type": "PublicTransportStation",
+                                "uri": "Resources/PublicTransport/Stations/PublicTransportStation/52696",
+                                "location": {
+                                    "latitude": 52.528315,
+                                    "longitude": 13.320255,
+                                    "system": "WGS_84"
+                                },
+                                "provider": "vmzStation",
+                                "availability": 100,
+                                "operator": "VBBStation",
+                                "modFlag": "Modified"
+                            },
+                            {
+                                "actions": [],
+                                "id": 51655,
+                                "description": "Berlin, Waltersdorfer Str./Krumme Str.",
+                                "type": "PublicTransportStation",
+                                "uri": "Resources/PublicTransport/Stations/PublicTransportStation/51655",
+                                "location": {
+                                    "latitude": 52.398914,
+                                    "longitude": 13.574981,
+                                    "system": "WGS_84"
+                                },
+                                "provider": "vmzStation",
+                                "availability": 100,
+                                "operator": "VBBStation",
+                                "modFlag": "Modified"
+                            }
+                        ]
+                    }
+
+## Time Table of a specific Station [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/{id}/TimeTables]
+
+Arrival and departure times at a specified station. 
+The data structure contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+id | Number | Internal public transport station identification number
+... | ... | ...
+arrivals | String | Arrivals info containing direction, line and arrival times
+departures | String | Departures info containing direction, line and departure times
+
+!Please note: expectedTime is not always available.
+
+### Getting a time table [GET] 
+@nottestable
+
++ Parameters
+    + id (string, `2532`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}]* .
+
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "metaData": [
+                    {
+                        "serviceAlias": "vmzStation",
+                        "lastUpdateTime": null,
+                        "messages": []
+                    }
+                ],
+                "resources": [
+                    {
+                        "actions": [],
+                        "id": 2532,
+                        "description": "Berlin, Alexandrinenstr.",
+                        "type": "PublicTransportStation",
+                        "uri": "Resources/PublicTransport/Stations/2532/TimeTables/2532",
+                        "location": {
+                            "latitude": 52.505154,
+                            "longitude": 13.405322,
+                            "system": "WGS_84"
+                        },
+                        "provider": "vmzStation",
+                        "availability": 100,
+                        "operator": "VBBStation",
+                        "arrivals": [],
+                        "departures": [
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:46:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:49:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:51:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:54:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:56:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T18:59:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:01:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:04:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:06:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:09:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:11:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:14:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:16:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:19:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:21:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:24:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:26:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:29:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:31:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:34:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:35:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "Grunewald, Roseneck",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:39:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Hermannplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:41:00+02:00",
+                                "expectedTime": null
+                            },
+                            {
+                                "direction": "U Wittenbergplatz",
+                                "line": "Bus M29",
+                                "aimedTime": "2014-07-14T19:44:00+02:00",
+                                "expectedTime": null
+                            }
+                        ]
+                    }
+                ]
+            }
 
 # Group Dummy. Please do not delete.
