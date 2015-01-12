@@ -3,38 +3,43 @@ FORMAT: 1A
 HOST: https://muc-staging-v2.jelastic.dogado.eu:4848
 
 # IMP North. Implemented. V2
-This IMP API version 2.
+This apiary project describes the API version V2 of SiMobility Connect. 
+
 Host V2: https://das-muc-staging-v2.jelastic.dogado.eu:4848
+
 Host V1: https://das-muc-staging-imp.jelastic.dogado.eu:4848
-cml host: http://cml-staging.jelastic.dogado.eu only IMR is working
+
+cml host: http://cml-staging.jelastic.dogado.eu (only IMR is working)
 
 # Readme before making any changes   
 
-Please keep the groovy generating script in synch with this documentation. Read more on Wiki: https://confluence.imp.mobilitaetsdienste.de/display/IMP/Apiary. 
+Please keep the Groovy generating script in synch with this documentation. Read more on Wiki: https://confluence.imp.mobilitaetsdienste.de/display/IMP/Apiary. 
 
-*update the goovy script if you change names of any chapter* 
-*chapter names can not contain special characters "(", ")", "\", etc. which have a meaning in regular expressions*
+* *Update the Groovy script if you change names of any chapter.* 
+* *Chapter names must not contain special characters "(", ")", "\", etc. which have a meaning in regular expressions.*
 
 # Introduction
 
-This is a description of a public REST interface offered by Siemens AG VERSION 2 and its subsidiary VMZ Berlin Betreibergesellschaft GmbH 
-in the project Open Mobility Berlin. A mockup of this interface can be tried using the URLs listed on the right. For access to the production
+This is the description of version V2 of the public REST interface of the platform SiMobility Connect offered by Siemens AG. A mockup of this interface can be tried using the URLs listed on the right. 
+In order to avoid redundancies, this project contains only interfaces that were changed since version V1. The V1 interface is decribed in http://docs.imp.apiary.io/.
+
+A mockup of this interface can be tried using the URLs listed on the right. For access to the production
 system please write an email to `henrik.koberg@siemens.com`
 
 (c) Siemens AG 2014 All rights reserved
 
 # Group Bike Sharing
-This is a group of all bike sharing related rest resources
+This is a group of all bike sharing related REST resources.
     
 ## Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]    
-This collection contains a list of all bike sharing stations in an area of interest specified by query parameters. (for station-based bike sharing)
-Note: The area of interest can be defined as:
+This collection contains a list of all bike sharing stations in an area of interest specified by query parameters.
+The area of interest can be defined as:
 
-* a bounding circle (lat={lat}&lng={lng}&radius={radius})
-* a bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
-The If-Modified-Since (optional) can be set to a specific date-time in order to request only resources modified after a particular date-time.
-Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
+Date-time is in HTTP date format for, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
 
 The data structure of the response contains the following attributes: 
 
@@ -50,17 +55,17 @@ description | String | Approximate location
 type | String | Type of bike sharing station
 uri | URI | URI to request more details.
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
-provider | String | service provider
+provider | String | Service provider
 availability | Double | Availability in percentage
-operator | String | resource operator
+operator | String | Resource operator
 phoneNo | String | 
 operatorURI | String |
-operatorName | String | 
+operatorName | String | Resource operator
 address | Object | 
-numberOfBikes | Number | 
-numberOfFreeBikes | Number | 
+numberOfBikes | Number | Number of bikes or storing positions
+numberOfFreeBikes | Number | Number of currently available bikes
 services | Array | 
-modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request  
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
 Parts of the data structure might be omitted if the information is not available. 
     
@@ -97,7 +102,7 @@ Parts of the data structure might be omitted if the information is not available
         }
 
 # Group Parking
-This is a group of all parking related rest resources including Parking Garages and On-street Parking Vacancies.
+This is a group of all parking related REST resources including Parking Garages and On-street Parking Vacancies.
     
 ## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages={categoryJson}]  
 This collection contains a list of all parking garages in an area of interest specified by query parameters together with an URI to acquire more details. Parking garages can be filtered by category.
@@ -287,7 +292,7 @@ entrance | String |
 @nottestable
 
 + Parameters
-    + id (string, `878`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}]* .
+    + id (string, `878`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -350,7 +355,11 @@ entrance | String |
             }
 
 ## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}]
-This collection contains a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet spaces can be filtered by the space size.
+This collection contains a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet parking spaces can be filtered by the space size (Small, Medium or Large).
+The area of interest can be defined as:
+
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
 Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
@@ -445,18 +454,18 @@ attribute | json data type | comments
 --- | --- | ---
 ... | ... | ...
 address | Object | Address {"citycode": String, "city": String, "street": String, "houseno": String }
-barrier | boolean |  
-indoor | boolean | 
+barrier | boolean | Entry/exit barrier 
+indoor | boolean | covered parking
 patio | String | 
-barrierFree | boolean | 
-category | Enum |  
-usage | String |  
+barrierFree | boolean | Barrier-free accessible
+category | Array | List of enums describing features
+usage | String | Description how to enter or use the parking space
 
 ### Getting a specific OnStreet Space [GET] 
 @nottestable
 
 + Parameters
-    + id (string, `907`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}]* .
+    + id (string, `907`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -584,22 +593,22 @@ Parts of the data structure might be omitted if the information is not available
         }
 
 # Group Journey Planner. IMR
-This is a group of all IMR journey planner related rest resources.
+This is a group of all IMR journey planner related REST resources.
 
 ## List of Trip Proposals with Basic Info. Intermodal Router [/imp-endpoint/api/V2/TripProposals/IMR] 
 
-This collection contains a list of trip proposals with basic information for specified trip criteria. Note: the trip proposals can be multimodal or intermodal, depending on which routing service the user is subscribed to.
+This collection contains a list of trip proposals with basic information for specified trip criteria. Note: The trip proposals can be multimodal or intermodal, depending on which routing service the mobility provider of the user is subscribed to.
 
 The data structure of collection contains a list of trip proposals. Each trip proposal contains the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
 url | URI | URI to request more details
-origin | Object | start point of the proposed trip
-destination | Object | endpoint of the proposed trip
-trafficTypes | Array | list of traffic types used in the proposed trip. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking
-description | String | description of the trip proposal
-costs | Array | list of costs for the proposed trip including distance, duration, price, etc.
+origin | Object | Start point of the proposed trip
+destination | Object | Endpoint of the proposed trip
+trafficTypes | Array | List of traffic types used in the proposed trip. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking.
+description | String | Description of the trip proposal
+costs | Array | List of costs for the proposed trip including distance, duration, price, etc.
 
     
 + Model (application/json)
@@ -724,21 +733,21 @@ Selection criteria for trip proposals is specified in the request body as descri
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | start point specified by a geo location (optionally can also include starttime). (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
-destination | Object | end point specified by a geo location (optional can also include endtime). Note if time in the origin is specified, time in the destination is discarded! If no time is specified current time is taken.
-viapoints | Array of Objects | list of geolocations the route should pass
-costfunctions | Array of Objects | list of cost factors, (such as Distance, Duration, Price, Emission), each with a percentual weight. Sample custfunction: {"costType":"Duration","percentage":"100"}
-ownVehicles | Array of Objects | list of own vehicles which should be included into trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
-userId | String | traveller id that requests a trip. Note: currently not used by IMP and can be any string
-trafficTypes | Array | list of traffic types wich should be included into trip proposal calculation. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking
-routingConstraints | Array of Objects | list of constraints to be taken into account for various traffic types, specified by min/max values. E.q. maximal distance in meters the traveller agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "Meter" }, "max":{"value":600, "unit":"Meter"}}
-useBikeSharing | Boolean | use bike sharing services for routing [default: false]
-useCarSharing | Boolean | use car sharing services for routing [default: false]
+origin | Object | Start point specified by a geo location (optionally can also include starttime). Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations".
+destination | Object | End point specified by a geo location (optional can also include endtime). Note if time in the origin is specified, time in the destination is discarded! If no time is specified current time is taken.
+viapoints | Array of Objects | List of geolocations the route should pass in the given sequence
+costfunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}
+ownVehicles | Array of Objects | List of own vehicles which may be included in trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
+userId | String | Traveller id that requests a trip. Note: Currently it is not used by IMP and can be any string.
+trafficTypes | Array | List of traffic types which should be included into trip proposal calculation. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. 
+routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
+useBikeSharing | Boolean | Use bike sharing services for routing [default: false]
+useCarSharing | Boolean | Use car sharing services for routing [default: false]
 
 Notes:
 - IMR also provides routes in the past, but not for public transport
-- route calculation the IMR takes into account information about current traffic situation (traffic jams/road works/...)
-- Traveling time costs for proposed journeys include the following extra time: 2 minutes set-up time and 1 minute return time for free-floating car sharing and bike sharing; 2 minutes set-up time and 0 minutes return time for station-based car and bike sharing, 5 minutes parking time for free-floating car sharing and own car
+- The IMR takes into account information about current traffic situation (traffic jams/road works/...) for route calculation.
+- Traveling time costs for proposed journeys include the following extra times: 2 minutes set-up time and 1 minute return time for free-floating car sharing and bike sharing; 2 minutes set-up time and 0 minutes return time for station-based car and bike sharing, 5 minutes parking time for free-floating car sharing and own car.
 
 
 
