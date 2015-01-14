@@ -890,14 +890,23 @@ A segment consists of a sequence of wayPoints and guidingPoints.
 A wayPoint describes an intermediate geo location useful for displaying the trip proposal in a map.
 A guidingPoint contain turn-by-turn instructions. It gives a traveler hints how to travel, e.g. whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints.
 
-The data structure of the trip proposal with detailed info contains the basic information attributes (*[POST /imp-endpoint/api/V2/TripProposals/IMR]*) and additionally the following attributes:
+The data structure of the trip proposal with detailed info contains the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
-segmentId | URI | URI to request more details
-origin | Object | Start point of the proposed trip. For car sharing segment we have "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction"
-destination | Object | endpoint of the proposed trip
+url | URI | URI to request more details
+segments | Array of Objects | List of route segments
+--- | --- | ---
+segmentId | Number | Index of segment
+description | String | Description of the segment
+origin | Object | Start point of the segment. 
+destination | Object | End point of the segment
+trafficType | Enum | Traffic type used in the segment. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking.
+cost | Object | Costs of the segment including distance, duration, price and CO2 emmision.
+wayPoints | Object | List of way points to render the segment
+guidingPoints | Object | List of guiding points with turn-by-turn instructions
 
+For a car or bike sharing segment we have in addition "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction".
 
 Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes.
 
@@ -1546,19 +1555,19 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
             }
 
 # Group Public Transport
-This is a group of all public transportation related rest resources.
+This is a group of all public transportation related REST resources.
 
 ## List of Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}] 
 
-This collection contains list stations (U-Bahn/S-Bahn/train/bus/tram) in a specific area with basic information and a URI to get more details.
-Note: The area of interest can be defined as:
+This collection contains a list of stations (U-Bahn/S-Bahn/train/bus/tram) in a specified area with basic information and a URI to get more details.
+The area of interest can be defined as:
 
-* a bounding circle (lat={lat}&lng={lng}&radius={radius})
-* a bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
-The optional filter `f_stations` can be used to get the stations with a particular   `stationType`
+The optional filter `f_stations` can be used to get the stations with a particular `stationType`.
 
-The If-Modified-Since (optional) can be set to a specific date-time in order to request only resources modified after a particular date-time. Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
 
 attribute | json data type | comments
 --- | --- | ---
@@ -1570,12 +1579,12 @@ description | String | Approximate location
 type | String | (="PublicTransportStation")
 uri | URI | URI to request more details
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
-provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 stationType | String | BusTramStation, MetroStation, CityTrainStation
-platforms | String | Platforms at station
-wheelChair | Boolean | Wheel chair availability
+platforms | String | Platforms of the station
+wheelChair | Boolean | Wheel chair accessibility
 lines | Array of Objects | Array of lines departing at the station
 modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
@@ -1688,21 +1697,21 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     
 ## List of All Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/All] 
 
-This collection contains list stations (U-Bahn/S-Bahn/train/bus/tram)
+This collection contains a list of stations (U-Bahn/S-Bahn/train/bus/tram).
 
-The If-Modified-Since (optional) can be set to a specific date-time in order to request only resources modified after a particular date-time. Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
 
 attribute | json data type | comments
 --- | --- | ---
 metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
 --- | --- | ---
-resources | Array | Array of resources within the search area
+resources | Array | Array of resources within the business area
 --- | --- | ---
 description | String | Approximate location
 type | String | (="PublicTransportStation")
 uri | URI | URI to request more details
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
-provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
@@ -1780,27 +1789,27 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
 
 ## Time Table of a specific Station [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/{id}/TimeTables]
 
-Arrival and departure times at a specified station. 
-The data structure contains the following attributes:
+Arrival and departure times of a specified station. 
+The data structure contains the station details as described above and in addition the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
 metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
 --- | --- | ---
-resources | Array | Array of resources within the search area
+resources | Array | Array of arrivals/departures
 --- | --- | ---
 id | Number | Internal public transport station identification number
 ... | ... | ...
-arrivals | String | Arrivals info containing direction, line and arrival times
-departures | String | Departures info containing direction, line and departure times
+arrivals | Array of Objects | Arrivals info containing direction, line and arrival times
+departures | Array of Objects | Departures info containing direction, line and departure times
 
-!Please note: expectedTime is not always available.
+Please note, the expectedTime is not always available.
 
 ### Getting a time table [GET] 
 @nottestable
 
 + Parameters
-    + id (string, `2532`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}]* .
+    + id (string, `2532`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
         
 + Response 200 (application/json)
