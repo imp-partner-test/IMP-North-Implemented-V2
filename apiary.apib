@@ -677,7 +677,7 @@ origin | Object | Start point of the proposed trip
 destination | Object | Endpoint of the proposed trip
 trafficTypes | Array | List of traffic types used in the proposed trip. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking.
 description | String | Description of the trip proposal
-costs | Array | List of costs for the proposed trip including distance, duration, price, etc.
+costs | Array | List of costs for the proposed trip including distance, duration, price, CO2 emmision and ticket price for public transport.
 
     
 + Model (application/json)
@@ -802,16 +802,24 @@ Selection criteria for trip proposals is specified in the request body as descri
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | Start point specified by a geo location (optionally can also include starttime). Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations".
-destination | Object | End point specified by a geo location (optional can also include endtime). Note if time in the origin is specified, time in the destination is discarded! If no time is specified current time is taken.
+origin | Object | Start point specified by a geo location. Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations".
+destination | Object | End point specified by a geo location.
+time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
+departureTime | Boolean | Specifies whether the time is used as departure or arrival time
 viapoints | Array of Objects | List of geolocations the route should pass in the given sequence
-costfunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}
-ownVehicles | Array of Objects | List of own vehicles which may be included in trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
-userId | String | Traveller id that requests a trip. Note: Currently it is not used by IMP and can be any string.
+costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}
+userId | String | Traveler id that requests a trip. Note: Currently it is not used by IMP and can be any string.
 trafficTypes | Array | List of traffic types which should be included into trip proposal calculation. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
+ownVehicles | Array of Objects | List of own vehicles which may be included in trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
 useBikeSharing | Boolean | Use bike sharing services for routing [default: false]
 useCarSharing | Boolean | Use car sharing services for routing [default: false]
+maxRoutingResponses | Number | Number of to be provided route alternatives
+numOfTravelers | Number | Number of fellow travelers
+numOfLuggage | Number | Number of luggage pieces
+useTrafficSituation | Boolean | If set to true, the current traffic situation will be considered in the route calculation
+
+Usually a subscribed route planning service does not support all of the above parameters. In many cases that is indicated by warnings in the metaData section of the response.
 
 Notes:
 - IMR also provides routes in the past, but not for public transport
@@ -876,23 +884,22 @@ Notes:
 
 A single trip proposal object with Detailed Information. 
 Each trip proposal consists of several segments, one segment for one transportation modality such as bike, car, train, etc. 
-There is also a separate segment if the traveler shall use different lines of the same transport modality, 
-for instance, first U5 from A to B and then U4 from B to C. Each segement has an origin and a destination with corresponding timestamps when to arrive and depart.
+There are also separate segments if the traveler shall use different lines of the same transport modality, 
+for instance, first U5 from A to B and then U4 from B to C. Each segment has an origin and a destination with corresponding timestamps when to arrive and depart.
 A segment consists of a sequence of wayPoints and guidingPoints.
 A wayPoint describes an intermediate geo location useful for displaying the trip proposal in a map.
-A guidingPoint gives a traveler hints how to travel, e.g., whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints
+A guidingPoint contain turn-by-turn instructions. It gives a traveler hints how to travel, e.g. whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints.
 
 The data structure of the trip proposal with detailed info contains the basic information attributes (*[POST /imp-endpoint/api/V2/TripProposals/IMR]*) and additionally the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
 segmentId | URI | URI to request more details
-origin | Object | start point of the proposed trip. For car sharing segment we have "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction"
+origin | Object | Start point of the proposed trip. For car sharing segment we have "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction"
 destination | Object | endpoint of the proposed trip
 
 
-Notes:
-- The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes.
+Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes.
 
 ### Getting a specific Trip Proposal [GET] 
 @nottestable
@@ -1570,7 +1577,7 @@ stationType | String | BusTramStation, MetroStation, CityTrainStation
 platforms | String | Platforms at station
 wheelChair | Boolean | Wheel chair availability
 lines | Array of Objects | Array of lines departing at the station
-modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request 
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
 
 + Parameters
@@ -1698,7 +1705,7 @@ location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Poin
 provider | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
-modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request 
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
 
 + Model (application/json)
 
@@ -1768,57 +1775,8 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
 
 + Response 200
 
-            {
-                "metaData": [
-                    {
-                      "serviceAlias": "vmzStation",
-                      "lastUpdateTime": "2015-01-07T07:14:23+00:00",
-                      "messages": [ ]
-                    }
-                ],
-                "resources": [
-                    {
-                      "actions": [
-                        
-                      ],
-                      "id": 4498,
-                      "description": "HÃ¶now, Erikastr.",
-                      "type": "PublicTransportStation",
-                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/4498",
-                      "location": {
-                        "type": "Point",
-                        "coordinates": [
-                          13.627082,
-                          52.530892
-                        ]
-                      },
-                      "provider": "vmzStation",
-                      "availability": 100.0,
-                      "operator": "VBBStation",
-                      "modFlag": "Modified"  
-                    },
-                    {
-                      "actions": [
-                        
-                      ],
-                      "id": 1306,
-                      "description": "S+U Karl-Bonhoeffer-Nervenklinik (Berlin)",
-                      "type": "PublicTransportStation",
-                      "uri": "Resources/PublicTransport/Stations/PublicTransportStation/1306",
-                      "location": {
-                        "type": "Point",
-                        "coordinates": [
-                          13.332921,
-                          52.578169
-                        ]
-                      },
-                      "provider": "vmzStation",
-                      "availability": 100.0,
-                      "operator": "VBBStation",
-                      "modFlag": "Modified"
-                    }
-                ]    
-            }
+    [List of All Public Transport Stations with Basic Info][]
+    
 
 ## Time Table of a specific Station [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/{id}/TimeTables]
 
