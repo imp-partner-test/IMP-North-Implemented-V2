@@ -33,13 +33,13 @@ Usually clients will be authorized by certificates. If that is not possible, Bas
 # Group Bike Sharing
 This is a group of all bike sharing related REST resources.
     
-## Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}&filter={textFilter}]    
+## Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}&filter={filter}]    
 This collection contains a list of all bike sharing stations in an area of interest specified by query parameters.
 The area of interest can be defined as:
 
 * an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
 * an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
-* an (optional) full text filter (filter={textFilter})
+* an (optional) full text filter (filter={filter})
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
 Date-time is in HTTP date format for, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
@@ -79,7 +79,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (number, `52.52`) ... latitude value. Has example value.
     + lng (number, `13.39`) ... longitude value. Has example value.
     + radius (number, `500`) ... radius in meter. Has example value.
-    + filter (optional, number, `Berlin`) ... textFilter value. Has example value.
+    + filter (optional, number, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, {`Berlin`}, {`Berlin` ´Mitte`}
     
 + Request
 
