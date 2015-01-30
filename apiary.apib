@@ -79,7 +79,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (number, `52.52`) ... latitude value. Has example value.
     + lng (number, `13.39`) ... longitude value. Has example value.
     + radius (number, `500`) ... radius in meter. Has example value.
-    + filter (optional, number, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, {`Berlin`}, {`Berlin` ´Mitte`}
+    + filter (optional, string, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
 
@@ -219,8 +219,7 @@ Parts of the data structure might be omitted if the information is not available
     + lng (optional, number, `13.39`) ... longitude value. Has example value.
     + radius (optional, number, `10000`) ... radius in meter. Has example value.
     + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data, containing a list of possible category values combined by OR. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
-    + filter (optional, string, `Parking`) ... filter value. Has example value.
-
+    + filter (optional, string, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
 
@@ -429,7 +428,7 @@ entrance | String |
                 "entrance": null
             }
 
-## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&filter={textFilter}]
+## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&filter={filter}]
 This collection contains a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet parking spaces can be filtered by the space size (Small, Medium or Large).
 The area of interest can be defined as:
 
@@ -470,7 +469,8 @@ Parts of the data structure might be omitted if the information is not available
     + lng (optional, number, `11.59`) ... longitude value. Has example value.
     + radius (optional, number, `5000`) ... radius in meter. Has example value.
     + sizeJson (optional, string, `{"size":"Medium"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`
-    + filter (optional, number, `Medium`) ... textFilter value. Has example value.
+    + filter (optional, string, `Medium`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
+    
 + Request
 
     + Headers
@@ -586,7 +586,7 @@ usage | String | Description how to enter or use the parking space
             }
             
         
-## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}&filter={textFilter}]    
+## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}&filter={filter}]    
 This collection contains a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -602,7 +602,7 @@ Parts of the data structure might be omitted if the information is not available
 + Parameters
     + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
     + categoryJson (optional, string, `{"category": ["P%2BR"]}`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
-    + filter (optional, number, `Medium`) ... textFilter value. Has example value.
+    + filter (optional, string, `Medium`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
 + Request
 
     + Headers
@@ -1563,7 +1563,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
 # Group Public Transport
 This is a group of all public transportation related REST resources.
 
-## List of Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}&filter={textFilter}] 
+## List of Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}&filter={filter}] 
 
 This collection contains a list of stations (U-Bahn/S-Bahn/train/bus/tram) in a specified area with basic information and a URI to get more details.
 The area of interest can be defined as:
@@ -1600,7 +1600,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     + lng (number, `11.59`) ... longitude value. Has example value.
     + radius (number, `500`) ... radius in meter. Has example value.
     + f_stations (optional, string, `{"stationType":"BusTramStation"}`) ... String `f_stations` filter value. Has example value.
-    + filter (optional, number, `BusTramStation`) ... textFilter value. Has example value.
+    + filter (optional, string, `BusTramStation`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
 + Model (application/json)
 
     + Body
