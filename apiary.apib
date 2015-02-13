@@ -1973,4 +1973,191 @@ Please note, the expectedTime is not always available.
                 ]
             }
 
+# Group System Configuration
+This group contains all System related configuration interfaces
+
+## Get System Business Area Info [/imp-endpoint/api/V2/ApplicationInfo/SystemBusinessArea] 
+
+This collection contains System Business Area Information.
+
+attribute | json data type | comments
+--- | --- | ---
+businessBoundary | Object | List of MultiPolygon in Geojson format.
+
++ Model (application/json)
+
+    + Body
+    
+            {
+                "operator": null,
+                "description": null,
+                "serviceCategory": null,
+                "businessBoundary": {
+                "disjunctedBoundary": {
+                    "coordinates": [
+                        [
+                            [
+                                [
+                                    13.0891553,
+                                    52.3396296
+                                ],
+                                [
+                                    13.0891553,
+                                    52.6754542
+                                ],
+                                [
+                                    13.7611176,
+                                    52.6754542
+                                ],
+                                [
+                                    13.7611176,
+                                    52.3396296
+                                ],
+                                [
+                                    13.0891553,
+                                    52.3396296
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    12.69987378269434,
+                                    52.29123
+                                ],
+                                [
+                                    12.69987378269434,
+                                    52.710410244573964
+                                ],
+                                [
+                                    14.106124117970467,
+                                    52.710410244573964
+                                ],
+                                [
+                                    14.106124117970467,
+                                    52.29123
+                                ],
+                                [
+                                    12.69987378269434,
+                                    52.29123
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    11.32715,
+                                    48.034301
+                                ],
+                                [
+                                    11.32715,
+                                    48.260096
+                                ],
+                                [
+                                    11.757894,
+                                    48.260096
+                                ],
+                                [
+                                    11.757894,
+                                    48.034301
+                                ],
+                                [
+                                    11.32715,
+                                    48.034301
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    9.730132,
+                                    53.396286
+                                ],
+                                [
+                                    9.730132,
+                                    53.739434
+                                ],
+                                [
+                                    10.32528,
+                                    53.739434
+                                ],
+                                [
+                                    10.32528,
+                                    53.396286
+                                ],
+                                [
+                                    9.730132,
+                                    53.396286
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    6.772582,
+                                    50.829527
+                                ],
+                                [
+                                    6.772582,
+                                    51.084963
+                                ],
+                                [
+                                    7.162063,
+                                    51.084963
+                                ],
+                                [
+                                    7.162063,
+                                    50.829527
+                                ],
+                                [
+                                    6.772582,
+                                    50.829527
+                                ]
+                            ]
+                        ],
+                        [
+                            [
+                                [
+                                    6.688762,
+                                    51.124375
+                                ],
+                                [
+                                    6.688762,
+                                    51.352534
+                                ],
+                                [
+                                    6.939939,
+                                    51.352534
+                                ],
+                                [
+                                    6.939939,
+                                    51.124375
+                                ],
+                                [
+                                    6.688762,
+                                    51.124375
+                                ]
+                            ]
+                        ]
+                    ],
+                    "type": "MultiPolygon",
+                    "crs": {
+                        "type": "name",
+                        "properties": {
+                            "name": "WGS84"
+                        }
+                    }
+                },
+                "negatedBoundary": null
+                }
+            }
+
+### Getting all stations in a specific area [GET]
+@testable
+
++ Response 200
+
+    [Get System Business Area Info][]
+            
+
 # Group Dummy. Please do not delete.
