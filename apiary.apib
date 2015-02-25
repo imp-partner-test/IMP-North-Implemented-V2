@@ -138,7 +138,7 @@ Parts of the data structure might be omitted if the information is not available
             ]
         }
 
-## All Bike Sharing Stations [/imp-endpoint/api/V1/Resources/BikeSharing/All]    
+## All Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/All]    
 This collection contains a list of all bike sharing stations.
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -246,7 +246,7 @@ Parts of the data structure might be omitted if the information is not available
           ]
         }
         
-## Station with Detailed Info [/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}]
+## Station with Detailed Info [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}]
 A single bike sharing station object with Detailed Information determined by a specific id.
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
 
@@ -259,7 +259,7 @@ attribute | json data type | comments
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -295,7 +295,7 @@ attribute | json data type | comments
             }
             
             
-## Getting bikes for a specific station [/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Bikes]
+## Getting bikes for a specific station [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes]
 Get list of bikes for a specific station determined by a specific stationId.
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
 
@@ -308,7 +308,7 @@ unitId | String | Internal identification number of a specific bike
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -348,7 +348,7 @@ unitId | String | Internal identification number of a specific bike
                 ]
             }
             
-## Getting details of bike of a specific station [/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Bikes/{bikeId}]
+## Getting details of bike of a specific station [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes/{bikeId}]
 Get details of bike of a specific station determined by a specific stationId and bikeId
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
 
@@ -361,8 +361,8 @@ attribute | json data type | comments
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
-    + bikeId (string, `18644`) ... String `unitId` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Bikes]* .
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + bikeId (string, `18644`) ... String `unitId` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes]* .
         
 + Response 200 (application/json)
 
@@ -393,7 +393,7 @@ attribute | json data type | comments
      
             
         
-## Book an available bike at a bike sharing station [/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Process?action=book]
+## Book an available bike at a bike sharing station [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -414,7 +414,7 @@ comments | String |
 @nottestable
 
 + Parameters
-    + stationId (string, `2`) ... Bike sharing station id where the bike is to be booked. String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `2`) ... Bike sharing station id where the bike is to be booked. String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
 + Request
 
@@ -449,7 +449,7 @@ comments | String |
         }
 
 
-## Book a specific bike at a bike sharing station [/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Bikes/{bikeId}/Process?action=book]
+## Book a specific bike at a bike sharing station [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes/{bikeId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -470,8 +470,8 @@ comments | String |
 @nottestable
 
 + Parameters
-    + stationId (string, `2`) ... Bike sharing station id where the bike is to be booked. String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
-    + bikeId (string, `1`) ... Bike to be booked. String `unitId` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Stations/{stationId}/Bikes]* .
+    + stationId (string, `2`) ... Bike sharing station id where the bike is to be booked. String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + bikeId (string, `1`) ... Bike to be booked. String `unitId` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes]* .
 
 + Request
 
@@ -505,7 +505,7 @@ comments | String |
             }
         }
 
-## Get floating bikes [/imp-endpoint/api/V1/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]    
+## Get floating bikes [/imp-endpoint/api/V2/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]    
 This collection contains a list of all floating bikes in an area of interest specified by query parameters.
 The area of interest can be defined as:
 
@@ -576,7 +576,7 @@ Parts of the data structure might be omitted if the information is not available
         }
         
         
-## Getting details of a floating bike [/imp-endpoint/api/V1/Resources/BikeSharing/Bikes/{bikeId}]
+## Getting details of a floating bike [/imp-endpoint/api/V2/Resources/BikeSharing/Bikes/{bikeId}]
 Get details of floating bike determined by a specific bikeId
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
 
@@ -589,7 +589,7 @@ attribute | json data type | comments
 @nottestable
 
 + Parameters
-    + bikeId (string, `18644`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + bikeId (string, `18644`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -618,7 +618,7 @@ attribute | json data type | comments
                 "unitId": "9423"
             }
 
-## Book a floating bike [/imp-endpoint/api/V1/Resources/BikeSharing/Bikes/{bikeId}/Process?action=book]
+## Book a floating bike [/imp-endpoint/api/V2/Resources/BikeSharing/Bikes/{bikeId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -639,7 +639,7 @@ comments | String |
 @nottestable
 
 + Parameters
-    + bikeId (string, `1`) ... Bike to be booked. String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + bikeId (string, `1`) ... Bike to be booked. String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
 + Request
 
@@ -677,7 +677,7 @@ comments | String |
 # Group Car Sharing
 This is a group of all car sharing related rest resources.
 
-## List of Car Sharing Locations with Basic Info [/imp-endpoint/api/V1/Resources/CarSharing/All?lat={lat}&lng={lng}&radius={radius}&f_cars={f_carsJson}] 
+## List of Car Sharing Locations with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/All?lat={lat}&lng={lng}&radius={radius}&f_cars={f_carsJson}] 
 
 This collection contains a list of available car sharing locations in an area of interest specified by the query parameters (both free-floating cars and/or car sharing stations) 
 with basic information and an URI to acquire more details.
@@ -791,7 +791,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
               ]
             } 
 
-## List of All Car Sharing Locations with Basic Info [/imp-endpoint/api/V1/Resources/CarSharing/All] 
+## List of All Car Sharing Locations with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/All] 
 
 This collection contains a list of all available car sharing locations (both free-floating cars and/or car sharing stations) 
 with basic information and an URI to acquire more details.
@@ -913,7 +913,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
               ]
             }
 
-## List of free-floating Cars with Basic Info [/imp-endpoint/api/V1/Resources/CarSharing/Cars?lat={lat}&lng={lng}&radius={radius}&f_cars={fuelTypeJson}]
+## List of free-floating Cars with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/Cars?lat={lat}&lng={lng}&radius={radius}&f_cars={fuelTypeJson}]
 
 This collection contains a list of available free-floating cars in a specific area specified by query parameters.
 The area of interest can be defined as:
@@ -1045,7 +1045,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                 ]
             }
         
-## Car with Detailed Info [/imp-endpoint/api/V1/Resources/CarSharing/Cars/{carId}]
+## Car with Detailed Info [/imp-endpoint/api/V2/Resources/CarSharing/Cars/{carId}]
 
 A single car object with Detailed Information. 
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
@@ -1068,7 +1068,7 @@ fee | String | Car costs per distance/time unit
 @nottestable
 
 + Parameters
-    + carId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/CarSharing/All?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + carId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/All?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
         
 + Response 200 (application/json)
@@ -1121,7 +1121,7 @@ fee | String | Car costs per distance/time unit
                 "fee": null
             }        
     
-## List of Stations with Basic Info [/imp-endpoint/api/V1/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}&f_cars={f_carsJson}]
+## List of Stations with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}&f_cars={f_carsJson}]
 
 This collection contains a list of car sharing stations in an area of interest specified by the query parameters,
 together with basic information and an URI to acquire more details.
@@ -1239,7 +1239,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
               ]
             }  
 
-## Station with Detailed Info [/imp-endpoint/api/V1/Resources/CarSharing/Stations/{stationId}]
+## Station with Detailed Info [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}]
 A single car sharing station object with Detailed Information determined by a specific id.
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
 
@@ -1254,7 +1254,7 @@ availableCars | Number | number of available cars
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
         
 + Response 200 (application/json)
 
@@ -1299,7 +1299,7 @@ availableCars | Number | number of available cars
                 "availableCars": 7
             }        
 
-## List of Cars at a specific Station with Basic Info [/imp-endpoint/api/V1/Resources/CarSharing/Stations/{stationId}/Cars]
+## List of Cars at a specific Station with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Cars]
 This collection contains a list of cars at a specific car sharing station.
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -1309,7 +1309,7 @@ Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
     
 + Request
 
@@ -1405,7 +1405,7 @@ Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
             ]
             } 
 
-## Book a free-floating car [/imp-endpoint/api/V1/Resources/CarSharing/Cars/{carId}/Process?action=book]
+## Book a free-floating car [/imp-endpoint/api/V2/Resources/CarSharing/Cars/{carId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -1426,7 +1426,7 @@ comments | String |
 @nottestable
 
 + Parameters
-    + carId (string, `2`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/CarSharing/Cars?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + carId (string, `2`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/Cars?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
 
 + Request
@@ -1446,7 +1446,7 @@ comments | String |
             "comments": "Comments"
         } 
 
-## Book a car at a specific station [/imp-endpoint/api/V1/Resources/CarSharing/Stations/{stationId}/Cars/{carId}/Process?action=book]
+## Book a car at a specific station [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Cars/{carId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -1467,8 +1467,8 @@ comments | String |
 @nottestable
 
 + Parameters
-    + stationId (string, `1`) ... String `id` as retrieved through [/imp-endpoint/api/V1/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}] or similar.
-    + carId (string, `2`) ... String `id` as retrieved through [/imp-endpoint/api/V1/Resources/CarSharing/Stations/{stationId}/Cars]
+    + stationId (string, `1`) ... String `id` as retrieved through [/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}] or similar.
+    + carId (string, `2`) ... String `id` as retrieved through [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Cars]
 
 
 + Request
@@ -1488,7 +1488,7 @@ comments | String |
             "comments": "Comments"
         } 
 
-## Book any car available at a station by specifying the car type [/imp-endpoint/api/V1/Resources/CarSharing/Stations/{stationId}/Process?action=book]
+## Book any car available at a station by specifying the car type [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Process?action=book]
 
 The data structure of the request contains the following attributes:
 
@@ -1510,7 +1510,7 @@ comments | String |
 @nottestable
 
 + Parameters
-    + stationId (string, `2`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `2`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
 + Request
 
@@ -1531,7 +1531,7 @@ comments | String |
 # Group EV Charging
 This is a group of all EV Charging related rest resources.
     
-## List of EV Charging Stations with Basic Info [/imp-endpoint/api/V1/Resources/EVCharging/Stations?lat={lat}&lng={lng}&radius={radius}]
+## List of EV Charging Stations with Basic Info [/imp-endpoint/api/V2/Resources/EVCharging/Stations?lat={lat}&lng={lng}&radius={radius}]
 This collection contains a list of all electric vehicle (EV) charging stations in an area of interest specified by query parameters, 
 together with geo location, name, and a URI to acquire more details.
 The area of interest can be defined as:
@@ -1623,7 +1623,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
             ]
         }
 
-## List of All EV Charging Stations with Basic Info [/imp-endpoint/api/V1/Resources/EVCharging/Stations/All]
+## List of All EV Charging Stations with Basic Info [/imp-endpoint/api/V2/Resources/EVCharging/Stations/All]
 This collection contains a list of all electric vehicle (EV) charging stations.
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
@@ -1707,7 +1707,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
             ]
         }
 
-## EV Charging Station with Detailed Info [/imp-endpoint/api/V1/Resources/EVCharging/Stations/{stationId}]
+## EV Charging Station with Detailed Info [/imp-endpoint/api/V2/Resources/EVCharging/Stations/{stationId}]
 
 A single charging station object with Detailed Information. 
 The data structure of the response contains the attributes with the basic information and additionally the following attributes:
@@ -1729,7 +1729,7 @@ units | EVChargingUnit | Details of EV Charging units
 @nottestable
 
 + Parameters
-    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V1/Resources/EVCharging/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/EVCharging/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
         
 + Response 200 (application/json)
@@ -1788,9 +1788,9 @@ This is a group of all handy ticketing related rest resources.
 
 Usually, a ticket is bought in three steps: First, the available tickets for a defined service will be requested. Then the selected ticket will be bought and finally the receipt of the ticket has to be confirmed.
     
-## Available Tickets [/imp-endpoint/api/V1/Resources/Ticketing/Tickets]    
+## Available Tickets [/imp-endpoint/api/V2/Resources/Ticketing/Tickets]    
 This collection contains a list of available products (tickets) for specified origin and destination. Both are public transport stations and are identified by `{pointId}`. 
-PointId can be retrieved using `GET /imp-endpoint/api/V1/Resources/PublicTransport/Stations`
+PointId can be retrieved using `GET /imp-endpoint/api/V2/Resources/PublicTransport/Stations`
 
 The data structure of the request:
 
@@ -1872,7 +1872,7 @@ Parts of the data structure might be omitted if the information is not available
                 ]
             }
 
-## Buy a Ticket [/imp-endpoint/api/V1/Resources/Ticketing/Tickets/{id}/Process?action=buy]    
+## Buy a Ticket [/imp-endpoint/api/V2/Resources/Ticketing/Tickets/{id}/Process?action=buy]    
 The response contains details of a bought ticket, identified by {ticketIds} and {ticketContent} 
 
 The data structure of the request body:
@@ -1948,7 +1948,7 @@ ticketContent | Base64Binary | Content of Ticket
                 }
             }
 
-## Confirm ticket delivery [/imp-endpoint/api/V1/Processes/{processId}]    
+## Confirm ticket delivery [/imp-endpoint/api/V2/Processes/{processId}]    
 The response contains details of a bought ticket, identified by {ticketIds} and {ticketContent} 
 
 The data structure of the request body:
@@ -2963,7 +2963,7 @@ Please note, the expectedTime is not always available.
 # Group Taxi Service
 This is a group of all taxi related REST resources.
 
-## List of available Taxis with Basic Info [/imp-endpoint/api/V1/Resources/TaxiService/Taxis?lat={lat}&lng={lng}&radius={radius}] 
+## List of available Taxis with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Taxis?lat={lat}&lng={lng}&radius={radius}] 
 
 This collection contains a list of taxis in a specified area with basic information and a URI to get more details.
 The area of interest can be defined as:
@@ -3019,7 +3019,7 @@ Parts of the data structure might be omitted if the information is not available
               "resources": []
         }
 
-## List of All available Taxis with Basic Info [/imp-endpoint/api/V1/Resources/TaxiService/Taxis/All] 
+## List of All available Taxis with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/All] 
 
 This collection contains a list of taxis.
 
@@ -3048,7 +3048,7 @@ The (optional) If-Modified-Since can be set to a specific date-time in order to 
         }        
         
 
-## Fare for the specified trip [/imp-endpoint/api/V1/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
+## Fare for the specified trip [/imp-endpoint/api/V2/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
 
 This response contains an estimated fare for trips from origin with distance.
 
@@ -3103,7 +3103,7 @@ services | Object | Set of available services
             }      
         }
 
-## Fare for the specified trip [/imp-endpoint/api/V1/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&dest_lat={dlat}&dest_lng={dlng}] 
+## Fare for the specified trip [/imp-endpoint/api/V2/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&dest_lat={dlat}&dest_lng={dlng}] 
 
 This response contains estimated fare for trips from origin to destination.
 
@@ -3150,7 +3150,7 @@ This response contains estimated fare for trips from origin to destination.
         }
 
 
-## Booking a taxi [/imp-endpoint/api/V1/Resources/TaxiService/Taxis/Processes?action=Book] 
+## Booking a taxi [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/Processes?action=Book] 
 
 Book a Taxi: The taxi ride is specified by providing the starting point (address and/or geo location) and the destination.
 This means that no specific, previously selected taxi is booked.
@@ -3201,7 +3201,7 @@ If booking is not possible, the response body explains the reason why.
 
     + Headers
     
-            Location: /api/V1/Process/4711
+            Location: /api/V2/Process/4711
             
     + Body
     
@@ -3233,13 +3233,13 @@ If booking is not possible, the response body explains the reason why.
                     {
                         "name": "Cancel",
                         "method": "PUT",
-                        "uri": "/api/V1/Processes/123?action=Cancel"
+                        "uri": "/api/V2/Processes/123?action=Cancel"
                     }
                 ]
             }
 
 
-## Canceling a taxi [/imp-endpoint/api/V1/Process/123?action=Cancel] 
+## Canceling a taxi [/imp-endpoint/api/V2/Process/123?action=Cancel] 
 
 Cancel a booking for a taxi that has been booked before. The booking id (123 in the example below) has to be provided as processID in the request.
 
@@ -3275,7 +3275,7 @@ If canceling is not possible, the response body explains the reason why.
 
     + Headers
     
-            Location: /api/V1/Process/123
+            Location: /api/V2/Process/123
             
     + Body
     
@@ -4195,7 +4195,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
 # Group Journey Planner. Car Router
 This is a group of all journey planner Car Router related REST resources.
             
-## List of Trip Proposals with Basic Info. Car Journey Planner [/imp-endpoint/api/V1/TripProposals/CarRouter] 
+## List of Trip Proposals with Basic Info. Car Journey Planner [/imp-endpoint/api/V2/TripProposals/CarRouter] 
 
 This collection contains trip proposals with basic information for specified trip criteria.
 The data structure of the response contains the following attributes:
@@ -4309,7 +4309,7 @@ userId: User that requests a trip
 # Group Incidents / Traffic Info
 This is a group of all incidents related REST resources.
 
-## List of Incidents [/imp-endpoint/api/V1/Info/Incidents?lat={lat}&lng={lng}&radius={radius}] 
+## List of Incidents [/imp-endpoint/api/V2/Info/Incidents?lat={lat}&lng={lng}&radius={radius}] 
 
 This collection contains a list of recent general incidents (incidents that affect public AND individual transport) in a specified area of interest with an URI to get more details.
 The area of interest can be defined as:
@@ -4411,7 +4411,7 @@ externalResourceId | String | ID in external provider system
 
     [List of Incidents][]
     
-## List of All Incidents [/imp-endpoint/api/V1/Info/Incidents/All] 
+## List of All Incidents [/imp-endpoint/api/V2/Info/Incidents/All] 
 
 This collection contains a list of recent general incidents (incidents that affect public AND individual transport). 
 The data structure of the response contains the following attributes:
@@ -4447,7 +4447,7 @@ externalResourceId | String | ID in external provider system
     
     
     
-## List of individual transport Incidents [/imp-endpoint/api/V1/Info/Incidents/IndividualTransport?lat={lat}&lng={lng}&radius={radius}] 
+## List of individual transport Incidents [/imp-endpoint/api/V2/Info/Incidents/IndividualTransport?lat={lat}&lng={lng}&radius={radius}] 
 
 This collection contains list of recent incidents that affect individual transport only in a specified area of interest.
 The area of interest can be defined as:
@@ -4455,7 +4455,7 @@ The area of interest can be defined as:
 * an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
 * an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
-The data structure contains the attributes as in *[/imp-endpoint/api/V1/Info/Incidents?lat={lat}&lng={lng}&radius={radius]* and additionally the roadName attribute.
+The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Incidents?lat={lat}&lng={lng}&radius={radius]* and additionally the roadName attribute.
 
 + Parameters
     + lat (number, `52.52`) ... latitude value. Has example value.
@@ -4529,7 +4529,7 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V1/Info/Inc
     [List of individual transport Incidents][]
 
 
-## List of public transport Incidents [/imp-endpoint/api/V1/Info/Incidents/PublicTransport?lat={lat}&lng={lng}&radius={radius}] 
+## List of public transport Incidents [/imp-endpoint/api/V2/Info/Incidents/PublicTransport?lat={lat}&lng={lng}&radius={radius}] 
 
 This collection contains a list of recent incidents that affect public transport only in a specified area.
 The area of interest can be defined as:
@@ -4537,7 +4537,7 @@ The area of interest can be defined as:
 * an (optinal) bounding circle (lat={lat}&lng={lng}&radius={radius})
 * an (Optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
-The data structure contains the attributes as in *[/imp-endpoint/api/V1/Info/Incidents?lat={lat}&lng={lng}&radius={radius]* and additionally information about line name, first and last stop and line direction.
+The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Incidents?lat={lat}&lng={lng}&radius={radius]* and additionally information about line name, first and last stop and line direction.
 
 + Parameters
     + lat (number, `52.52`) ... latitude value. Has example value.
@@ -4630,7 +4630,7 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V1/Info/Inc
 # Group WMS
 This is a group of all REST resources delivered as WMS.
 
-## WMS PNG file for Points of Interest [/imp-endpoint/api/V1/Resources?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}&serviceNames={categories}]
+## WMS PNG file for Points of Interest [/imp-endpoint/api/V2/Resources?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}&serviceNames={categories}]
 Get WMS PNG file for points of interests specified by (several) service categories (e.g. PublicTransport, Parking, etc.)
 
 ### Getting a WMS PNG file [GET] 
@@ -4660,7 +4660,7 @@ Please note, the accept-header of this request must be set to "image/png".
             ?PNG
 
 
-## WMS PNG file for Public Transport Stations [/imp-endpoint/api/V1/Resources/PublicTransport?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
+## WMS PNG file for Public Transport Stations [/imp-endpoint/api/V2/Resources/PublicTransport?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
 Get WMS PNG file for public transport stations
 
 ### Getting a public transport stations WMS PNG file [GET] 
@@ -4688,7 +4688,7 @@ Please note: The accept-header of this request must be set to "image/png"
             ?PNG
 
 
-## WMS PNG file for Current Traffic [/imp-endpoint/api/V1/Info/TrafficInfo?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
+## WMS PNG file for Current Traffic [/imp-endpoint/api/V2/Info/TrafficInfo?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
 Get WMS PNG file for current traffic
 
 ### Getting a current traffic WMS PNG file [GET] 
@@ -4720,7 +4720,7 @@ Please note: The accept-header of this request must be set to "image/png"
 This is a group of all IMP partner related REST resources.
 
  
-## Partner [/imp-endpoint/api/V1/Partners/{PartnerId}]
+## Partner [/imp-endpoint/api/V2/Partners/{PartnerId}]
 
 The Partner resource has the following attributes: 
 
@@ -4777,7 +4777,7 @@ Starts "Delete Partner" Process (UC PM-1)
 
 
 
-## Partners Collection [/imp-endpoint/api/V1/Partners]
+## Partners Collection [/imp-endpoint/api/V2/Partners]
 Collection of all Partners
 
 + Model
@@ -4819,7 +4819,7 @@ Starts "New Partner" Process
 
     [Partner][]
 
-## User Token [/imp-endpoint/api/V1/Partners/User/Process?action={action}]
+## User Token [/imp-endpoint/api/V2/Partners/User/Process?action={action}]
 
 The User Token resource has the following attributes: 
 
@@ -4856,7 +4856,7 @@ Starts "User Token Generation" Process
     [User Token][]
 
 
-## User Transactions Collection [/imp-endpoint/api/V1/Partners/User/Transactions?startDate={startDate}&endDate={endDate}]
+## User Transactions Collection [/imp-endpoint/api/V2/Partners/User/Transactions?startDate={startDate}&endDate={endDate}]
 
 The User Transactions Collection resource has the following attributes: 
 
@@ -4907,7 +4907,7 @@ The User Transactions Collection resource has the following attributes:
             
 # Group Business Area Info
 
-## Business Area Info [/imp-endpoint/api/V1/Info/ServiceOffering/{id}/BusinessArea]    
+## Business Area Info [/imp-endpoint/api/V2/Info/ServiceOffering/{id}/BusinessArea]    
 Business area of a (free-floating) service (cars, bikes) specified by service offering id.
 
 The data structure contains the following attributes:
@@ -4965,7 +4965,7 @@ businessBoundary | Object | business area specified as MultiPolygon conform to t
 This is a group of all REST resources related to request heatmaps as PNG files. A heat map is a graphical representation of data where the individual values are represented as colors.
 Currently it is used to represent distribution of the resouces of two service categories, Car and Bike Sharing.
 
-## CarSharing Heatmap [/imp-endpoint/api/V1/Info/Heatmap/CarSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## CarSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/CarSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
 Get WMS PNG file for carSharing for a specific date (in the past, current date or in the future) and for a specific bounding box (place).
 If the date is in the past, the returned image with green areas represents historical data of car sharing availability, if the date is in the future, the returned image with blue dots represents a prediction of car sharing availability.
 
@@ -4993,7 +4993,7 @@ If the date is in the past, the returned image with green areas represents histo
     
             ?PNG
 
-## BikeSharing Heatmap [/imp-endpoint/api/V1/Info/Heatmap/BikeSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## BikeSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/BikeSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
 Get WMS PNG file for bike sharing for a specific date and for a specific bounding box (place).
 
 ### Getting heatmap as PNG image [GET]
@@ -5023,7 +5023,7 @@ Get WMS PNG file for bike sharing for a specific date and for a specific boundin
 
 # Group ServiceOfferings
 
-## ServiceOfferings [/imp-endpoint/api/V1/ServiceOfferings] 
+## ServiceOfferings [/imp-endpoint/api/V2/ServiceOfferings] 
 
 RESPONSE:
 This collection contains a list service offerings.
@@ -5306,7 +5306,7 @@ x | String | xx
     
     [ServiceOfferings][]
 
-## Service Offerings per Partner [/imp-endpoint/api/V1/Partners/{partnerId}/ServiceOfferings]
+## Service Offerings per Partner [/imp-endpoint/api/V2/Partners/{partnerId}/ServiceOfferings]
 
 ### Getting service offerings per partner [GET]
 @nottestable
@@ -5327,7 +5327,7 @@ TODO
 
 This is a group of all REST resources related to available service categories. Services offered by service providers have to be classified with one of these service categories.
 
-## Service Categories [/imp-endpoint/api/V1/ServiceCategories] 
+## Service Categories [/imp-endpoint/api/V2/ServiceCategories] 
 
 RESPONSE:
 This collection contains a list of all currently available service categories in IMP. Each service category has the following attributes:
@@ -5405,7 +5405,7 @@ name | String | Service Category name
 Some of IMP resources are linked to BPMN processes. These resources contain actions in the URL, similar to "Resources/Parking/Garages/270113/Process?action=consume"
 This group describes REST resources which can be used to list possible BPMN process definitions.
 
-## All Process Definitions [/imp-endpoint/api/V1/ProcessDefinitions] 
+## All Process Definitions [/imp-endpoint/api/V2/ProcessDefinitions] 
 
 RESPONSE:
 This collection contains a list of all Processes. Each service usage has the following attributes:
@@ -5471,7 +5471,7 @@ requiredFeatures | Array | List of features (BOOKING, CANCELATION, etc.)
     [All Process Definitions][]
 
 
-## Process Definitions for Service Usage [/imp-endpoint/api/V1/ProcessDefinitions/ServiceUsage] 
+## Process Definitions for Service Usage [/imp-endpoint/api/V2/ProcessDefinitions/ServiceUsage] 
 
 RESPONSE:
 This collection contains a list of process definitions of the type service usage. Each process has the following attributes:
@@ -5536,7 +5536,7 @@ requiredFeatures | Array | List of features (BOOKING, CANCELATION, etc.)
     
     [Process Definitions for Service Usage][]
 
-## Process Definitions for Service Subscription [/imp-endpoint/api/V1/ProcessDefinitions/ServiceSubscription] 
+## Process Definitions for Service Subscription [/imp-endpoint/api/V2/ProcessDefinitions/ServiceSubscription] 
 
 RESPONSE:
 This collection contains a list of process definitions of the type service subscription. Each process has the following attributes:
@@ -5774,7 +5774,7 @@ businessBoundary | Object | List of MultiPolygon in Geojson format.
 
 This is a group of all REST resources related to reporting.
 
-## Report [/imp-endpoint/api/V1/Reporting/CustomReport?reportName={reportName}] 
+## Report [/imp-endpoint/api/V2/Reporting/CustomReport?reportName={reportName}] 
 
 RESPONSE:
 The response contains an image representing the report.
