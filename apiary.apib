@@ -157,7 +157,7 @@ id | Number | Internal bike sharing station identification number
 description | String | Textual description of location
 type | String | Type of bike sharing station
 uri | URI | URI to request more details.
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -214,9 +214,11 @@ Parts of the data structure might be omitted if the information is not available
               "type": "BikeSharingStation",
               "uri": "Resources/BikeSharing/BikeSharingStation/47059",
               "location": {
-                "latitude": 52.51343536376953,
-                "longitude": 13.32278823852539,
-                "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.32278823852539,
+                        52.51343536376953
+                    ]
               },
               "provider": "callabike",
               "availability": 62.5,
@@ -235,9 +237,11 @@ Parts of the data structure might be omitted if the information is not available
               "type": "BikeSharingStation",
               "uri": "Resources/BikeSharing/BikeSharingStation/47072",
               "location": {
-                "latitude": 52.5088996887207,
-                "longitude": 13.306029319763184,
-                "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.306029319763184,
+                        52.5088996887207
+                    ]
               },
               "provider": "callabike",
               "availability": 68.75,
@@ -278,9 +282,11 @@ attribute | json data type | comments
                 "type": "BikeSharingStationDetails",
                 "uri": "Resources/BikeSharing/Stations/9/",
                 "location": {
-                    "latitude": 52.52271270751953,
-                    "longitude": 13.394195556640625,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.394195556640625,
+                        52.52271270751953
+                    ]
                 },
                 "provider": "callabike",
                 "availability": 33.333333333333336,
@@ -336,9 +342,11 @@ unitId | String | Internal identification number of a specific bike
                         "type": "BikeSharingStationBikeDetails",
                         "uri": "Resources/BikeSharing/Stations/18612/Bikes/18644",
                         "location": {
-                            "latitude": 52.519676208496094,
-                            "longitude": 13.385995864868164,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.385995864868164,
+                                52.519676208496094
+                            ]
                         },
                         "provider": "callabike",
                         "availability": 100,
@@ -381,9 +389,11 @@ attribute | json data type | comments
                 "type": "BikeSharingStationBikeDetails",
                 "uri": "Resources/BikeSharing/Stations/18612/Bikes/18644/",
                 "location": {
-                    "latitude": 52.519676208496094,
-                    "longitude": 13.385995864868164,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.385995864868164,
+                        52.519676208496094
+                    ]
                 },
                 "provider": "callabike",
                 "availability": 100,
@@ -528,7 +538,7 @@ id | Number | Internal bike sharing station identification number
 description | String | Textual description of location
 type | String | Type of floating bike
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -608,9 +618,11 @@ attribute | json data type | comments
                 "type": "BikeSharingBikeDetails",
                 "uri": "Resources/BikeSharing/Bikes/18644/",
                 "location": {
-                    "latitude": 52.519676208496094,
-                    "longitude": 13.385995864868164,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.385995864868164,
+                        52.519676208496094
+                    ]
                 },
                 "provider": "callabike",
                 "availability": 100,
@@ -702,7 +714,7 @@ id | Number |
 description | String | License ID or approximate location
 type | String | Type of resource
 uri | URI | URI
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -763,9 +775,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "type": "Cars",
                   "uri": "Resources/CarSharing/Cars/49483",
                   "location": {
-                    "latitude": 52.525909423828125,
-                    "longitude": 13.390524864196777,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.390524864196777,
+                        52.525909423828125
+                    ]
                   },
                   "provider": "citeeCar",
                   "availability": null,
@@ -779,9 +793,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "type": "Cars",
                   "uri": "Resources/CarSharing/Cars/48831",
                   "location": {
-                    "latitude": 52.51978302001953,
-                    "longitude": 13.393811225891113,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.393811225891113,
+                        52.51978302001953
+                    ]
                   },
                   "provider": "citeeCar",
                   "availability": null,
@@ -810,7 +826,7 @@ id | Number |
 description | String | License ID or approximate location
 type | String | Type of resource
 uri | URI | URI
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -881,9 +897,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "type": "Stations",
                   "uri": "Resources/CarSharing/Stations/7695",
                   "location": {
-                    "latitude": 52.53166159018624,
-                    "longitude": 13.412632271647453,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.412632271647453,
+                        52.53166159018624
+                    ]
                   },
                   "provider": "flinkster",
                   "availability": 0,
@@ -902,9 +920,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "type": "Stations",
                   "uri": "Resources/CarSharing/Stations/7683",
                   "location": {
-                    "latitude": 52.48663380523992,
-                    "longitude": 13.422980234026909,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.422980234026909,
+                        52.48663380523992
+                    ]
                   },
                   "provider": "flinkster",
                   "availability": 0,
@@ -936,7 +956,7 @@ id | Number | car id
 description | String | License ID or approximate location
 type | String | "CarSharingCarDetails"
 uri | URI | URI
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -1005,9 +1025,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                         "type": "CarSharingCar",
                         "uri": "Resources/CarSharing/Cars/50781",
                         "location": {
-                            "latitude": 52.526275,
-                            "longitude": 13.3706283,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.3706283,
+                                52.526275
+                            ]
                         },
                         "provider": "multiCity",
                         "availability": 100,
@@ -1027,9 +1049,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                         "type": "CarSharingCar",
                         "uri": "Resources/CarSharing/Cars/50324",
                         "location": {
-                            "latitude": 52.5327567,
-                            "longitude": 13.39542,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.39542,
+                                52.5327567
+                            ]
                         },
                         "provider": "multiCity",
                         "availability": 100,
@@ -1088,9 +1112,11 @@ fee | String | Car costs per distance/time unit
                 "type": "CarSharingCarDetails",
                 "uri": "Resources/CarSharing/Cars/203869/",
                 "location": {
-                    "latitude": 52.51613,
-                    "longitude": 13.41643,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.41643,
+                        52.51613
+                    ]
                 },
                 "provider": "car2Go",
                 "availability": 100,
@@ -1145,7 +1171,7 @@ id | Number | Internal car sharing station identification number
 description | String | Approximate location
 type | String | 
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -1215,9 +1241,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "type": "CarSharingStation",
                   "uri": "Resources/CarSharing/Stations/46874",
                   "location": {
-                    "latitude": 52.533559809882156,
-                    "longitude": 13.382519781589508,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.382519781589508,
+                        52.533559809882156
+                    ]
                   },
                   "provider": "flinkster",
                   "availability": 100,
@@ -1273,9 +1301,11 @@ availableCars | Number | number of available cars
                 "type": null,
                 "uri": "Resources/CarSharing/Stations/1634/",
                 "location": {
-                    "latitude": 52.5083274841,
-                    "longitude": 13.3902387619,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.3902387619,
+                        52.5083274841
+                    ]
                 },
                 "provider": "FlinksterDB",
                 "availability" : 100,
@@ -1343,9 +1373,11 @@ Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
                     "type": "CarSharingStationCarDetails",
                     "uri": "Resources/CarSharing/Stations/206470/Cars/207643",
                     "location": {
-                        "latitude": 52.533559809882156,
-                        "longitude": 13.382519781589508,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.382519781589508,
+                            52.533559809882156
+                        ]
                     },
                     "provider": "flinkster",
                     "availability": null,
@@ -1379,9 +1411,11 @@ Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
                     "type": "CarSharingStationCarDetails",
                     "uri": "Resources/CarSharing/Stations/206470/Cars/207644",
                     "location": {
-                        "latitude": 52.533559809882156,
-                        "longitude": 13.382519781589508,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.382519781589508,
+                            52.533559809882156
+                        ]
                     },
                     "provider": "flinkster",
                     "availability": null,
@@ -1553,7 +1587,7 @@ id | Number | Internal charging station identification number
 description | String | Approximate location or EV charging operator
 type | String | ="EVChargingStation" 
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider |  String| Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -1640,7 +1674,7 @@ id | Number | Internal charging station identification number
 description | String | Approximate location or EV charging operator
 type | String | ="EVChargingStation" 
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider |  String| Service provider
 availability | Double | Availability in percentage
 operator | String | Resource operator
@@ -1681,9 +1715,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                     "type": "EVChargingStationDetails",
                     "uri": "Resources/EVCharging/Stations/EVChargingStationDetails/53009",
                     "location": {
-                        "latitude": 52.43498,
-                        "longitude": 13.43448,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.43448,
+                            52.43498
+                        ]
                     },
                     "provider": "vattenfall",
                     "availability": 100,
@@ -1696,9 +1732,11 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                     "type": "EVChargingStationDetails",
                     "uri": "Resources/EVCharging/Stations/EVChargingStationDetails/49313",
                     "location": {
-                        "latitude": 52.5481579,
-                        "longitude": 13.4675685,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.4675685,
+                            52.5481579
+                        ]
                     },
                     "provider": "vattenfall",
                     "availability": 100,
@@ -1741,9 +1779,11 @@ units | EVChargingUnit | Details of EV Charging units
                 "type": "EVChargingStationDetails",
                 "uri": "Resources/EVCharging/Stations/238936/",
                 "location": {
-                    "latitude": 52.519231,
-                    "longitude": 13.390489,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.390489,
+                        52.519231
+                    ]
                 },
                 "provider": "hubject",
                 "availability": 0,
@@ -1812,7 +1852,7 @@ id | Number | Resource id
 description | String | 
 type | String | 
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 operator | String | Name of Ticket Operator
 tariffText | String | Contains Zone and Validity information
@@ -2236,10 +2276,10 @@ entrance | String |
                 "uri": "Resources/Parking/Garages/878",
                 "location": {
                     "type": "Point",
-                        "coordinates": [
-                            13.39694,
-                            52.515930000000004
-                        ]
+                    "coordinates": [
+                        13.39694,
+                        52.515930000000004
+                    ]
                 },
                 "provider": "vmzParking",
                 "availability": null,
@@ -2404,10 +2444,10 @@ usage | String | Description how to enter or use the parking space
                 "uri": "Resources/Parking/OnStreetSpaces/907",
                 "location": {
                     "type": "Point",
-                        "coordinates": [
-                            13.403188,
-                            52.528512
-                        ]
+                    "coordinates": [
+                        13.403188,
+                        52.528512
+                    ]
                 },
                 "provider": "parkUParking",
                 "availability": 100,
@@ -2986,7 +3026,7 @@ id | Number | Internal taxi identification number
 description | String | Approximate location
 type | String | Type of taxi
 uri | URI | URI to request more details
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  } 
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider 
 availability | Double | Availability in percentage
 operator | String | Resource operator 
@@ -3187,7 +3227,13 @@ If booking is not possible, the response body explains the reason why.
                     "password": "TopSecret!"
                 },
                 "origin" : {
-                    "location": { "latitude":52.51914, "longitude": 13.40693 }, 
+                    "location": { 
+                        "type": "Point",
+                        "coordinates": [
+                            13.40693,
+                            52.51914
+                        ]
+                    }
                     "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
                     "time": "2013-05-01T12:00:00" 
                 },
@@ -3212,7 +3258,13 @@ If booking is not possible, the response body explains the reason why.
                     "featureType": "BOOKING"
                 },
                 "origin" : {
-                    "location": { "latitude":52.51914, "longitude": 13.40693 }, 
+                    "location": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.40693,
+                            52.51914
+                        ]
+                    }
                     "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
                     "time": "2013-05-01 12:00:00" 
                 },
@@ -3283,7 +3335,13 @@ If canceling is not possible, the response body explains the reason why.
                 "userId": "MP1_1",
                 "ride": { 
                     "origin" : {
-                        "location": { "latitude":52.51914, "longitude": 13.40693 }, 
+                        "location": {
+                            "type": "Point",
+                            "coordinates": [
+                                13.40693,
+                                52.51914
+                            ]
+                        }
                         "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
                         "time": "2013-05-01T12:00:00" 
                     },
@@ -4218,18 +4276,22 @@ costs | Array | List of costs for the proposed trip
                     "url": "TripProposals/CarRouter/80844",
                     "origin": {
                         "location": {
-                            "latitude": 52.39419937133789,
-                            "longitude": 13.07367992401123,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.07367992401123,
+                                52.39419937133789
+                            ]
                         },
                         "address": null,
                         "time": "2014-03-27T13:04:40+01:00"
                     },
                     "destination": {
                         "location": {
-                            "latitude": 52.563589,
-                            "longitude": 13.319065,
-                            "system": "WGS_84"
+                            "type": "Point",
+                            "coordinates": [
+                                13.319065,
+                                52.563589
+                            ]
                         },
                         "address": null,
                         "time": "2014-03-27T14:48:09+01:00"
@@ -4281,17 +4343,21 @@ userId: User that requests a trip
             {
                   "origin": {
                     "location": {
-                      "longitude": 13.072690999999963,
-                      "latitude": 52.3941887,
-                      "system": "WGS84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.072690999999963,
+                            52.3941887
+                        ]
                     },
                     "time": "2014-03-27T12:04:02UTC+05:30"
                   },
                   "destination": {
                     "location": {
-                      "longitude": 13.319420000000036,
-                      "latitude": 52.56347100000001,
-                      "system": "WGS84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.319420000000036,
+                            52.56347100000001
+                        ]
                     },
                     "time": null
                   },
@@ -4328,7 +4394,7 @@ reason | String | Full description of reason
 reasonShort | String | Short description of reason
 consequence | String | Full description of consequence
 consequenceShort | String | Short description of consequence
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 source | String | {= "PT", "INKO", etc.}
 affectedTrips | Array | List of affected trips
 net | NetType  | 
@@ -4361,9 +4427,11 @@ externalResourceId | String | ID in external provider system
                     "consequence": null,
                     "consequenceShort": null,
                     "location": {
-                        "latitude": 52.51774,
-                        "longitude": 13.38868,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.319420000000036,
+                            52.51774
+                        ]
                     },
                     "source": "INKO",
                     "affectedTrips": null,
@@ -4387,9 +4455,11 @@ externalResourceId | String | ID in external provider system
                     "consequence": null,
                     "consequenceShort": null,
                     "location": {
-                        "latitude": 52.51753,
-                        "longitude": 13.39682,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.39682,
+                            52.51753
+                        ]
                     },
                     "source": "INKO",
                     "affectedTrips": null,
@@ -4425,7 +4495,7 @@ reason | String | Full description of reason
 reasonShort | String |  Short description of reason
 consequence | String |  Full description of consequence
 consequenceShort | String | Short description of consequence
-location | Object | Standard WGS 84 for polar coordinates { "latitude":Number, "longitude":Number, "system": ENUM{"WGS_84","GK4","ETRS89",...}  }
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 source | String | {= "PT", "INKO", etc.}
 affectedTrips | Array | List of affected trips
 net | NetType  | 
@@ -4477,9 +4547,11 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
                 "consequence": null,
                 "consequenceShort": null,
                 "location": {
-                    "latitude": 52.51680860970485,
-                    "longitude": 13.385821218640254,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.385821218640254,
+                        52.51680860970485
+                    ]
                 },
                 "source": "Concert",
                 "affectedTrips": null,
@@ -4504,9 +4576,11 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
                 "consequence": null,
                 "consequenceShort": null,
                 "location": {
-                    "latitude": 52.51753,
-                    "longitude": 13.39682,
-                    "system": "WGS_84"
+                    "type": "Point",
+                    "coordinates": [
+                        13.39682,
+                        52.51753
+                    ]
                 },
                 "source": "INKO",
                 "affectedTrips": null,
@@ -4561,9 +4635,11 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
                     "consequence": "Die Linie verkehrt nur zwischen Riesaer Str. und S Hackescher Markt. Die Haltestellen zwischen S Hackescher Markt und U Schwartzkopffstr. werden nicht bedient. Ein Ersatzverkehr mit Bussen ist nicht eingerichtet. Fahrempfehlung: Fahrgäste in Richtung U Schwartzkopffstr. nutzen zur Weiterfahrt bitte die Linien M1 bzw. 12 von der Haltestelle S Hackescher Markt in der Rosenthaler Str. bis U Oranienburger Tor bzw. die S-Bahn bis S+U Friedrichstr. und von dort die U6 in Richtung Alt-Tegel.",
                     "consequenceShort": "Bauarbeiten, Sperrung Streckenabschnitt lnvalidenstr./Chausseestr. &lt;&gt; U Schwartzkopffstr.",
                     "location": {
-                        "latitude": 52.52165861111111,
-                        "longitude": 13.40267888888889,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.40267888888889,
+                            52.52165861111111
+                        ]
                     },
                     "source": "PT",
                     "affectedTrips": null,
@@ -4594,9 +4670,11 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
                     "consequence": "Die Linie muss in Fahrtrichtung S+U Zoologischer Garten über Caroline-Michaelis-Str., Julie-Wolfthorn-Str., Zinnowitzer Str., Chausseestr., Habersaathstr. und Schwarzer Weg umgeleitet werden.",
                     "consequenceShort": "Bauarbeiten, Umleitung",
                     "location": {
-                        "latitude": 52.53041916666667,
-                        "longitude": 13.382412777777777,
-                        "system": "WGS_84"
+                        "type": "Point",
+                        "coordinates": [
+                            13.382412777777777,
+                            52.53041916666667
+                        ]
                     },
                     "source": "PT",
                     "affectedTrips": null,
