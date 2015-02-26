@@ -3381,111 +3381,111 @@ costs | Array | List of costs for the proposed trip including distance, duration
     + Body
     
             {
-                  "metaData": [
+                "metaData": [
                     {
-                      "serviceAlias": "vmzImrRouting",
-                      "lastUpdateTime": "2014-12-23T12:35:43+00:00",
-                      "messages": []
+                        "serviceAlias": "vmzImrRouting",
+                        "lastUpdateTime": "2014-12-23T12:35:43+00:00",
+                        "messages": []
                     }
-                  ],
-                  "tripProposals": [
+                ],
+                "tripProposals": [
                     {
-                      "url": "TripProposals/IMR/11873",
-                      "origin": {
-                        "location": {
-                          "type": "Point",
-                          "coordinates": [
-                            13.4113422,
-                            52.5218455
-                          ]
+                        "url": "TripProposals/IMR/11873",
+                        "origin": {
+                            "location": {
+                                "type": "Point",
+                                "coordinates": [
+                                    13.4113422,
+                                    52.5218455
+                                ]
+                            },
+                            "address": "Dircksenstraße, 10178 Berlin, Germany",
+                            "time": "2013-07-23T13:10:00+00:00"
                         },
-                        "address": "Dircksenstraße, 10178 Berlin, Germany",
-                        "time": "2013-07-23T13:10:00+00:00"
-                      },
-                      "destination": {
-                        "location": {
-                          "type": "Point",
-                          "coordinates": [
-                            13.3194514,
-                            52.5635387
-                          ]
+                        "destination": {
+                            "location": {
+                                "type": "Point",
+                                "coordinates": [
+                                    13.3194514,
+                                    52.5635387
+                                ]
+                            },
+                            "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                            "time": "2013-07-23T13:43:26+00:00"
                         },
-                        "address": "Meteorstraße 40, 13405 Berlin, Germany",
-                        "time": "2013-07-23T13:43:26+00:00"
-                      },
-                      "trafficTypes": [
-                        "OwnBike"
-                      ],
-                      "description": null,
-                      "costs": {
-                        "distance": {
-                          "unit": "meter",
-                          "value": 8929
-                        },
-                        "duration": {
-                          "unit": "minute",
-                          "value": 33.43333333333333
-                        },
-                        "price": {
-                          "unit": "Euro",
-                          "value": 0
-                        },
-                        "emission": {
-                          "unit": "gram",
-                          "value": 0
-                        },
-                        "ticketPrice": null
-                      }
+                        "trafficTypes": [
+                            "OwnBike"
+                        ],
+                        "description": null,
+                        "costs": {
+                            "distance": {
+                                "unit": "meter",
+                                "value": 8929
+                            },
+                            "duration": {
+                                "unit": "minute",
+                                "value": 33.43333333333333
+                            },
+                            "price": {
+                                "unit": "Euro",
+                                "value": 0
+                            },
+                            "emission": {
+                                "unit": "gram",
+                                "value": 0
+                            },
+                            "ticketPrice": null
+                        }
                     },
                     {
-                      "url": "TripProposals/IMR/11874",
-                      "origin": {
-                        "location": {
-                          "type": "Point",
-                          "coordinates": [
-                            13.4113422,
-                            52.5218455
-                          ]
+                        "url": "TripProposals/IMR/11874",
+                        "origin": {
+                            "location": {
+                                "type": "Point",
+                                "coordinates": [
+                                    13.4113422,
+                                    52.5218455
+                                ]
+                            },
+                            "address": "Dircksenstraße, 10178 Berlin, Germany",
+                            "time": "2013-07-23T13:10:00+00:00"
                         },
-                        "address": "Dircksenstraße, 10178 Berlin, Germany",
-                        "time": "2013-07-23T13:10:00+00:00"
-                      },
-                      "destination": {
-                        "location": {
-                          "type": "Point",
-                          "coordinates": [
-                            13.3194514,
-                            52.5635387
-                          ]
+                        "destination": {
+                            "location": {
+                                "type": "Point",
+                                "coordinates": [
+                                    13.3194514,
+                                    52.5635387
+                                ]
+                            },
+                            "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                            "time": "2013-07-23T15:17:54+00:00"
                         },
-                        "address": "Meteorstraße 40, 13405 Berlin, Germany",
-                        "time": "2013-07-23T15:17:54+00:00"
-                      },
-                      "trafficTypes": [
-                        "Other",
-                        "BikeSharing",
-                        "Walk"
-                      ],
-                      "description": null,
-                      "costs": {
-                        "distance": {
-                          "unit": "meter",
-                          "value": 10264
-                        },
-                        "duration": {
-                          "unit": "minute",
-                          "value": 127.9
-                        },
-                        "price": {
-                          "unit": "Euro",
-                          "value": 0.024444444444444442
-                        },
-                        "emission": {
-                          "unit": "gram",
-                          "value": 0
-                        },
-                        "ticketPrice": null
-                      }
+                        "trafficTypes": [
+                            "Other",
+                            "BikeSharing",
+                            "Walk"
+                        ],
+                        "description": null,
+                        "costs": {
+                            "distance": {
+                                "unit": "meter",
+                                "value": 10264
+                            },
+                            "duration": {
+                                "unit": "minute",
+                                "value": 127.9
+                            },
+                            "price": {
+                                "unit": "Euro",
+                                "value": 0.024444444444444442
+                            },
+                            "emission": {
+                                "unit": "gram",
+                                "value": 0
+                            },
+                            "ticketPrice": null
+                        }
                     }
                 ]
             }
@@ -4323,6 +4323,10 @@ origin: Start point specified by a geo location (addresses can be converted into
 
 destination: Start point specified by a geo location. Either orgin or destination might specify a time.
 
+time: Date and time of the trip. If no time is specified, the current time is used as departure time.
+
+departureTime: Specifies whether the given time is used as departure or arrival time.
+
 viaPoints: List of geo locations that the route should pass in the given sequence
 
 costFunctions: List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
@@ -4341,7 +4345,7 @@ userId: User that requests a trip
     + Body
         
             {
-                  "origin": {
+                "origin": {
                     "location": {
                         "type": "Point",
                         "coordinates": [
@@ -4349,9 +4353,8 @@ userId: User that requests a trip
                             52.3941887
                         ]
                     },
-                    "time": "2014-03-27T12:04:02UTC+05:30"
-                  },
-                  "destination": {
+                },
+                "destination": {
                     "location": {
                         "type": "Point",
                         "coordinates": [
@@ -4359,12 +4362,13 @@ userId: User that requests a trip
                             52.56347100000001
                         ]
                     },
-                    "time": null
-                  },
-                  "viaPoints": [],
-                  "costFunctions": [],
-                  "userId": "4711/10",
-                  "routingConstraints": []
+                },
+                "time": "2014-03-27T12:04:02+02:00",
+                "departureTime":"true",
+                "viaPoints": [],
+                "costFunctions": [],
+                "userId": "4711/10",
+                "routingConstraints": []
             }
 
 + Response 200 
