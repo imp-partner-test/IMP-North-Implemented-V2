@@ -3061,13 +3061,13 @@ Parts of the data structure might be omitted if the information is not available
               "resources": []
         }
 
-## List of All available Taxis with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/All] 
+## List of All available Taxis and Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/All] 
 
-This collection contains a list of taxis.
+This collection contains a list of taxis and taxi ranks.
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
 
-### Get taxis in a specific area [GET]
+### Get list of taxis and taxi ranks [GET]
 @testable
 
 + Request
@@ -3087,9 +3087,74 @@ The (optional) If-Modified-Since can be set to a specific date-time in order to 
                 }
             ],
               "resources": []
-        }        
+        }
+        {
+            "metaData": [
+                {
+                  "serviceAlias": "osmBerlinTaxi",
+                  "lastUpdateTime": null,
+                  "messages": []
+                }
+            ],
+              "resources": []
+        }  
         
+## List of available Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Ranks?lat={lat}&lng={lng}&radius={radius}] 
 
+This collection contains a list of taxi ranks in a specified area with basic information and a URI to get more details.
+The area of interest can be defined as:
+
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+
+The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
+
+### Get taxi ranks in a specified area [GET]
+@testable
+
+attribute | json data type | comments
+--- | --- | ---
+metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+--- | --- | ---
+resources | Array | Array of resources within the search area
+--- | --- | ---
+id | Number | Internal taxi rank identification number
+description | String | Approximate location
+type | String | Type of taxi rank
+uri | URI | URI to request more details
+location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
+provider | String | Service provider 
+availability | Double | Availability in percentage
+operator | String | Resource operator 
+size | Enum | Size of car 
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
+
+Parts of the data structure might be omitted if the information is not available. 
+
++ Parameters
+    + lat (number, `52.52`) ... latitude value. Has example value.
+    + lng (number, `13.39`) ... longitude value. Has example value.
+    + radius (number, `1000`) ... radius in meter. Has example value.
+    
++ Request
+
+    + Headers
+    
+            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
+
++ Response 200 (application/json)
+
+        {
+            "metaData": [
+                {
+                  "serviceAlias": "osmBerlinTaxi",
+                  "lastUpdateTime": null,
+                  "messages": []
+                }
+            ],
+              "resources": []
+        }
+        
 ## Fare for the specified trip [/imp-endpoint/api/V2/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
 
 This response contains an estimated fare for trips from origin with distance.
