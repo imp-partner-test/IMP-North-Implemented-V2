@@ -3170,7 +3170,7 @@ Parts of the data structure might be omitted if the information is not available
             ]
         }
         
-## Fare for the specified trip [/imp-endpoint/api/V2/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
+## Fare for the specified trip [/imp-endpoint/api/V2/Info/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
 
 This response contains an estimated fare for trips from origin with distance.
 
@@ -3225,7 +3225,7 @@ services | Object | Set of available services
             }      
         }
 
-## Fare for the specified trip [/imp-endpoint/api/V2/Resources/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&dest_lat={dlat}&dest_lng={dlng}] 
+## Fare for the specified trip [/imp-endpoint/api/V2/Info/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&dest_lat={dlat}&dest_lng={dlng}] 
 
 This response contains estimated fare for trips from origin to destination.
 
@@ -3272,7 +3272,7 @@ This response contains estimated fare for trips from origin to destination.
         }
 
 
-## Booking a taxi [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/Processes?action=Book] 
+## Booking a taxi [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/Process?action=Book] 
 
 Book a Taxi: The taxi ride is specified by providing the starting point (address and/or geo location) and the destination.
 This means that no specific, previously selected taxi is booked.
@@ -3329,7 +3329,7 @@ If booking is not possible, the response body explains the reason why.
 
     + Headers
     
-            Location: /api/V2/Process/4711
+            Location: /api/V2/Processes/4711
             
     + Body
     
@@ -3373,7 +3373,7 @@ If booking is not possible, the response body explains the reason why.
             }
 
 
-## Canceling a taxi [/imp-endpoint/api/V2/Process/123?action=Cancel] 
+## Canceling a taxi [/imp-endpoint/api/V2/Processes/123?action=Cancel] 
 
 Cancel a booking for a taxi that has been booked before. The booking id (123 in the example below) has to be provided as processID in the request.
 
@@ -3409,7 +3409,7 @@ If canceling is not possible, the response body explains the reason why.
 
     + Headers
     
-            Location: /api/V2/Process/123
+            Location: /api/V2/Processes/123
             
     + Body
     
