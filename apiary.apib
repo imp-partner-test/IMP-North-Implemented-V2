@@ -1437,7 +1437,74 @@ Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
                     "imageLink": null
                 }
             ]
-            } 
+            }
+            
+## List of availabe cars in future at a specific Station [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Cars?from={fromDate}&to={toDate}]
+
+This collection contains a list of available cars in future at a specific car sharing station.
+
+### Getting available cars in future at a specific station [GET]
+@nottestable
+
++ Parameters
+    + stationId (string, `203869`) ... String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/CarSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + fromDate (string, `2015-04-14T13:00:00%2B02:00`) ... from date 
+    + toDate (string, `2015-04-19T16:00:00%2B02:00`) ... to date
+    
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+            "metaData": [
+                {
+                    "serviceAlias": "flinkster",
+                    "lastUpdateTime": null,
+                    "messages": []
+                }
+            ],
+            "resources": [
+                {
+                    "actions": [
+                        {
+                            "name": "book",
+                            "method": "POST",
+                            "uri": "Resources/CarSharing/Stations/1080/Cars/33188/Process?action=book"
+                        }
+                    ],
+                    "id": 33188,
+                    "description": "F-R 8743",
+                    "type": "CarSharingStationCar",
+                    "uri": "Resources/CarSharing/Stations/1080/Cars/33188",
+                    "location": {
+                        "coordinates": [
+                            13.347101211547852,
+                            52.53306217555385
+                        ],
+                        "type": "Point"
+                    },
+                    "provider": null,
+                    "availability": null,
+                    "operator": "FlinksterDB",
+                    "model": "Citroën DS3 1,6 Diesel 68kW NAVI",
+                    "address": {
+                        "citycode": "10559",
+                        "city": "Berlin",
+                        "street": "",
+                        "houseno": null,
+                        "district": null,
+                        "region": null,
+                        "country": null
+                    },
+                    "licenseId": "F-R 8743",
+                    "category": null,
+                    "fuelType": "DIESEL",
+                    "fuelLevel": null,
+                    "imageLink": "www.flinkster.de/common/gethashdata.php?uniquebid=73406c9a68b4cc8286e53d12e326e1ab"
+                }
+            ]
+            }
 
 ## Book a free-floating car [/imp-endpoint/api/V2/Resources/CarSharing/Cars/{carId}/Process?action=book]
 
