@@ -3670,13 +3670,13 @@ destination | Object | End point specified by a geo location.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time
 viapoints | Array of Objects | List of geolocations the route should pass in the given sequence
-costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}
+costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function.
 userId | String | Traveler id that requests a trip. Note: Currently it is not used by IMP and can be any string.
-trafficTypes | Array | List of traffic types which should be included into trip proposal calculation. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. 
+trafficTypes | Array | List of traffic types which will be considered when calculating best route alterntives. Due to the ranking according to the cost function not all modes may be used in the resulting route alternatives. Currently possible: Bike, Bus, Car, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
-ownVehicles | Array of Objects | List of own vehicles which may be included in trip proposal calculation. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
-useBikeSharing | Boolean | Use bike sharing services for routing [default: false]
-useCarSharing | Boolean | Use car sharing services for routing [default: false]
+ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
+useBikeSharing | Boolean | Consider also bike sharing services in calculation of route alternatives [default: false]. Due to the ranking according to the cost function, bike sharing may not be used in the resulting route alternatives.
+useCarSharing | Boolean | Consider also car sharing services in calculation of route alternatives [default: false]. Due to the ranking according to the cost function, car sharing may not be used in the resulting route alternatives.
 maxRoutingResponses | Number | Number of to be provided route alternatives
 numOfTravelers | Number | Number of fellow travelers
 numOfLuggage | Number | Number of luggage pieces
