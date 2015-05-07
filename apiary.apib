@@ -686,6 +686,160 @@ comments | String |
         }             
         
         
+
+## Rent a specific bike at a bike sharing station [/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes/{bikeId}/Process?action=rent]
+
+The data structure of the request contains the following attributes:
+
+Input in request body: 
+operator including name, userId and password (for authentication)
+
+attribute | json data type | comments
+--- | --- | ---
+operator | String | Name of the operator
+
+The data structure of the response has the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+featureType | String | Feature type
+confirmationId | String | 
+confirmationData | Json | rental response containing rental details 
+
+### Rent a specific bike at a bike sharing station [POST]
+@nottestable
+
++ Parameters
+    + stationId (string, `2`) ... Bike sharing station id where the bike is to be rented. String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}]* or similar.
+    + bikeId (string, `1`) ... Bike to be rented. String `unitId` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Stations/{stationId}/Bikes]* .
+
++ Request
+
+        { 
+           "operator":{
+           "name":"nextbikeCologne",   
+            "userId": "1234",
+            "password": "ABChL0nHxtGvful4"            
+            }
+        }
+
+
++ Response 201 (application/json)
+        
+        {
+            "actions": [
+            {
+                "name": "return",
+                "method": "PUT",
+                "uri": "Processes/88?action=return"
+            }
+            ],
+            "processId": "88",
+            "confirmation": {
+                "featureType": "RENT",
+                "confirmationId": "7133",
+                "confirmationData": {
+                "rentalId": "7133",
+                "subResourceId": "29498",
+                "lockCode": "9968",
+                "resourceId": "29496",
+                "startTime": "793583"
+                }
+            }
+        }
+
+## Return a rented bike [/imp-endpoint/api/V2/Processes/{processId}?action=return]    
+
+Return a bike that was rented before. The process id (for example, 88 as shown in bike rental example above) has to be provided in the request.
+
+Input in request body: 
+operator including name, userId and password (for authentication), end-location
+
+The data structure of the request body:
+
+attribute | json data type | comments
+--- | --- | ---
+operator | String | Name of Operator
+location | GeoJsonPoint | end-location, where bike rental transaction ends 
+
+The response contains information about rental details and the rental fees.
+
+Please note: 
+If returning is not possible, the response body explains the reason why.
+
+The response contains details of bike return transaction, identified by {rentalId} and {returnResponse} 
+
+The data structure of the response contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+featureType  | String |     Feature type
+confirmationId  | String | 
+confirmationData  | Object | Response of confirm ticket request
+
+confirmationData contains following fields:
+
+attribute | json data type | comments
+--- | --- | ---
+resourceId | String | station id
+subResourceId | String | id  of returned bike
+rentalId | String | Value indicating rental transaction id
+lockCode | String | lock code
+startTime | String | bike rental start time 
+endPlaceId | String | returned station id 
+endTime | String | bike rental end time
+rentCharge | String | rental amount
+serviceCharge | String | additional service amount, if any
+
+### Return rented bike [PUT]
+@nottestable
+
++ Parameters
+    + processId (string, `9347`) ... String `id` - BPMN process id
+    
++ Request
+
+    + Headers
+        
+            userToken: {someUserToken} 
+
+    + Body
+    
+            {
+            "operator": {
+                "name": "nextbikeCologne",
+                "userId": 1234,
+                "password": "xUtspCkrRD7xL6IB"
+            },
+            "location": {"type": "Point", "coordinates": [ 13.384160041809082, 52.5100212097168 ]}
+               }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+            "process": {
+            "actions": [],
+            "processId": "88",
+            "confirmation": {
+                "featureType": "RETURN",
+                "confirmationId": "7133",
+                "confirmationData": {
+                    "resourceId": "29496",
+                    "subResourceId": "29498",
+                    "rentalId": "7133",
+                    "lockCode": "1520",
+                    "startTime": "35814",
+                    "endPlaceId": "31",
+                    "endTime": "177489",
+                    "rentCharge": "4",
+                    "serviceCharge": "7"
+                        }
+                    }
+                }
+            }
+
 # Group Car Sharing
 This is a group of all car sharing related rest resources.
 
