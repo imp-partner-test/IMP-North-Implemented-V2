@@ -694,9 +694,13 @@ The data structure of the request contains the following attributes:
 Input in request body: 
 operator including name, userId and password (for authentication)
 
+The data structure of the request has the following attributes:
+
 attribute | json data type | comments
 --- | --- | ---
-operator | String | Name of the operator
+name | String | Name of the operator
+userid | String | id of the user
+password | String | login key
 
 The data structure of the response has the following attributes:
 
@@ -705,6 +709,16 @@ attribute | json data type | comments
 featureType | String | Feature type
 confirmationId | String | 
 confirmationData | Json | rental response containing rental details 
+
+confirmationData contains following fields:
+
+attribute | json data type | comments
+--- | --- | ---
+resourceId | String | station id
+subResourceId | String | id  of returned bike
+rentalId | String | Value indicating rental transaction id
+lockCode | String | lock code
+startTime | String | bike rental transaction start time 
 
 ### Rent a specific bike at a bike sharing station [POST]
 @nottestable
@@ -750,7 +764,7 @@ confirmationData | Json | rental response containing rental details
 
 ## Return a rented bike [/imp-endpoint/api/V2/Processes/{processId}?action=return]    
 
-Return a bike that was rented before. The process id (for example, 88 as shown in bike rental example above) has to be provided in the request.
+Return a bike that was rented before. The process id (for example, 88 as shown in bike rental response in example above) has to be provided in the request.
 
 Input in request body: 
 operator including name, userId and password (for authentication), end-location
@@ -759,10 +773,12 @@ The data structure of the request body:
 
 attribute | json data type | comments
 --- | --- | ---
-operator | String | Name of Operator
+name | String | Name of Operator
+userid | String | id of the user
+password | String | login key
 location | GeoJsonPoint | end-location, where bike rental transaction ends 
 
-The response contains information about rental details and the rental fees.
+The response contains information about rental details and the rental charges.
 
 Please note: 
 If returning is not possible, the response body explains the reason why.
@@ -773,9 +789,9 @@ The data structure of the response contains the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
-featureType  | String |     Feature type
+featureType | String | Feature type
 confirmationId  | String | 
-confirmationData  | Object | Response of confirm ticket request
+confirmationData  | Object | Response of bike return request
 
 confirmationData contains following fields:
 
@@ -785,9 +801,9 @@ resourceId | String | station id
 subResourceId | String | id  of returned bike
 rentalId | String | Value indicating rental transaction id
 lockCode | String | lock code
-startTime | String | bike rental start time 
+startTime | String | bike rental transaction start time 
 endPlaceId | String | returned station id 
-endTime | String | bike rental end time
+endTime | String | bike rental transaction end time
 rentCharge | String | rental amount
 serviceCharge | String | additional service amount, if any
 
