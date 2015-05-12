@@ -804,8 +804,9 @@ lockCode | String | lock code
 startTime | String | bike rental transaction start time 
 endPlaceId | String | returned place id 
 endTime | String | bike rental transaction end time
-rentCharge | String | rental amount
-serviceCharge | String | additional service amount, if any
+rentCharge | Double | rental amount
+serviceCharge | Double | additional service amount, if any
+currency | String | Currency of charged amount
 
 ### Return rented bike [PUT]
 @nottestable
@@ -822,35 +823,36 @@ serviceCharge | String | additional service amount, if any
     + Body
     
             {
-            "operator": {
-                "name": "nextbikeCologne",
-                "userId": 1234,
-                "password": "xUtspCkrRD7xL6IB"
-            },
-            "location": {"type": "Point", "coordinates": [ 13.384160041809082, 52.5100212097168 ]}
-               }
+                "operator": {
+                    "name": "nextbikeCologne",
+                    "userId": 1234,
+                    "password": "xUtspCkrRD7xL6IB"
+                },
+                "location": {"type": "Point", "coordinates": [ 13.384160041809082, 52.5100212097168 ]}
+            }
         
 + Response 200 (application/json)
 
     + Body
     
             {
-            "process": {
-            "actions": [],
-            "processId": "88",
-            "confirmation": {
-                "featureType": "RETURN",
-                "confirmationId": "7133",
-                "confirmationData": {
-                    "resourceId": "29496",
-                    "subResourceId": "29498",
-                    "rentalId": "7133",
-                    "lockCode": "1520",
-                    "startTime": "35814",
-                    "endPlaceId": "31",
-                    "endTime": "177489",
-                    "rentCharge": "4",
-                    "serviceCharge": "7"
+                "process": {
+                    "actions": [],
+                    "processId": "88",
+                    "confirmation": {
+                        "featureType": "RETURN",
+                        "confirmationId": "7133",
+                        "confirmationData": {
+                            "resourceId": "29496",
+                            "subResourceId": "29498",
+                            "rentalId": "7133",
+                            "lockCode": "1520",
+                            "startTime": "35814",
+                            "endPlaceId": "31",
+                            "endTime": "177489",
+                            "rentCharge": "4",
+                            "serviceCharge": "7"
+                            "currency": "Euro"
                         }
                     }
                 }
@@ -3264,8 +3266,10 @@ resources | Array | Array of resources within the search area
 id | Number | Internal taxi identification number
 description | String | Approximate location
 type | String | Type of taxi
+model | String | Model of taxi, e.g. MB W212
 uri | URI | URI to request more details
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
+remainingTime | Object | Required time the taxi would need to reach the center of the requested region. The way the time is calculated may depend on the service provider. { "value": Number, "unit": String }
 provider | String | Service provider 
 availability | Double | Availability in percentage
 operator | String | Resource operator 
