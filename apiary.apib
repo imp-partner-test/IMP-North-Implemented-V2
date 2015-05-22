@@ -3530,6 +3530,77 @@ This response contains estimated fare for trips from origin to destination.
             }      
         }
 
+## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?address={address}&lat={lat}&lng={lng}]
+Get list of geo locations for given parameters.
+
+### Get list of geo locations [GET]
+@testable
+
+attribute | json data type | comments
+--- | --- | ---
+address | String | a search string
+lat | String | prioritized latitude 
+lng | String | prioritized Longitude
+
++ Parameters
+    + address (string, `mollstrasse`) ... search string. Has example value.
+    + lat (number, `52.482780222078205`) ... latitude value of origin. Has example value.
+    + lng (number, `13.3154296875`) ... longitude value of origin. Has example value.
+
++ Response 200 (application/json)
+
+        [
+         {
+           "searchLocation": "mollstrasse",
+           "rankedLocations": [
+               {
+                 "type": "PublicTransportStation",
+                 "description": "Mollstraße, Berlin (Germany)",
+                 "location": {
+                     "coordinates": [
+                         13.4162775,
+                         52.5264437
+                     ],
+                     "type": "Point"
+                 },
+                 "rank": null,
+                 "geocoder": "PhotonGeocoder"
+               }
+           ]
+        },    
+         {
+           "searchLocation": "mollstrasse",
+           "rankedLocations": [
+               {
+                 "type": "DescriptedLocation",
+                 "description": "Mollstraße, Berlin, Deutschland",
+                 "location": {
+                     "coordinates": [
+                         13.4212298,
+                         52.5248399
+                     ],
+                     "type": "Point"
+                 },
+                 "rank": 100,
+                 "geocoder": "GoogleRoutingWrapper"
+               },
+               {
+                 "type": "PublicTransportStation",
+                 "description": "Mollstr./Otto-Braun-Str. (Berlin)",
+                 "location": {
+                     "coordinates": [
+                         13.419942,
+                         52.525184
+                     ],
+                     "type": "Point"
+                 },
+                 "rank": 100,
+                 "geocoder": "VBBRoutingWrapper"
+               }          
+           ]
+         }
+        ]
+
 
 ## Booking a taxi [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/Process?action=Book] 
 
@@ -6232,6 +6303,8 @@ REQUEST
 + Response 200 
 
     [Report][]
+
+
 
 
 # Group Dummy. Please do not delete.
