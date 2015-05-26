@@ -3530,7 +3530,8 @@ This response contains estimated fare for trips from origin to destination.
             }      
         }
 
-## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?address={address}&lat={lat}&lng={lng}]
+## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?address={address}&language={language}&lat={lat}&lng={lng}]
+
 Get list of geo locations for given parameters.
 
 ### Get list of geo locations [GET]
@@ -3541,12 +3542,12 @@ attribute | json data type | comments
 address | String | a search string
 lat | String | prioritized latitude 
 lng | String | prioritized Longitude
-
+language | String | international abbreviation for language
 + Parameters
     + address (string, `mollstrasse`) ... search string. Has example value.
     + lat (number, `52.482780222078205`) ... latitude value of origin. Has example value.
     + lng (number, `13.3154296875`) ... longitude value of origin. Has example value.
-
+    + language (string, `en`) ... international abbreviation for language. Has example value.
 + Response 200 (application/json)
 
         [
