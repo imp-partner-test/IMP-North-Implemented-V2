@@ -5337,7 +5337,7 @@ The User Transactions Collection resource has the following attributes:
 
 ## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?address={address}&language={language}&lat={lat}&lng={lng}]
 
-Get list of geo locations for given parameters.
+Get list of geo locations for given parameters. Matching locations including geo-coordinates will be provided for a given textual address.
 
 ### Get list of geo locations [GET]
 @testable
@@ -5349,62 +5349,44 @@ lat | String | prioritized latitude
 lng | String | prioritized Longitude
 language | String | international abbreviation for language
 + Parameters
-    + address (string, `mollstrasse`) ... search string. Has example value.
-    + lat (number, `52.482780222078205`) ... latitude value of origin. Has example value.
-    + lng (number, `13.3154296875`) ... longitude value of origin. Has example value.
-    + language (string, `en`) ... international abbreviation for language. Has example value.
+    + address (string, `Berlin, Mollstrasse 7`) ... Search string. Has example value.
+    + lat (number, `52.4827802220`, optional) ... Prioritized latitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
+    + lng (number, `13.3154296875`, optional) ... Prioritized longitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
+    + language (string, `en`, optional) ... International abbreviation of language in which the content will be provided, if it is available in this language. Has example value.
 + Response 200 (application/json)
 
         [
-         {
-           "searchLocation": "mollstrasse",
-           "rankedLocations": [
-               {
-                 "type": "PublicTransportStation",
-                 "description": "Mollstraße, Berlin (Germany)",
-                 "location": {
-                     "coordinates": [
-                         13.4162775,
-                         52.5264437
-                     ],
-                     "type": "Point"
-                 },
-                 "rank": null,
-                 "geocoder": "PhotonGeocoder"
-               }
-           ]
-        },    
-         {
-           "searchLocation": "mollstrasse",
-           "rankedLocations": [
-               {
-                 "type": "DescriptedLocation",
-                 "description": "Mollstraße, Berlin, Deutschland",
-                 "location": {
-                     "coordinates": [
-                         13.4212298,
-                         52.5248399
-                     ],
-                     "type": "Point"
-                 },
-                 "rank": 100,
-                 "geocoder": "GoogleRoutingWrapper"
-               },
-               {
-                 "type": "PublicTransportStation",
-                 "description": "Mollstr./Otto-Braun-Str. (Berlin)",
-                 "location": {
-                     "coordinates": [
-                         13.419942,
-                         52.525184
-                     ],
-                     "type": "Point"
-                 },
-                 "rank": 100,
-                 "geocoder": "VBBRoutingWrapper"
-               }          
-           ]
-         }
+            {
+                "searchLocation": "Berlin, Mollstrasse 7",
+                "rankedLocations": [
+                    {
+                        "type": "Place",
+                        "description": "Berlin (Germany)",
+                        "location": {
+                           "coordinates": [
+                                13.421097,
+                                52.5236814
+                           ],
+                           "type": "Point"
+                        },
+                        "rank": null,
+                        "geocoder": "PhotonGeocoder"
+                    },
+                    {
+                        "type": "Amenity",
+                        "description": "Kita Traumzauberbaum, Berlin (Germany)",
+                        "location": {
+                            "coordinates": [
+                                13.421197012371714,
+                                52.52326395
+                            ],
+                            "type": "Point"
+                        },
+                        "rank": null,
+                        "geocoder": "PhotonGeocoder"
+                    }
+                ]
+            }
         ]
 
 # Group Business Area Info
