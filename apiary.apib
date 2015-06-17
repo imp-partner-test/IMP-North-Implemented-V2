@@ -5550,7 +5550,12 @@ timeInSec | Integer | time in seconds
 
 ### Receive notification messages
 
-The data structure of the notification message contains following attributes:
+The data structure of the notification message contains the attributes with the basic information and additionally the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+... | ... | ...
+modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
 
 # Group ServiceOfferings
