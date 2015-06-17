@@ -5524,16 +5524,32 @@ Get WMS PNG file for bike sharing for a specific date and for a specific boundin
 
 
 # Group Notifications
-
 This group contains list for requesting status notifications.
 
-## Request notifications for changes to an already retrieved Resource [/imp-endpoint/api/V2/WebSocket/Open?username={username}&password={password}]
+## Request notification for changes to a Resource retrieved from the System
 
-This collection contains a list for requesting status notifications over web socket.
+This collection contains a list for requesitng notification for changes to an earlier retrieved Resource, such as a Bike station.
 
-### Open Web Socket Connection 
+### Register with the URI (/imp-endpoint/api/V2/WebSocket/Open)
 
+Following request parameters needs to be sent:
+attribute | data type | comments
+--- | --- | ---
+username | String | username
+password | String | password
 
+### Subscribe for notifications
+
+The data structure of the subscription request contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+id | String | id of the Resource to be monitored
+timeInSec | Integer | time in seconds
+
+### Receive notification messages
+
+The data structure of the notification message contains following attributes:
 
 
 # Group ServiceOfferings
