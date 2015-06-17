@@ -6085,6 +6085,20 @@ requiredFeatures | Array | List of features (BOOKING, CANCELATION, etc.)
     [Process Definitions for Service Subscription][]
 
 
+# Group Notifications
+
+This group contains list for requesting status notifications.
+
+## Register for receving notifications over the connected web socket [/imp-endpoint/api/V2/WebSocket/Open?username={username}&password={password}]
+
+This collection contains a list for requesitng notification for changes to an earlier retrieved Resource, such as a Bike station.
+
++ Parameters
+    + username (string, `mpUserId`) ... User's id.
+    + password (string, `mpUserPassword`) ... User's password.
+
+
+
 # Group System Configuration
 This group contains all System related configuration interfaces.
 
