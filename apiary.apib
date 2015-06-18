@@ -5528,7 +5528,7 @@ This group contains list for requesting status notifications.
 
 ## Request notification for changes to an earlier retrieved Resource
 
-This collection contains a list for requesitng notification for changes to an earlier retrieved Resource, such as a Bike station.
+This collection contains a list for requesitng notification for changes to an earlier retrieved Resource.
 
 ### Open a Web Socket connection with the URI (/imp-endpoint/api/V2/WebSocket/Open)
 
@@ -5541,36 +5541,46 @@ password | String | password
 
 
 ### Subscribe for receving notification messages
-Subscribe for receiving notification by sending a subscription message containing id of the Resource to be monitored and monitoring time in seconds.
+Subscribe for receiving notification by sending a subscription message.
 
 REQUEST:
 
-    {"id":47059,"timeInSec":60}
+    { "id": 11689, "timeInSec": 120 }
 
 ### Receive notification messages
 Receive notification message containing information of requested Resources.
 
 RESPONSE:
 
-            "resources": [
-            {
-              "id": 47059,
-              "description": "Ernst-Reuter-Platz / Marchstraße",
-              "type": "BikeSharingStation",
-              "uri": "Resources/BikeSharing/BikeSharingStation/47059",
-              "location": {
-                    "type": "Point",
-                    "coordinates": [
-                        13.32278823852539,
-                        52.51343536376953
-                    ]
-              },
-              "provider": "callabike",
-              "availability": 62.5,
-              "operator": "CallABike",
-              "modFlag": "Modified"
+             {
+                "actions":[],
+                "id":11689,
+                "description":"Ladestation RWE Effizienz GmbH",
+                "type":"EVChargingStationDetails",
+                "uri":null,
+                "location":{
+                    "coordinates":[
+                        13.390248,
+                        52.51897
+                    ],
+                "type":"Point"},
+                "provider":"hubject",
+                "availability":0.0,
+                "operator":"Hubject",
+                "modFlag":"Modified",
+                "address":
+                {
+                    "citycode":"10117",
+                    "city":"Berlin",
+                    "street":"Planckstr.",
+                    "houseno":"4",
+                    "district":null,
+                    "region":"11",
+                    "country":"DEU"
+                },
+                "plugTypes":["Type2Outlet"],
+                "power":null
             }
-          ]
 
 
 # Group ServiceOfferings
