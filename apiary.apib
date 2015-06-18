@@ -5540,45 +5540,36 @@ username | String | username
 password | String | password
 
 
-### Register for receving notifications over the connected web socket
+### Subscribe for receving notification messages
+Subscribe for receiving notification by sending a subscription message containing id of the Resource to be monitored and monitoring time in seconds.
 
 REQUEST:
 
-    {"id":9,"timeInSec":60}
+    {"id":47059,"timeInSec":60}
+
+### Receive notification messages
+Receive notification message containing information of requested Resources.
 
 RESPONSE:
 
+            "resources": [
             {
-                "actions": [
-                    {
-                        "name": "book",
-                        "method": "POST",
-                        "uri": "Resources/BikeSharing/Stations/9/Process?action=book"
-                    }
-                ],
-                "id": 9,
-                "description": "Museumsinsel / Monbijoubrücke",
-                "type": "BikeSharingStationDetails",
-                "uri": "Resources/BikeSharing/Stations/9/",
-                "location": {
+              "id": 47059,
+              "description": "Ernst-Reuter-Platz / Marchstraße",
+              "type": "BikeSharingStation",
+              "uri": "Resources/BikeSharing/BikeSharingStation/47059",
+              "location": {
                     "type": "Point",
                     "coordinates": [
-                        13.394195556640625,
-                        52.52271270751953
+                        13.32278823852539,
+                        52.51343536376953
                     ]
-                },
-                "provider": "callabike",
-                "availability": 33.333333333333336,
-                "operator": "CallABike",
-                "phoneNo": null,
-                "operatorURI": null,
-                "operatorName": "CallABike",
-                "address": null,
-                "numberOfBikes": 18,
-                "numberOfFreeBikes": 6,
-                "services": null,
-                "modFlag": Modified
+              },
+              "provider": "callabike",
+              "availability": 62.5,
+              "operator": "CallABike"
             }
+          ]
 
 
 # Group ServiceOfferings
