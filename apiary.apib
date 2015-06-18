@@ -5526,11 +5526,11 @@ Get WMS PNG file for bike sharing for a specific date and for a specific boundin
 # Group Notifications
 This group contains list for requesting status notifications.
 
-## Request notification for changes to a Resource retrieved from the System
+## Request notification for changes to an earlier retrieved Resource
 
 This collection contains a list for requesitng notification for changes to an earlier retrieved Resource, such as a Bike station.
 
-### Register with the URI (/imp-endpoint/api/V2/WebSocket/Open)
+### Open a Web Socket connection with the URI (/imp-endpoint/api/V2/WebSocket/Open)
 
 Following request parameters needs to be sent:
 
@@ -5539,23 +5539,46 @@ attribute | data type | comments
 username | String | username
 password | String | password
 
-### Subscribe for notifications
 
-The data structure of the subscription request contains the following attributes:
+### Register for receving notifications over the connected web socket
 
-attribute | json data type | comments
---- | --- | ---
-id | String | id of the Resource to be monitored
-timeInSec | Integer | time in seconds
+REQUEST:
 
-### Receive notification messages
+    {"id":9,"timeInSec":60}
 
-The data structure of the notification message contains the attributes with the basic information and additionally the following attributes:
+RESPONSE:
 
-attribute | json data type | comments
---- | --- | ---
-... | ... | ...
-modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
+            {
+                "actions": [
+                    {
+                        "name": "book",
+                        "method": "POST",
+                        "uri": "Resources/BikeSharing/Stations/9/Process?action=book"
+                    }
+                ],
+                "id": 9,
+                "description": "Museumsinsel / Monbijoubrücke",
+                "type": "BikeSharingStationDetails",
+                "uri": "Resources/BikeSharing/Stations/9/",
+                "location": {
+                    "type": "Point",
+                    "coordinates": [
+                        13.394195556640625,
+                        52.52271270751953
+                    ]
+                },
+                "provider": "callabike",
+                "availability": 33.333333333333336,
+                "operator": "CallABike",
+                "phoneNo": null,
+                "operatorURI": null,
+                "operatorName": "CallABike",
+                "address": null,
+                "numberOfBikes": 18,
+                "numberOfFreeBikes": 6,
+                "services": null,
+                "modFlag": Modified
+            }
 
 
 # Group ServiceOfferings
