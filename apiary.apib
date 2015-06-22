@@ -5524,11 +5524,11 @@ Get WMS PNG file for bike sharing for a specific date and for a specific boundin
 
 
 # Group Notifications
-This group contains list for requesting status notifications.
+This group contains the interface for requesting status notifications.
 
 ## Request notification for changes to an earlier retrieved Resource
 
-This collection contains a list for requesitng notification for changes to an earlier retrieved Resource.
+This collection contains a list for requesting notification for changes to an earlier retrieved Resource.
 
 ### Open a Web Socket connection with the URI (/imp-endpoint/api/V2/WebSocket/Open)
 
@@ -5540,8 +5540,10 @@ username | String | username
 password | String | password
 
 
-### Subscribe for receving notification messages
+### Subscribe for receiving notification messages
 Subscribe for receiving notification by sending a subscription message.
+The subscription request contains the resource ID (id) and the time (timeInSec) the subscriber wants to receive notification about status changes of this resource.
+Multiple subscription messages may be send via a websocket.
 
 REQUEST MESSAGE:
 
