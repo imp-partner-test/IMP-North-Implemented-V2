@@ -1692,9 +1692,23 @@ The data structure of the response has the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
+actions | Array |
+processId | String | 
+confirmation | Object | 
+--- | --- | ---
+featureType | String
 confirmationId | String | 
-comments | String | 
-
+confirmationData | Object |
+--- | --- | ---
+resource | Object | 
+--- | --- | ---
+type | String | 
+location | Object |
+licenseId | String | 
+interval | Object |
+--- | --- | ---
+from | DateTime |
+to | DateTime |
 ### Booking a car [POST]
 @nottestable
 
@@ -1705,7 +1719,7 @@ comments | String |
 + Request
 
         { 
-            "operator": "flinkster",
+            "operator": "drivenow",
             "from": "",
             "to": "",
             "userId": "4711/10" 
@@ -1714,10 +1728,37 @@ comments | String |
         
 + Response 201 (application/json)
 
-        {  
-            "confirmationId": "1012020020",
-            "comments": "Comments"
-        } 
+        {
+            "actions": [
+                {
+                    "name": "cancel",
+                    "method": "PUT",
+                    "uri": "Processes/967620?action=cancel"
+                }
+            ],
+            "processId": "967620",
+            "confirmation": {
+                "featureType": "BOOKING",
+                "confirmationId": "res_24009",
+                "confirmationData": {
+                    "resource": {
+                        "type": "CarSharingCarDetails",
+                        "location": {
+                        "coordinates": [
+                            11.515691,
+                            48.072761
+                        ],
+                        "type": "Point"
+                        },
+                        "licenseId": "M-DX5721",
+                    },
+                    "interval": {
+                        "from": "2015-06-24T17:05:24+05:30",
+                        "to": "2015-06-24T17:20:24+05:30"
+                    }
+                }
+            }
+        }
 
 ## Book a car at a specific station [/imp-endpoint/api/V2/Resources/CarSharing/Stations/{stationId}/Cars/{carId}/Process?action=book]
 
