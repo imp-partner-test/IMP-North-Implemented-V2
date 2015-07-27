@@ -4024,6 +4024,7 @@ description | String | Description of the segment
 origin | Object | Start point of the segment. 
 destination | Object | End point of the segment
 trafficType | Enum | Traffic type used in the segment. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking.
+line | String | line information for Public Transit trip segment
 cost | Object | Costs of the segment including distance, duration, price and CO2 emmision.
 wayPoints | Object | List of way points to render the segment
 guidingPoints | Object | List of guiding points with turn-by-turn instructions
@@ -4070,6 +4071,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                             "time": "2013-07-23T13:43:26+00:00"
                         },
                         "trafficType": "OwnBike",
+                        "line": "S6",
                         "cost": {
                             "distance": {
                                 "unit": "meter",
