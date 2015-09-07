@@ -25,8 +25,9 @@ Usually clients will be authorized by certificates. If that is not possible, Bas
 (c) Siemens AG 2014 All rights reserved
 
 ##Metadata
-Metadata provides fields that describe additional information regarding service provider and the requested resources. Such information includes organization specific short-names, site URIs, 
-data refresh timestamps,and warning or error messages. Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
+Mobility Providers are able to access the services of various service providers via the unified REST interface of SiMobility Connect.
+The integrated serviced of different mobility categories are structured as resources. Usually a response to a resource request contains a metadata header which is common for all resources.
+For each provided service the metadata header containes a field that describe genral information regarding service provider and the requested resources. Such information includes service specific short-name, site URIs, data refresh timestamps, and warning or error messages. Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
 
 # Group Bike Sharing
 This is a group of all bike sharing related REST resources.
