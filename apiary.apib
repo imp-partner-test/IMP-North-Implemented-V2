@@ -27,7 +27,17 @@ Usually clients will be authorized by certificates. If that is not possible, Bas
 ##Metadata
 Mobility Providers are able to access the services of various service providers via the unified REST interface of SiMobility Connect.
 The integrated serviced of different mobility categories are structured as resources. Usually a response to a resource request contains a metadata header which is common for all resources.
-For each provided service the metadata header containes a field that describe genral information regarding service provider and the requested resources. Such information includes service specific short-name, site URIs, data refresh timestamps, and warning or error messages. Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
+For each provided service the metadata header containes a field that describe genral information regarding service provider and the requested resources. Such information includes service specific short-name, site URIs, data refresh timestamps, and warning or error messages.
+Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
+
+The metaData structure contains the following attributes: 
+
+attribute | json data type | comments
+--- | --- | ---
+serviceAlias | String | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+webUiUrl | String | URI of the service provider to obtain further information
+lastUpdateTime | DateTime | Timestamp when the provided data was refreshed
+messages | Array | Array of string with warnings and error messages
 
 # Group Bike Sharing
 This is a group of all bike sharing related REST resources.
@@ -47,7 +57,7 @@ The data structure of the response contains the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
-metadata | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
+metaData | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
 --- | --- | ---
 resources | Array | Array of resources within the search area
 --- | --- | ---
