@@ -2157,7 +2157,7 @@ This is a group of all handy ticketing related rest resources.
 
 Usually, a ticket is bought in three steps: First, the available tickets for a defined service will be requested. Then the selected ticket will be bought and finally the receipt of the ticket has to be confirmed.
     
-## Available Tickets [/imp-endpoint/api/V2/Resources/Ticketing/Tickets]    
+## Available Tickets [/imp-endpoint/api/V2/Resources/Ticketing/Tickets?action=book]    
 This collection contains a list of available products (tickets) for specified origin and destination. Both are public transport stations and are identified by `{pointId}`. 
 PointId can be retrieved using `GET /imp-endpoint/api/V2/Resources/PublicTransport/Stations`
 
@@ -2191,7 +2191,7 @@ currency | String | Currency
 
 Parts of the data structure might be omitted if the information is not available. 
     
-### Getting available tickets [GET]
+### Getting available tickets [POST]
 @nottestable
     
 + Request
@@ -2317,7 +2317,7 @@ ticketContent | Base64Binary | Content of Ticket
                 }
             }
 
-## Confirm ticket delivery [/imp-endpoint/api/V2/Processes/{processId}]    
+## Confirm ticket delivery [/imp-endpoint/api/V2/Processes/{processId}?action=confirm]    
 The response contains details of a bought ticket, identified by {ticketIds} and {ticketContent} 
 
 The data structure of the request body:
