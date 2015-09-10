@@ -2165,7 +2165,7 @@ The data structure of the request:
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | Point id and/or address string (depending on Service HandyTicket requires addess while ZPS/Nova does not requires it.)
+origin | Object | Point id and/or address string (depending on Service HandyTicket requires addess while ZPS/Nova do not need it.)
 destination | Object | Point id and address string
 viaPoints | Object | List of geo locations the route should pass
 numberOfTickets | Object | Number of tickets
@@ -2368,7 +2368,7 @@ confirmationData contains following fields:
 attribute | json data type | comments
 --- | --- | ---
 confirmed | Boolean | Value indicating success/failure
-ticketContent | Base64 | image data for ticket
+ticketContent | Object | Image data for ticket
     
 ### Confirming a ticket delivery [PUT]
 @nottestable
