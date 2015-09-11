@@ -3965,7 +3965,7 @@ origin | Object | Start point specified by a geo location. Addresses can be conv
 destination | Object | End point specified by a geo location.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time
-viapoints | Array of Objects | List of geolocations the route should pass in the given sequence
+viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence
 costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function.
 userId | String | Traveler id that requests a trip. Note: Currently it is not used by IMP and can be any string.
 trafficTypes | Array | List of traffic types which will be considered when calculating best route alterntives. Due to the ranking according to the cost function not all modes may be used in the resulting route alternatives. Currently possible: Bike, BikeSharing, OwnBike, Bus, Car, CarSharing, OwnCar, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively.
