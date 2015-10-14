@@ -4837,7 +4837,188 @@ userId: User that requests a trip
 
 + Response 200 
 
-    [List of Trip Proposals with Basic Info. Car Journey Planner][]          
+    [List of Trip Proposals with Basic Info. Car Journey Planner][]    
+    
+# Group Journey Planner. Bike Router
+This is a group of all journey planner Bike Router related REST resources.
+            
+## List of Trip Proposals with Basic Info. Bike Journey Planner [/imp-endpoint/api/V2/TripProposals/BikeRouter] 
+
+This collection contains trip proposals with basic information for specified trip criteria.
+The data structure of the response contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+url | URI | URI to request more details
+origin | Object | Start point of the proposed trip
+destination | Object | Endpoint of the proposed trip
+trafficTypes | Array | List of traffic types used in the proposed trip. Currently: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking  
+description | String | 
+costs | Array | List of costs for the proposed trip
+    
++ Model (application/json)
+
+    + Body
+    
+            {
+                "metaData": [
+                    {
+                        "serviceAlias": "vmzBikeRouting",
+                        "webUiUrl": "http://vmz.de/BikeRouter",
+                        "lastUpdateTime": "2015-10-14T09:06:37+00:00",
+                        "messages": []
+                    }
+                ],
+                "tripProposals": [
+                    {
+                        "url": "TripProposals/BikeRouter/27824",
+                        "origin": {
+                            "location": {
+                                "coordinates": [
+                                    13.3714412,
+                                    52.539236
+                                ],
+                                "type": "Point"
+                            },
+                            "address": "Chausseestraße Brücke, 13353 Berlin, Germany",
+                            "time": "2015-10-14T13:10:00+00:00"
+                        },
+                        "destination": {
+                            "location": {
+                                "coordinates": [
+                                    13.4233923,
+                                    52.5247243
+                                ],
+                                "type": "Point"
+                            },
+                            "address": "Mollstraße 25-26, 10249 Berlin, Germany",
+                            "time": "2015-10-14T14:05:41+00:00"
+                        },
+                        "trafficTypes": [
+                            "Walk"
+                        ],
+                        "description": null,
+                        "costs": {
+                            "distance": {
+                                "unit": "meter",
+                                "value": 4443
+                            },
+                            "duration": {
+                                "unit": "minute",
+                                "value": 55.68333333333333
+                            },
+                            "price": {
+                                "unit": "Euro",
+                                "value": 0
+                            },
+                            "emission": {
+                                "unit": "gram",
+                                "value": 0
+                            },
+                            "ticketPrice": null
+                        }
+                    },
+                    {
+                        "url": "TripProposals/BikeRouter/27825",
+                        "origin": {
+                            "location": {
+                                "coordinates": [
+                                    13.3714412,
+                                    52.539236
+                                ],
+                                "type": "Point"
+                            },
+                            "address": "Chausseestraße Brücke, 13353 Berlin, Germany",
+                            "time": "2015-10-14T13:10:00+00:00"
+                        },
+                        "destination": {
+                            "location": {
+                                "coordinates": [
+                                    13.4233923,
+                                    52.5247243
+                                ],
+                                "type": "Point"
+                            },
+                            "address": "Mollstraße 25-26, 10249 Berlin, Germany",
+                            "time": "2015-10-14T13:29:49+00:00"
+                        },
+                        "trafficTypes": [
+                            "OwnBike"
+                        ],
+                        "description": null,
+                        "costs": {
+                            "distance": {
+                                "unit": "meter",
+                                "value": 5335
+                            },
+                            "duration": {
+                                "unit": "minute",
+                                "value": 19.816666666666666
+                            },
+                            "price": {
+                                "unit": "Euro",
+                                "value": 0
+                            },
+                            "emission": {
+                                "unit": "gram",
+                                "value": 0
+                            },
+                            "ticketPrice": null
+                        }
+                    }
+                ]
+            }
+
+
+### Getting Trip Proposals by Bike Journey Planner [POST]
+@testable
+
+Selection criteria is specified in the request body as described in the sample request:
+
+origin: Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
+
+destination: Start point specified by a geo location. Either orgin or destination might specify a time.
+
+time: Date and time of the trip. If no time is specified, the current time is used as departure time.
+
+departureTime: Specifies whether the given time is used as departure or arrival time.
+
+viaPoints: List of geo locations that the route should pass in the given sequence
+
+costFunctions: List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
+
+routingConstraints: List of constraints to be taken into account for various traffic types, specified by min/max values
+
+userId: User that requests a trip
+
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+        
+            { 
+                "origin": { 
+                    "location": {"type": "Point", "coordinates": [ 13.37143, 52.53923 ]}
+                },
+                "destination": { 
+                    "location": {"type": "Point", "coordinates": [ 13.42338, 52.52471 ]}
+                },
+                "time": "2015-10-14T15:10:00+02:00",
+                "departureTime":"true",
+                "costFunctions": [],
+                "routingConstraints": [],
+                "userId": "4711/10" ,
+                "maxRoutingResponses": 4,
+                "useTrafficSituation" : true
+            }
+
++ Response 200 
+
+    [List of Trip Proposals with Basic Info. Bike Journey Planner][]   
 
 
 # Group Incidents / Traffic Info
