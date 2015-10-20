@@ -4717,10 +4717,12 @@ attribute | json data type | comments
 url | URI | URI to request more details
 origin | Object | Start point of the proposed trip
 destination | Object | Endpoint of the proposed trip
-trafficTypes | Array | List of traffic types used in the proposed trip. Currently: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking  
+trafficTypes | Array | List of traffic types used in the proposed trip. Here only: OwnCar
 description | String | 
 costs | Array | List of costs for the proposed trip
     
+A single trip proposal object with Detailed Information is requested similar as for IMR.
+
 + Model (application/json)
 
     + Body
@@ -4783,21 +4785,16 @@ costs | Array | List of costs for the proposed trip
 
 Selection criteria is specified in the request body as described in the sample request:
 
-origin: Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
-
-destination: Start point specified by a geo location. Either orgin or destination might specify a time.
-
-time: Date and time of the trip. If no time is specified, the current time is used as departure time.
-
-departureTime: Specifies whether the given time is used as departure or arrival time.
-
-viaPoints: List of geo locations that the route should pass in the given sequence
-
-costFunctions: List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
-
-routingConstraints: List of constraints to be taken into account for various traffic types, specified by min/max values
-
-userId: User that requests a trip
+attribute | json data type | comments
+--- | --- | ---
+origin | Object | Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
+destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
+time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
+departureTime | Boolean | Specifies whether the given time is used as departure or arrival time.
+viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence
+costFunctions | Array of Objects | List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
+routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
+userId | String | User that requests a trip
 
 + Request
 
@@ -4852,144 +4849,95 @@ attribute | json data type | comments
 url | URI | URI to request more details
 origin | Object | Start point of the proposed trip
 destination | Object | Endpoint of the proposed trip
-trafficTypes | Array | List of traffic types used in the proposed trip. Currently: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. trafficType Other is used in the segments for car rental/parking  
+trafficTypes | Array | List of traffic types used in the proposed trip. Here only: OwnBike
 description | String | 
 costs | Array | List of costs for the proposed trip
     
+A single trip proposal object with Detailed Information is requested similar as for IMR.
+
 + Model (application/json)
 
     + Body
     
             {
                 "metaData": [
-                    {
-                        "serviceAlias": "vmzBikeRouting",
-                        "webUiUrl": "http://vmz.de/BikeRouter",
-                        "lastUpdateTime": "2015-10-14T09:06:37+00:00",
-                        "messages": []
-                    }
+                {
+                    "serviceAlias": "vmzBikeRouting",
+                    "webUiUrl": "http://vmz.de/BikeRouter",
+                    "lastUpdateTime": "2015-10-20T08:54:39+00:00",
+                    "messages": []
+                }
                 ],
                 "tripProposals": [
-                    {
-                        "url": "TripProposals/BikeRouter/27824",
-                        "origin": {
-                            "location": {
-                                "coordinates": [
-                                    13.3714412,
-                                    52.539236
-                                ],
-                                "type": "Point"
-                            },
-                            "address": "Chausseestraße Brücke, 13353 Berlin, Germany",
-                            "time": "2015-10-14T13:10:00+00:00"
+                {
+                    "url": "TripProposals/BikeRouter/52745",
+                    "origin": {
+                        "location": {
+                            "coordinates": [
+                                13.371430357216871,
+                                52.53922982995011
+                            ],
+                            "type": "Point"
                         },
-                        "destination": {
-                            "location": {
-                                "coordinates": [
-                                    13.4233923,
-                                    52.5247243
-                                ],
-                                "type": "Point"
-                            },
-                            "address": "Mollstraße 25-26, 10249 Berlin, Germany",
-                            "time": "2015-10-14T14:05:41+00:00"
-                        },
-                        "trafficTypes": [
-                            "Walk"
-                        ],
-                        "description": null,
-                        "costs": {
-                            "distance": {
-                                "unit": "meter",
-                                "value": 4443
-                            },
-                            "duration": {
-                                "unit": "minute",
-                                "value": 55.68333333333333
-                            },
-                            "price": {
-                                "unit": "Euro",
-                                "value": 0
-                            },
-                            "emission": {
-                                "unit": "gram",
-                                "value": 0
-                            },
-                            "ticketPrice": null
-                        }
+                        "address": null,
+                        "time": "2015-10-14T13:10:00+00:00",
+                        "type": "TimedLocation"
                     },
-                    {
-                        "url": "TripProposals/BikeRouter/27825",
-                        "origin": {
-                            "location": {
-                                "coordinates": [
-                                    13.3714412,
-                                    52.539236
-                                ],
-                                "type": "Point"
-                            },
-                            "address": "Chausseestraße Brücke, 13353 Berlin, Germany",
-                            "time": "2015-10-14T13:10:00+00:00"
+                    "destination": {
+                        "location": {
+                            "coordinates": [
+                                13.423440421396725,
+                                52.52469677199724
+                            ],
+                            "type": "Point"
                         },
-                        "destination": {
-                            "location": {
-                                "coordinates": [
-                                    13.4233923,
-                                    52.5247243
-                                ],
-                                "type": "Point"
-                            },
-                            "address": "Mollstraße 25-26, 10249 Berlin, Germany",
-                            "time": "2015-10-14T13:29:49+00:00"
+                        "address": null,
+                        "time": "2015-10-14T13:29:27+00:00",
+                        "type": "TimedLocation"
+                    },
+                    "trafficTypes": [
+                        "OwnBike"
+                    ],
+                    "description": null,
+                    "costs": {
+                        "distance": {
+                            "unit": "meter",
+                            "value": 5189.351168191728
                         },
-                        "trafficTypes": [
-                            "OwnBike"
-                        ],
-                        "description": null,
-                        "costs": {
-                            "distance": {
-                                "unit": "meter",
-                                "value": 5335
-                            },
-                            "duration": {
-                                "unit": "minute",
-                                "value": 19.816666666666666
-                            },
-                            "price": {
-                                "unit": "Euro",
-                                "value": 0
-                            },
-                            "emission": {
-                                "unit": "gram",
-                                "value": 0
-                            },
-                            "ticketPrice": null
-                        }
+                        "duration": {
+                            "unit": "minute",
+                            "value": 19.460066880718983
+                        },
+                        "price": {
+                            "unit": "Euro",
+                            "value": 0
+                        },
+                        "emission": {
+                            "unit": "gram",
+                            "value": 0
+                        },
+                        "ticketPrice": null
                     }
-                ]
+                }
             }
-
+            ]
+        }
 
 ### Getting Trip Proposals by Bike Journey Planner [POST]
 @testable
 
 Selection criteria is specified in the request body as described in the sample request:
 
-origin: Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
-
-destination: Start point specified by a geo location. Either orgin or destination might specify a time.
-
-time: Date and time of the trip. If no time is specified, the current time is used as departure time.
-
-departureTime: Specifies whether the given time is used as departure or arrival time.
-
-viaPoints: List of geo locations that the route should pass in the given sequence
-
-costFunctions: List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
-
-routingConstraints: List of constraints to be taken into account for various traffic types, specified by min/max values
-
-userId: User that requests a trip
+attribute | json data type | comments
+--- | --- | ---
+origin | Object | Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations").
+destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
+time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
+departureTime | Boolean | Specifies whether the given time is used as departure or arrival time.
+viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence.
+costFunctions | Array of Objects | Lst of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight. This bike router uses the traffic safety as optimization criterion. The other cost functions will be ignored. 
+routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
+userId | String | User that requests a trip
 
 + Request
 
