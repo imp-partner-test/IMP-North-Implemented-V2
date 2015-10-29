@@ -3161,9 +3161,7 @@ resources | Array | Array of arrivals/departures
 id | Number | Internal public transport station identification number
 ... | ... | ...
 arrivals | Array of Objects | Arrivals info containing direction, line and arrival times
-departures | Array of Objects | Departures info containing direction, line and departure times
-
-Please note, the expectedTime is not always available.
+departures | Array of Objects | Departures info containing direction, line and departure times; “aimedTime” is the scheduled departure time (Soll-Zeit in German).  It’s always provided; “expectedTime” is the real-time-based departure time (IST-Zeit in German).  It’s higher-quality but NOT always provided.
 
 ### Getting a time table [GET] 
 @nottestable
