@@ -27,7 +27,7 @@ Usually clients will be authorized by certificates. If that is not possible, Bas
 ##Metadata
 Mobility Providers are able to access the services of various service providers via the unified REST interface of SiMobility Connect.
 The integrated serviced of different mobility categories are structured as resources. Usually a response to a resource request contains a metadata header which is common for all resources.
-For each provided service the metadata header containes a field that describe general information regarding service provider and the requested resources. Such information includes service specific short-name, site URI, data refresh timestamp, and warning or error messages.
+For each provided service, relevant for this request, the metadata header containes a field that describes general information regarding subscribed service provider(s) and the requested resources. Such information includes service specific short-name, site URI, data refresh timestamp, and warning or error messages.
 Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
 
 The metaData structure contains the following attributes: 
@@ -37,7 +37,7 @@ attribute | json data type | comments
 serviceAlias | String | Short name of the service offering
 webUiUrl | String | URI of the service provider to obtain further information
 lastUpdateTime | DateTime | Timestamp when the provided data was refreshed
-messages | Array | Array of strings with warnings and error messages
+messages | Array | Array of strings with warnings and error messages e.g. "message": "This service is not available in the requested region" or "code": "cost.functions.not.supported".
 
 # Group Bike Sharing
 This is a group of all bike sharing related REST resources.
@@ -2956,7 +2956,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     + lng (number, `13.4`) ... longitude value. Has example value.
     + radius (number, `600`) ... radius in meter. Has example value.
     + f_stations (optional, string, `{"stationType":"BusTramStation"}`) ... String `f_stations` filter value. Has example value.
-    + filter (optional, string, `Str`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
+    + filter (optional, string, `Str`) ... free text filter value. Multiple strings are combined by or. Not all providers offer full-text filter. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
 + Model (application/json)
 
     + Body
