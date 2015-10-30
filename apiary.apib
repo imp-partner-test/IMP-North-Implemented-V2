@@ -5835,6 +5835,17 @@ NOTIFICATION MESSAGE:
 
 ## ServiceOfferings [/imp-endpoint/api/V2/ServiceOfferings] 
 
+* an (optional) service offerings filter (f_service={filterJson} )
+ 
+filterJson has following structure,
+
+
+attribute | json data type | comments
+--- | --- | ---
+subscribed | Boolean | true, false 
+category | String | Parking, PublicTransport, TrafficInfo, TimeTables, Ticketing, BikeSharing, CarSharing, EVCharging, WMS, JourneyPlanner, CarJourneyPlanner, GeoCoding, TaxiService 
+
+
 RESPONSE:
 This collection contains a list service offerings.
 
