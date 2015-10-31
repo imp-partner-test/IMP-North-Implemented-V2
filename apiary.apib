@@ -2944,7 +2944,7 @@ provider | String | Service provider
 availability | Double | Availability in percentage
 operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
 stationType | String | BusTramStation, MetroStation, CityTrainStation
-stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation
+stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where trafficTypes are unknown.
 platforms | String | Platforms of the station
 wheelChair | Boolean | Wheel chair accessibility
 lines | Array of Objects | Array of lines departing at the station
