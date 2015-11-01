@@ -3816,9 +3816,8 @@ This is a group of all intermodal router (IMR) related REST resources.
 
 ## List of Trip Proposals with Basic Info. Intermodal Router [/imp-endpoint/api/V2/TripProposals/IMR] 
 
-This collection contains a list of trip proposals with basic information for specified trip criteria. Note: The trip proposals can be multimodal or intermodal, depending on which routing service the mobility provider of the user is subscribed to.
-
-The data structure of collection contains a list of trip proposals. Each trip proposal contains the following attributes:
+This collection contains a list of trip proposals with basic information for specified trip search criteria. Results can only be intermodal if an intermodal service is subscribed. Otherwise results are mono- or multimodal. 
+Each trip proposal in the list of trip propsoals contains the following attributes:
 
 attribute | json data type | comments
 --- | --- | ---
