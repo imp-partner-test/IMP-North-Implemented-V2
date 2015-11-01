@@ -2942,7 +2942,7 @@ uri | URI | URI to request more details (more details not always available)
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Alias of service provider
 availability | Double | 100=availalbe
-operator | String | The transport company operating the service (not offered by all services)
+operator | String | The transport company operating the service (not provided by all services)
 stationType | String | BusTramStation, MetroStation, CityTrainStation
 stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where lines are unavailable.
 platforms | String | Platforms of the station (not always available, e.g. most bus stops have no platforms)
@@ -3956,8 +3956,8 @@ origin | Object | Start point specified by a geo location. Addresses can be conv
 destination | Object | End point specified by a geo location.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time
-viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence (not offered by all services)
-costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function. (not offered by all services)
+viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence (not provided by all services)
+costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function. (not supported by all services)
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 trafficTypes | Array | List of traffic types to be considered in the route calculation. Route results may not contain all modes. Possible values: Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, OwnCar, Unknown. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Depending on the subscribed serves, not all values may be accepted.
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
