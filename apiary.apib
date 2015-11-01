@@ -13,7 +13,7 @@ Please keep the groovy generating script in synch with this documentation. Read 
 
 # Introduction
 
-This is the description of version V2 of the public REST interface of the platform SiMobility Connect offered by Siemens AG. 
+This is the description of version V2 of the public REST interface to the integrated mobility platform SiMobility Connect by Siemens AG. 
 A mockup of this interface can be tried using the URLs listed on the right. 
 For access to the staging and production system please write an email to `connect.mobility@siemens.com`
 
@@ -22,11 +22,11 @@ The staging system with this version is hosted on: https://sales.imp-siemens.com
 Usually clients will be authorized by certificates. If that is not possible, Basic Authentication may be used as a fallback.
 
 
-(c) Siemens AG 2014 All rights reserved
+(c) Siemens AG 2015 All rights reserved
 
 ##Metadata
 Mobility Providers are able to access the services of various service providers via the unified REST interface of SiMobility Connect.
-The integrated serviced of different mobility categories are structured as resources. Usually a response to a resource request contains a metadata header which is common for all resources.
+The integrated services of different mobility categories are structured as resources. Usually a response to a resource request contains a metadata header which is common for all resources.
 For each provided service, relevant for this request, the metadata header containes a field that describes general information regarding subscribed service provider(s) and the requested resources. Such information includes service specific short-name, site URI, data refresh timestamp, and warning or error messages.
 Warning messages are provided when request paramters are ignored or unsupported by the integrated services. Error messages refer to failures occuring during interaction with these services.
 
