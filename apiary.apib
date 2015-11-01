@@ -2920,7 +2920,7 @@ This is a group of all public transportation related REST resources.
 
 ## List of Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}&filter={filter}] 
 
-This collection contains a list of stations (U-Bahn/S-Bahn/train/bus/tram) in a specified area with basic information and a URI to get more details.
+This collection contains a list of public transport stations in a specified area with basic information.
 The area of interest can be defined as:
 
 * an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
@@ -2947,7 +2947,7 @@ stationType | String | BusTramStation, MetroStation, CityTrainStation
 stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where lines are unavailable.
 platforms | String | Platforms of the station (not always available, e.g. most bus stops have no platforms)
 wheelChair | Boolean | Wheel chair accessibility (not always available)
-lines | Array of Objects | Array of lines departing at the station. Duplicates because of differnt start and stop locations possible. (not always available)
+lines | Array of Objects | Array of lines departing at the station. Duplicates are possible because of different start and final stations. (not always available)
 modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
 
