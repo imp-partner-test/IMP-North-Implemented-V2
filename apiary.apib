@@ -3961,10 +3961,10 @@ costFunctions | Array of Objects | List of cost factors, (such as Distance, Dura
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 trafficTypes | Array | List of traffic types to be considered in the route calculation. Route results may not contain all modes. Possible values: Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, OwnCar, Unknown. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Depending on the subscribed serves, not all values may be accepted.
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
-ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}. Per default the default values of the individual routing services are used.
+ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}. Per default the default values of the individual routing services are used. (not supported by all services)
 maxRoutingResponses | Number | Number of to be provided route alternatives
-numOfTravelers | Number | Number of fellow travelers
-numOfLuggage | Number | Number of luggage pieces
+numOfTravelers | Number | Number of fellow travelers (not supported by all services)
+numOfLuggage | Number | Number of luggage pieces (not supported by all services)
 useTrafficSituation | Boolean | If set to true, the current road traffic conditions are considered in the route calculation. In case of public transport, trip results are per default as real-time as possible.
 
 Usually a subscribed route planning service does not support all of the above parameters. In many cases that is indicated by warnings in the metaData section of the response.
