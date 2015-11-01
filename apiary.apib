@@ -2942,7 +2942,7 @@ uri | URI | URI to request more details (more details not always available)
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Alias of service provider
 availability | Double | 100=availalbe
-operator | String | Operating transport company (not always available)
+operator | String | The transport company operating the service (not always available)
 stationType | String | BusTramStation, MetroStation, CityTrainStation
 stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where lines are unavailable.
 platforms | String | Platforms of the station (not always available, e.g. most bus stops have no platforms)
@@ -3072,7 +3072,7 @@ uri | URI | URI to request more details
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Service provider
 availability | Double | Availability in percentage
-operator | String | Bus/tram (="VBBStation"), metro (="VBBStationU"), S-Bahn (="VBBStationS")
+operator | String | The transport company operating the service.
 modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
 
 + Model (application/json)
@@ -3962,7 +3962,7 @@ costFunctions | Array of Objects | List of cost factors, (such as Distance, Dura
 userId | String | Traveler id that requests a trip. Note: Currently it is not used by IMP and can be any string.
 trafficTypes | Array | List of traffic types which will be considered when calculating best route alterntives. Due to the ranking according to the cost function not all modes may be used in the resulting route alternatives. Currently possible: Bike, BikeSharing, OwnBike, Bus, Car, CarSharing, OwnCar, CityTrain, Ferry, Metro, RegioTrain, Unknown, Train, Tram, Walk, UBahn. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively.
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
-ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}
+ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}. Per default the default values of the individual routing services are used.
 maxRoutingResponses | Number | Number of to be provided route alternatives
 numOfTravelers | Number | Number of fellow travelers
 numOfLuggage | Number | Number of luggage pieces
