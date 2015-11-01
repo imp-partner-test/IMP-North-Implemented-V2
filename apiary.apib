@@ -3824,7 +3824,7 @@ attribute | json data type | comments
 url | URI | URI to request more details
 origin | Object | Start point of the proposed trip
 destination | Object | Endpoint of the proposed trip
-trafficTypes | Array | List of traffic types used in the proposed trip. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking. The list may be ordered or unordered depending on the subscribed services.
+trafficTypes | Array | List of traffic types contained in the proposed trip. The list may be ordered or unordered depending on the subscribed services. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Car, Bike, Car, Other, Unknown. Other is used in segments with start/stop procedures for car rental/parking. 
 description | String | Description of the trip proposal
 costs | Array | List of costs for the proposed trip including distance, duration, price, CO2 emmision and ticket price for public transport.
 
@@ -3956,10 +3956,10 @@ origin | Object | Start point specified by a geo location. Addresses can be conv
 destination | Object | End point specified by a geo location.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time
-viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence
-costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function.
-userId | String | Traveler id that requests a trip. Note: Currently it is not used by IMP and can be any string.
-trafficTypes | Array | List of traffic types to be considered in the route calculation. Route results may not contain all modes. Possible values: Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, OwnCar, Unknown. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively.
+viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence (not always possible)
+costFunctions | Array of Objects | List of cost factors, (such as Distance, Duration, Price, Emission), each with a percentaged weight. Sample cost function: {"costType":"Duration","percentage":"100"}. The resulting route alternatives will be ranked according to this cost function. (not always possible)
+userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
+trafficTypes | Array | List of traffic types to be considered in the route calculation. Route results may not contain all modes. Possible values: Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, OwnCar, Unknown. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Depending on the subscribed serves, not all values may be accepted.
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values. E.g. maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
 ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}. Per default the default values of the individual routing services are used.
 maxRoutingResponses | Number | Number of to be provided route alternatives
