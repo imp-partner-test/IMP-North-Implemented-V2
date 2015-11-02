@@ -4794,7 +4794,7 @@ departureTime | Boolean | Specifies whether the given time is used as departure 
 viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence
 costFunctions | Array of Objects | List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
-userId | String | User that requests a trip
+userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 
 + Request
 
@@ -4936,7 +4936,7 @@ departureTime | Boolean | Specifies whether the given time is used as departure 
 viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence.
 costFunctions | Array of Objects | Lst of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight. This bike router uses the traffic safety as optimization criterion. The other cost functions will be ignored. 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
-userId | String | User that requests a trip
+userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 
 + Request
 
