@@ -2942,7 +2942,7 @@ type | String | (="PublicTransportStation")
 uri | URI | URI to request more details (more details not always available)
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
 provider | String | Alias of service provider
-availability | Double | 100=availalbe
+availability | Double | This value is always 100
 operator | String | The transport company operating the service (not provided by all services)
 stationType | String | BusTramStation, MetroStation, CityTrainStation
 stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where lines are unavailable.
