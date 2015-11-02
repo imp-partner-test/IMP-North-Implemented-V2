@@ -59,7 +59,7 @@ attribute | json data type | comments
 --- | --- | ---
 metaData | Object | List of service providers and the last update times and failures if any [{serviceAlias:"XXX",lastUpdateTime:dd-mm-yyyyThhmmssZ,messages:[]}]
 --- | --- | ---
-resources | Array | Array of resources within the search area
+resources | Array | Array of resources within the area of interest
 --- | --- | ---
 actions | Array | Available actions
 id | Number | Internal bike sharing station identification number
@@ -2859,7 +2859,7 @@ stationType | String | BusTramStation, MetroStation, CityTrainStation
 stationTypes | List of Enum(PublicTransportStationType) |  MetroStation, CityTrainStation, TrainStation, BusStation, TramStation, RegioTrainStation, FerryStation, PublicTransportStation. The last value is used as a generic for stations where information about deparing lines is unavailable.
 platforms | String | Platforms of the station. Information may not always available, e.g. most bus stops have no platforms.
 wheelChair | Boolean | Wheel chair accessibility. Information may not be available.
-lines | Array of Objects | Array of lines departing at the station. Duplicates are possible because of different start and final stations. (not yet offered by all services)
+lines | Array of Objects | Array of lines departing at the station. Duplicates are possible because of different start and final stations. Information not yet available from all services.
 modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request.
 
 
@@ -3644,7 +3644,7 @@ attribute | json data type | comments
 url | URI | URI to request more details
 origin | Object | Start point of the proposed trip
 destination | Object | Endpoint of the proposed trip
-trafficTypes | Array | List with trafficTypes of all trip segments contained in the proposed trip. The list may be ordered or unordered depending on the subscribed services. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Car, Bike, Other, Unknown. Other is used in segments with start/stop procedures for car/bike sharing, car rental, and car parking. 
+trafficTypes | Array | List with trafficTypes of all trip segments contained in the proposed trip. The list may be ordered or unordered depending on the subscribed services. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Car, Bike, Other, and Unknown. Other is used in segments with start/stop procedures for car/bike sharing, car rental, and car parking. 
 description | String | Description of the proposed trip provided by the service provider. 
 costs | Array | List of costs for the proposed trip including distance, duration, price, and CO2 emmision.
 
@@ -3779,7 +3779,7 @@ departureTime | Boolean | Specifies whether the time is used as departure or arr
 viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence. Not supported by all services.
 costFunctions | Array of Objects | List of cost factors, i.e. distance, duration, price, and CO2-emission, each with a percentaged weight. Example: {"costType":"Duration","percentage":"100"}. The trip proposals are ranked according to this cost function. Attribute is not supported by all services. Default cost functions are specified by the individual services. 
 userId | String | Traveler id that requests a trip. Traveler ids from this collection are currently not used and can be any string.
-trafficTypes | Array | List of traffic types to be considered in the search for trip proposals. Results may not contain all modes. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, OwnCar. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Not all trafficTypes may be supported.
+trafficTypes | Array | List of traffic types to be considered in the search for trip proposals. Results may not contain all modes. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, and OwnCar. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Not all trafficTypes may be supported.
 routingConstraints | Array of Objects | List of constraints to be considered in the search for trip proposals. Min and max values are specified for the indvidual traffic types walk, car, and bike. Example for a maximal distance in meters the traveler agrees to walk: {"routingConstraintType": "Distance", "trafficType": "Walk", "min": { "value": 0,"unit": "meter" }, "max":{"value":600, "unit":"meter"}}
 ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to the ranking according to the cost function, own vehicles may not be used in the resulting route alternatives. Sample object value {"trafficType":"Car", "useParking":true,"useParkAndRide":false, "location":{"type": "Point", "coordinates": [13.064472900000055, 52.3905689]}}. Per default the default values of the individual routing services are used. Not supported by all services.
 maxRoutingResponses | Number | Number of trip proposals to be returned
@@ -3793,8 +3793,8 @@ HTTP Headers:
 - Accept-Language: This header specifies the language of the trip proposals. Examples: de-DE, en-US. The default language is English. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.  
 
 Notes:
-- Some services also provide routes in the past
-- Travel time for some trafficTypes may contain extra times. Example: 2 minutes set-up time and 1 minute return time for free-floating car sharing and bike sharing; 2 minutes set-up time and 0 minutes return time for station-based car and bike sharing, 5 minutes parking time for free-floating car sharing and own car.
+- Some services also provide  routes in the past
+- Travel times for some trafficTypes may contain extra times. Example: 2 minutes set-up time and 1 minute return time for free-floating car sharing and bike sharing; 2 minutes set-up time and 0 minutes return time for station-based car and bike sharing, 5 minutes parking time for free-floating car sharing and own car.
 
 
 
@@ -3839,7 +3839,7 @@ Notes:
                     "location": {"type": "Point", "coordinates": [ 13.41100700000004, 52.521642 ]}
                 } 
               ],
-              "maxRoutingResponses": 4,
+              "maxRoutingResssnses": 4,
               "numOfTravelers" : 2,
               "numOfLuggage" : 2,
               "useTrafficSituation" : true
@@ -3853,11 +3853,10 @@ Notes:
 ## Trip Proposal with Detailed Info [/imp-endpoint/api/V2/TripProposals/IMR/{proposalId}]
 
 A single trip proposal object with detailed information. A trip proposal consists of one or more segments, each segment has one trafficType. 
-There are also separate segments if the traveler shall use different lines of the same transport modality, 
-for instance, first U5 from A to B and then U4 from B to C. Each segment has an origin and a destination with corresponding timestamps when to arrive and depart.
+Successive segments may have the same trafficType. Each segment has an origin and a destination with corresponding timestamps when to arrive and depart.
 A segment can contain a a sequence of wayPoints and guidingPoints.
 A wayPoint describes an intermediate geo location useful for displaying a trip course in a map.
-A guidingPoint can be an intermediate public transport station or a turn-by-turn instruction. It gives a traveler hints how to travel, e.g. whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints.
+A guidingPoint can be an intermediate public transport station or a turn-by-turn instruction. It gives a traveler hints on how to travel, e.g. whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints.
 
 The data structure of the trip proposal with detailed info contains the following attributes:
 
@@ -3867,19 +3866,19 @@ url | URI | URI to request more details
 segments | Array of Objects | List of route segments
 --- | --- | ---
 segmentId | Number | Index of segment
-description | String | Description of the segment
+description | String | Description of the segment provided by the service provider.
 origin | Object | Start point of the segment. 
 destination | Object | End point of the segment
-trafficType | Enum | Traffic type used in the segment. Possible values: Bike, Bus, Car, CityTrain, Ferry, Metro, Other, RegioTrain, Unknown, Train, Tram, Walk, UBahn. The trafficType Other is used in the segments for the start/stop procedures of car rental/parking.
-line | String | line information for Public Transit trip segment
-cost | Object | Costs of the segment including distance, duration, price and CO2 emmision.
-wayPoints | Object | List of way points to render the segment in a map (not yet available for all services)
-guidingPoints | Object | List of guiding points with intermediate public transport stops or turn-by-turn instructions for walking, cycling, and driving. (not yet available for all services).
+trafficType | Enum | Traffic type used in the segment. Possible values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Car, Bike, Other, and Unknown. Other is used in segments with start/stop procedures for car/bike sharing, car rental, and car parking. 
+line | String | line information for a public transport segment
+cost | Object | Costs of the segment including distance, duration, price, and CO2 emmision.
+wayPoints | Object | List of way points to render the segment in a map. This information is not yet available for all services.
+guidingPoints | Object | List of guiding points with intermediate public transport stops or turn-by-turn instructions for walking, cycling, and driving. This information is not yet available for all services.
 
-For a car or bike sharing segment we have in addition "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction".
+For a car and bike-sharing-segments "operatorId" and "unitId" are provided. For public transport segments "stationId", and "direction" are provided. For Train, RegionTrain, and CityTrain, and Metro-segments "platform" may be provided.
 
 
-Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes.
+Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes. Trip proposals can be based on real-time-data and should not be kept longer than necesseary.
 
 ### Getting a specific Trip Proposal [GET] 
 @nottestable
