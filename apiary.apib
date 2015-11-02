@@ -3967,6 +3967,11 @@ numOfTravelers | Number | Number of fellow travelers (not supported by all servi
 numOfLuggage | Number | Number of luggage pieces (not supported by all services)
 useTrafficSituation | Boolean | If set to true, the current road traffic conditions are considered in the route calculation. In case of public transport, trip results are per default as real-time as possible.
 
+- HTTP Headers:
+
+Accept-Language: The Accept-Language header is information about the user's language preferences for trip reponse.
+eg. de-DE, en-US etc.
+
 Usually a subscribed route planning service does not support all of the above parameters. In many cases that is indicated by warnings in the metaData section of the response.
 
 Notes:
@@ -4056,6 +4061,7 @@ wayPoints | Object | List of way points to render the segment in a map (not yet 
 guidingPoints | Object | List of guiding points with intermediate public transport stops or turn-by-turn instructions for walking, cycling, and driving. (not yet available for all services).
 
 For a car or bike sharing segment we have in addition "operatorId" and "unitId" and for CityTrain/RegioTrain segment we have "platform", "stationId" and "direction".
+
 
 Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes.
 
@@ -4796,6 +4802,11 @@ costFunctions | Array of Objects | List of cost factors (such as Distance, Durat
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 
+- HTTP Headers:
+
+Accept-Language: The Accept-Language header is information about the user's language preferences for trip reponse.
+eg. de-DE, en-US etc.
+
 + Request
 
     + Headers
@@ -4938,12 +4949,18 @@ costFunctions | Array of Objects | Lst of cost factors (such as Distance, Durati
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
 
+- HTTP Headers:
+
+Accept-Language: The Accept-Language header is information about the user's language preferences for trip reponse.
+eg. de-DE, en-US etc.
+
 + Request
 
     + Headers
     
             Content-Type: application/json
             Accept: application/json
+            Accept-Language: de-DE
 
     + Body
         
