@@ -5670,7 +5670,7 @@ NOTIFICATION MESSAGE:
 
 * an (optional) service offerings filter (f_service={filterJson} )
  
-filterJson has following structure,
+filterJson has following structure:
 
 
 attribute | json data type | comments
@@ -5678,6 +5678,7 @@ attribute | json data type | comments
 subscribed | Boolean | true, false 
 category | List of String | Parking, PublicTransport, TrafficInfo, TimeTables, Ticketing, BikeSharing, CarSharing, EVCharging, WMS, JourneyPlanner, CarJourneyPlanner, GeoCoding, TaxiService 
 
+Example: f_service={"subscribed": true, "category": ["PublicTransport", "CarSharing"]}
 
 RESPONSE:
 This collection contains a list service offerings.
