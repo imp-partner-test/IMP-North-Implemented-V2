@@ -3775,7 +3775,7 @@ attribute | json data type | comments
 origin | Object | Start point specified by a geo location. Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations". Required parameter.
 destination | Object | End point specified by a geo location. Required parameter.
 time | String | Date and time of the trip. Default time is the current server time.
-departureTime | Boolean | Specifies whether the time is used as departure or arrival time
+departureTime | Boolean | Specifies whether the time is used as departure or arrival time. If not provided then it will get as departure time by default.
 viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence. Not supported by all services.
 costFunctions | Array of Objects | List of cost factors, i.e. distance, duration, price, and CO2-emission, each with a percentaged weight. Example: {"costType":"Duration","percentage":"100"}. The trip proposals are ranked according to this cost function. Attribute is not supported by all services. Default cost functions are specified by the individual services. 
 userId | String | Traveler id that requests a trip. Traveler ids from this collection are currently not used and can be any string.
@@ -4611,7 +4611,7 @@ attribute | json data type | comments
 origin | Object | Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations")
 destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
-departureTime | Boolean | Specifies whether the given time is used as departure or arrival time.
+departureTime | Boolean | Specifies whether the given time is used as departure or arrival time. If not provided then it will get as departure time by default.
 viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence
 costFunctions | Array of Objects | List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
@@ -4759,7 +4759,7 @@ attribute | json data type | comments
 origin | Object | Start point specified by a geo location (addresses can be converted into geo locations by means of "GET /Resources/GeoLocations").
 destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
-departureTime | Boolean | Specifies whether the given time is used as departure or arrival time.
+departureTime | Boolean | Specifies whether the given time is used as departure or arrival time. If not provided then it will get as departure time by default.
 viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence.
 costFunctions | Array of Objects | Lst of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight. This bike router uses the traffic safety as optimization criterion. The other cost functions will be ignored. 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
