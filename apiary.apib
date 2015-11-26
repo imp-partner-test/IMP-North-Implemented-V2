@@ -2987,59 +2987,6 @@ Parts of the data structure might be omitted if the information is not available
             ],
               "resources": []
         }
-
-## List of All available Taxis and Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/All] 
-
-This collection contains a list of taxis and taxi ranks.
-
-The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
-
-### Get list of taxis and taxi ranks [GET]
-@testable
-
-+ Request
-
-    + Headers
-    
-            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
-
-+ Response 200 (application/json)
-
-        {
-            "metaData": [
-                {
-                  "serviceAlias": "bettertaxi",
-                  "webUiUrl": "http://bettertaxi.de",
-                  "lastUpdateTime": null,
-                  "messages": []
-                },
-                {
-                  "serviceAlias": "osmBerlinTaxi",
-                  "webUiUrl": "http://www.overpass-api.de/api/interpreter",
-                  "lastUpdateTime": null,
-                  "messages": []
-                }
-            ],
-            "resources": [
-                {
-                    "actions": [],
-                    "id": 461,
-                    "description": null,
-                    "type": "TaxiServiceRank",
-                    "uri": "Resources/TaxiService/Ranks/461",
-                    "location": {
-                        "coordinates": [
-                            13.6996987,
-                            52.5209164
-                        ],
-                        "type": "Point"
-                    },
-                    "provider": "osmBerlinTaxi",
-                    "availability": null,
-                    "operator": null
-                }
-            ]
-        }
         
             
         
