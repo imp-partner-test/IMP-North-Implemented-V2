@@ -4610,42 +4610,6 @@ externalResourceId | String | ID in external provider system
 
     [List of Incidents][]
     
-## List of All Incidents [/imp-endpoint/api/V2/Info/Incidents/All] 
-
-This collection contains a list of recent general incidents (incidents that affect public AND individual transport). 
-The data structure of the response contains the following attributes:
-
-attribute | json data type | comments
---- | --- | ---
-category | Enum | {"Roadworks", "Blockade", "Indefinition", "Congestion"} are the categories for the incidents with type "IncidentIndividualTransport", {"Construction", "Imbalance", "Diversion", "RailReplacement"} are the categories for incidents with type "IncidentPublicTransport"
-message | String | 
-timePeriod | Object | Time period of the incident
-reason | String | Full description of reason
-reasonShort | String |  Short description of reason
-consequence | String |  Full description of consequence
-consequenceShort | String | Short description of consequence
-location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
-source | String | {= "PT", "INKO", etc.}
-affectedTrips | Array | List of affected trips
-net | NetType  | 
-description | String | Description of an incident information
-type | String | There are 2 types of incidents: Incidents with the type "IncidentIndividualTransport" affect individual transport (car, bicycle), incidents with the type "IncidentPublicTransport" affect public transport (bus, tram, etc.).
-uri | URI | URI
-provider | String | Service provider
-operator | Enum | {"News", etc.}
-externalResourceId | String | ID in external provider system
-
-
-
-### Getting all incidents [GET]
-@testable
-
-+ Response 200
-
-    [List of Incidents][]
-    
-    
-    
 ## List of individual transport Incidents [/imp-endpoint/api/V2/Info/Incidents/IndividualTransport?lat={lat}&lng={lng}&radius={radius}] 
 
 This collection contains list of recent incidents that affect individual transport only in a specified area of interest.
