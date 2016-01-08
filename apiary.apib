@@ -2497,8 +2497,12 @@ usage | String | Description how to enter or use the parking space
             }
             
         
-## All Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking/All?f_onStreetSpaces={sizeJson}&f_garages={categoryJson}&filter={filter}]    
+## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&f_garages={categoryJson}&filter={filter}]    
 This collection contains a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
+The area of interest can be defined as:
+
+* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
+* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time.
 Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
@@ -2507,10 +2511,13 @@ The response contains attributes from parking garages or OnStreet parking spaces
 
 Parts of the data structure might be omitted if the information is not available. 
     
-### Getting all parking garages or OnStreet parking spaces or both with specified size and category [GET]
+### Getting parking garages or OnStreet parking spaces or both with specified size and category [GET]
 @testable
 
 + Parameters
+    + lat (number, `52.52`) ... latitude value. Has example value.
+    + lng (number, `13.39`) ... longitude value. Has example value.
+    + radius (number, `1000`) ... radius in meter. Has example value.
     + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
     + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
     + filter (optional, string, `Large PR`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
