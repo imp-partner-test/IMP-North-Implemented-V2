@@ -1831,7 +1831,7 @@ The data structure of the request:
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | Point id and/or address string (depending on Service HandyTicket requires addess while ZPS/Nova do not need it.)
+origin | Object | Point id and/or address string (depending on Service HandyTicket requires address while ZPS/Nova does not need it.)
 destination | Object | Point id and address string
 viaPoints | Object | List of geo locations the route should pass
 numberOfTickets | Object | Number of tickets
@@ -1947,6 +1947,9 @@ requestId | String | Resource id received while initiating the booking
 ticketIds | Array | Array of ticket ids 
 ticketContent | Base64Binary | Content of Ticket
     
+HTTP Headers:
+- userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
+
 ### Buying a ticket [POST]
 @nottestable
 
@@ -2036,6 +2039,9 @@ attribute | json data type | comments
 confirmed | Boolean | Value indicating success/failure
 ticketContent | Object | Image data for ticket
     
+HTTP Headers:
+- userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
+
 ### Confirming a ticket delivery [PUT]
 @nottestable
 
@@ -3500,6 +3506,7 @@ Watch the metaData for use of unsupported attributes.
 
 HTTP Headers:
 - Accept-Language: This header specifies the language of the trip proposals. Examples: de-DE, en-US. The default language is English. The supported languages depend on the individual services. Not all information may be translated from the default language of the service. The language setting of this request is also used to answer the trip proposal details request, because the system caches the data for this purpose.
+
 Notes:
 - Some services also provide  routes in the past.
 - Travel times for some trafficTypes may contain extra times. Example: 2 minutes set-up time and 1 minute return time for free-floating car sharing and bike sharing; 2 minutes set-up time and 0 minutes return time for station-based car and bike sharing, 5 minutes parking time for free-floating car sharing and own car.
