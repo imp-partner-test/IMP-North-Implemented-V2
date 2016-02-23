@@ -3389,6 +3389,7 @@ costs | Array | List of costs for the proposed trip including distance, duration
                                 ]
                             },
                             "address": "Dircksenstraße, 10178 Berlin, Germany",
+                            "level": "1",
                             "time": "2013-07-23T13:10:00+00:00"
                         },
                         "destination": {
@@ -3400,6 +3401,7 @@ costs | Array | List of costs for the proposed trip including distance, duration
                                 ]
                             },
                             "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                            "level": "2",
                             "time": "2013-07-23T13:43:26+00:00"
                         },
                         "trafficTypes": [
@@ -3437,6 +3439,7 @@ costs | Array | List of costs for the proposed trip including distance, duration
                                 ]
                             },
                             "address": "Dircksenstraße, 10178 Berlin, Germany",
+                            "level": "1",
                             "time": "2013-07-23T13:10:00+00:00"
                         },
                         "destination": {
@@ -3448,6 +3451,7 @@ costs | Array | List of costs for the proposed trip including distance, duration
                                 ]
                             },
                             "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                            "level": "2",
                             "time": "2013-07-23T15:17:54+00:00"
                         },
                         "trafficTypes": [
@@ -3487,8 +3491,8 @@ Selection criteria for trip proposals is specified in the request body as descri
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | Start point specified by a geo location. Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations". Required parameter.
-destination | Object | End point specified by a geo location. Required parameter.
+origin | Object | Start point specified by a geo location; level parameter is optional, to provide level information, e.g."level":"2". Addresses can be converted into geo locations by means of "GET /Resources/GeoLocations". Required parameter. 
+destination | Object | End point specified by a geo location; level parameter is optional, to provide level information, e.g."level":"2". Required parameter.
 time | String | Date and time of the trip. Default time is the current server time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time. If not provided then it will get as departure time by default.
 viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence. Not supported by all services.
@@ -3525,10 +3529,12 @@ Notes:
         
             {
               "origin": {
-                "location": {"type": "Point", "coordinates": [ 13.41100700000004, 52.521642 ]}
+                "location": {"type": "Point", "coordinates": [ 13.41100700000004, 52.521642 ]},
+                "level":"1"
               },
               "destination": {
-                "location": {"type": "Point", "coordinates": [ 13.319420000000036, 52.56347100000001 ]}
+                "location": {"type": "Point", "coordinates": [ 13.319420000000036, 52.56347100000001 ]},
+                "level":"2"
               },
               "time": "2013-07-23T15:10:00+02:00",
               "departureTime":"true",
@@ -3619,6 +3625,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                 ]
                             },
                             "address": "Dircksenstraße, 10178 Berlin, Germany",
+                            "level": "1",
                             "time": "2013-07-23T13:10:00+00:00"
                         },
                         "destination": {
@@ -3630,6 +3637,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                 ]
                             },
                             "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                            "level": "2",
                             "time": "2013-07-23T13:43:26+00:00"
                         },
                         "trafficType": "OwnBike",
@@ -3706,6 +3714,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3736,6 +3745,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3766,6 +3776,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3796,6 +3807,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3826,6 +3838,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3856,6 +3869,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3886,6 +3900,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3916,6 +3931,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3946,6 +3962,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -3976,6 +3993,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4006,6 +4024,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4036,6 +4055,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4066,6 +4086,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4096,6 +4117,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4126,6 +4148,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4156,6 +4179,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4186,6 +4210,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": null,
+                                    "level": null,
                                     "time": null
                                 },
                                 "cost": {
@@ -4216,6 +4241,7 @@ Note: The trip proposals as returned by *[GET /imp-endpoint/api/V2/TripProposals
                                         ]
                                     },
                                     "address": "Meteorstraße 40, 13405 Berlin, Germany",
+                                    "level": null,
                                     "time": "2013-07-23T13:43:26+00:00"
                                 },
                                 "cost": {
