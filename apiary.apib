@@ -1847,12 +1847,21 @@ The data structure of the request:
 
 attribute | json data type | comments
 --- | --- | ---
-origin | Object | Point id and/or address string (depending on Service HandyTicket requires address while ZPS/Nova does not need it.)
-destination | Object | Point id and address string
-viaPoints | Object | List of geo locations the route should pass
-numberOfTickets | Object | Number of tickets
-ticketingCategory | String | Code for category defined by the operator, e.g. service class and specified zone. Range of values for Berlin: B0, B1, B2, B3
+origin | Object | Point id and/or address string (depending on Service HandyTicket requires address while ZPS/Nova does not need it.).To be specified for way-based request.
+destination | Object | Point id and address string.To be specified for way-based request.
+viaPoints | Object | List of geo locations the route should pass (Optional)
+numberOfTickets | Object | Number of tickets (Depending on service-to-be-used).
+ticketingCategory | String | Code for category defined by the operator, e.g. service class and specified zone. Range of values for Berlin: B0, B1, B2, B3.Range of values for Switzerland:2361,125,4092.Optional for way-based/connection-based request.Mandatory for product-based request.
+outwardProposalId | String |Trip id for outward trip.To be specified for connection-based request.
+returnProposalId | String |Trip id for return trip.To be specified for connection-based request.
+medium | Object | Media of ticket. (Optional)
+classes | Object | Classes of ticket for eg. 1st Class/2nd Class. (Optional)
+type | Object | Type of trip for ticket for eg. Single-Trip Ticket/Return-Trip Ticket.
+travellers | Object | List of  traveller information (Optional)
+time | Object | Time of departure for way based trip
+returnTime | Object| Time of departure for return journey(if specified).
 
+Based on the ticketing-service to-be-used , certain attributes have been provided and shall be used in the request accordingly.
 
 The data structure of the response contains the following attributes:
 
@@ -1943,8 +1952,8 @@ The data structure of OperatorCredentials contains the following attributes:
 attribute | json data type | comments
 --- | --- | ---
 name | String | Name of Ticket Operator (handyticket or zpsnova depending on service)
-userId | String | Traveler Id
-password | String | Password for buying ticket
+userId | String | Traveler Id ( Depends on the ticketing-serivce to be used.)
+password | String | Password for buying ticket ( Depends on the ticketing-serivce to be used.)
 
 The data structure of the response contains the following attributes:
 
@@ -1962,7 +1971,7 @@ attribute | json data type | comments
 requestId | String | Resource id received while initiating the booking
 ticketIds | Array | Array of ticket ids 
 ticketContent | Base64Binary | Content of Ticket
-    
+price | Object | Price of ticket with currency and value specified.    
 HTTP Headers:
 - userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
 
@@ -2045,7 +2054,7 @@ confirmation contains following fields:
 attribute | json data type | comments
 --- | --- | ---
 featureType | String | Feature type
-confirmationId | String | 
+confirmationId | String | (Dependig on the service to-be-used)
 confirmationData | Object | Response of confirm ticket request
 
 confirmationData contains following fields:
@@ -2054,7 +2063,7 @@ attribute | json data type | comments
 --- | --- | ---
 confirmed | Boolean | Value indicating success/failure
 ticketContent | Object | Image data for ticket
-    
+ messages | Array | (Depending on the ticket-service to be used.)    
 HTTP Headers:
 - userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
 
