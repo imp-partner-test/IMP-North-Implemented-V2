@@ -111,6 +111,12 @@ Parts of the data structure might be omitted if the information is not available
                     "webUiUrl": "http://www.nextbike.de/de/standorte/",
                     "lastUpdateTime": "2014-07-10T14:11:02+02:00",
                     "messages": []
+                },
+                {
+                    "serviceAlias": "vmzBikeSharingStation",
+                    "webUiUrl": "http://www.vmzberlin.com/",
+                    "lastUpdateTime": "2016-05-03T13:09:28+00:00",
+                    "messages": []
                 }
             ],
             "resources": [
@@ -182,26 +188,36 @@ attribute | json data type | comments
                         "uri": "Resources/BikeSharing/Stations/9/Process?action=book"
                     }
                 ],
-                "id": 9,
-                "description": "Museumsinsel / Monbijoubrücke",
+                "id": 465,
+                "description": "Tourist-Information Lindow (Rhinpaddel)",
                 "type": "BikeSharingStationDetails",
-                "uri": "Resources/BikeSharing/Stations/9/",
+                "uri": "Resources/BikeSharing/Stations/465/",
                 "location": {
                     "type": "Point",
                     "coordinates": [
-                        13.394195556640625,
-                        52.52271270751953
+                        12.9882042,
+                        52.9718091
                     ]
                 },
-                "provider": "callabike",
+                "provider": "vmzBikeSharingStation",
                 "availability": 33.333333333333336,
-                "operator": "CallABike",
-                "phoneNo": null,
-                "operatorURI": null,
-                "operatorName": "CallABike",
-                "address": null,
-                "numberOfBikes": 18,
-                "numberOfFreeBikes": 6,
+                "externalId": "SG123",
+                "operator": "BikeSharingStation",
+                "phoneNo": "+4933933 70297",
+                "operatorURI": "http://www.lindow-mark.de",
+                "operatorName": null,
+                "address": {
+                    "citycode": "16835",
+                    "city": "Lindow (Mark)",
+                    "street": "Am Marktplatz",
+                    "houseno": "1",
+                    "district": null,
+                    "region": "Brandenburg",
+                    "country": "Deutschland"
+                },
+                "openingHours": "Apr-Sep Mo-Sa 10-16, Apr-Sep So 10-13, Okt-Mär Mo-Fr 10-16",
+                "numberOfBikes": null,
+                "numberOfFreeBikes": null,
                 "services": null
             }
             
