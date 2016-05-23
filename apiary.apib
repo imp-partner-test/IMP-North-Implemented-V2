@@ -1881,6 +1881,8 @@ price | double | Price of ticket
 currency | String | Currency
 
 Parts of the data structure might be omitted if the information is not available. 
+HTTP Headers:
+- Accept-Language: This header specifies the language to be used for the attributes obtained in the respone, which is the list of tickets obtained. Examples: de, en, fr, it. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.
     
 ### Getting available tickets [POST]
 @nottestable
@@ -1974,7 +1976,7 @@ ticketContent | Base64Binary | Content of Ticket
 price | Object | Price of ticket with currency and value specified.    
 HTTP Headers:
 - userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
-
+- Accept-Language: This header specifies the language of the attribues in the buy request to be sent. Examples: de, en, fr, it. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.
 ### Buying a ticket [POST]
 @nottestable
 
@@ -2066,7 +2068,7 @@ ticketContent | Object | Image data for ticket
  messages | Array | (Depending on the ticket-service to be used.)    
 HTTP Headers:
 - userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
-
+- Accept-Language: This header specifies the language of the relevant messages for the ticket. Examples: de, en, fr, it. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.
 ### Confirming a ticket delivery [PUT]
 @nottestable
 
