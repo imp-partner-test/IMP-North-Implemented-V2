@@ -3662,7 +3662,7 @@ cost | Object | Costs of the segment including distance, duration, price, and CO
 wayPoints | Object | List of way points to render the segment in a map. This information is not yet available for all services.
 guidingPoints | Object | List of guiding points with intermediate public transport stops or turn-by-turn instructions for walking, cycling, and driving. This information is not yet available for all services.
 
-For a car and bike-sharing-segments "operatorId" and "unitId" are provided. For public transport segments "stationId", and "direction" are provided. For Train, RegionTrain, and CityTrain, and Metro-segments "platform" may be provided.
+For a car and bike-sharing-segments "operatorId" and "unitId" are provided. For public transport segments "stationId", and "direction" are provided. For Train, RegionTrain, and CityTrain, and Metro-segments "platform" and "expectedPlatform" may be provided.
 
 
 Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposals/IMR]* are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes. Trip proposals can be based on real-time-data and should not be kept longer than necesseary.
