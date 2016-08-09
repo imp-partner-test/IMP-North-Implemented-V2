@@ -22,7 +22,7 @@ The staging system with this version is hosted on: https://sandbox-staging.imp-s
 Usually clients will be authorized by certificates. If that is not possible, Basic Authentication may be used as a fallback.
 
 
-(c) Siemens AG 2015 All rights reserved
+(c) Siemens AG 2016 All rights reserved
 
 ##Metadata
 Mobility Providers are able to access the services of various service providers via the unified REST interface of SiMobility Connect.
@@ -2110,6 +2110,83 @@ HTTP Headers:
                     }
                 }
             }
+## Cancelation of ticket [/imp-endpoint/api/V2/Processes/{processId}?action=cancel] 
+The data structure of the request body:
+
+attribute | json data type | comments
+--- | --- | ---
+requestId | String | Resource id
+ticketIds | String | Tickets ids for cancelation
+operator | String | Name of Ticket Operator
+
+The data structure of the response contains the following attributes:
+
+attribute | json data type | comments
+--- | --- | ---
+processId | Number | BPMN process id
+confirmation | Object | Cancel ticket response data
+
+
+confirmation contains following fields:
+
+attribute | json data type | comments
+--- | --- | ---
+featureType | String | Feature type
+confirmationId | String | (Dependig on the service to-be-used)
+confirmationData | Object | Response of cancel ticket request
+
+confirmationData contains following fields:
+
+attribute | json data type | comments
+--- | --- | ---
+status | Boolean | Value indicating success/failure
+data | Array | (Depending on the ticket-service to be used.)    
+HTTP Headers:
+- userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
+- Accept-Language: This header specifies the language of the relevant messages for the ticket. Examples: de, en, fr, it. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.
+### Canceling a ticket [PUT]
+@nottestable
+
++ Parameters
+    + processId (string, `192636`) ... String `id` - BPMN process id
+    
++ Request
+
+    + Headers
+        
+            userToken: {someUserToken} 
+
+    + Body
+    
+            {
+              "requestId": "{resourceId}",
+              "ticketIds": [
+                            "15900040459226"
+                           ],
+               "operator": {
+                    "name": "zpsnova"        
+                }
+            }
+        
++ Response 200 (application/json)
+
+    + Body
+    
+           {
+  "process": {
+    "actions": [],
+    "processId": "192636",
+    "confirmation": {
+      "featureType": "CANCELATION",
+      "confirmationData": {
+        "status": "CANCELED",
+        "data": [
+          "15900040459226 TECHNISCH_ANNULLIERT"
+        ]
+      }
+    }
+  }
+}
 
 # Group Parking
 This is a group of all parking related REST resources including Parking Garages and On-street Parking Vacancies.
