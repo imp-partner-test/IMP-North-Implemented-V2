@@ -3749,7 +3749,8 @@ maxRoutingResponses | Number | Number of trip proposals to be returned
 numOfTravelers | Number | Number of travelers. Not supported by all services.
 numOfLuggage | Number | Number of luggage pieces Not supported by all services.
 useTrafficSituation | Boolean | If set to true, the current road traffic conditions are considered in the route calculation. In case of public transport, trip results are per default as real-time as possible.
-
+traveler | Array Of Objects | List of Traveler Details i.e, name, age, travelerType , discountCards, Date of Birth.
+classes | List of Strings | | e.g 1st class or 2nd class
 Watch the metaData for use of unsupported attributes.
 
 HTTP Headers:
@@ -3782,6 +3783,8 @@ Notes:
                 "stationId":36336
                 "level":"2"
               },
+              "traveler" : [{"age": 25 , "type" : "PERSON"}] ,
+              "classes" : ["KLASSE_1"],
               "time": "2016-07-12T18:10:00+02:00",
               "departureTime":"true",
               "costFunctions": [
