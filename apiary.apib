@@ -807,7 +807,7 @@ resources | Array | Array of resources within the area of interest
 --- | --- | ---
 actions | Array | 
 id | Number | 
-description | String | License ID or approximate location
+description | String | License ID, approximate location or name of vehicle
 type | String | Type of resource
 uri | URI | URI
 location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
@@ -1849,7 +1849,7 @@ attribute | json data type | comments
 --- | --- | ---
 origin | Object | Point id and/or address string (depending on Service HandyTicket requires address while ZPS/Nova does not need it.).To be specified for way-based request.
 destination | Object | Point id and address string.To be specified for way-based request.
-viaPoints | Object | List of geo locations the route should pass (Optional)
+viaPoints | Object | List of stations IDs as well as geo locations the route should pass (Optional)
 numberOfTickets | Object | Number of tickets (Depending on service-to-be-used).
 ticketingCategory | String | Code for category defined by the operator, e.g. service class and specified zone. Range of values for Berlin: B0, B1, B2, B3.Range of values for Switzerland:2361,125,4092.Optional for way-based/connection-based request.Mandatory for product-based request.
 outwardProposalId | String |Trip id for outward trip.To be specified for connection-based request.
@@ -3739,7 +3739,7 @@ origin | Object | Start point specified by a geo location; level parameter is op
 destination | Object | End point specified by a geo location; level parameter is optional, to provide level information, e.g."level":"2". Required parameter.
 time | String | Date and time of the trip. Default time is the current server time.
 departureTime | Boolean | Specifies whether the time is used as departure or arrival time. If not provided then it will get as departure time by default.
-viaPoints | Array of Objects | List of geolocations the route should pass in the given sequence. Not supported by all services.
+viaPoints | Array of Objects | List of stations IDs as well as geolocations the route should pass in the given sequence. Not supported by all services.
 costFunctions | Array of Objects | List of cost factors, i.e. distance, duration, price, and CO2-emission, each with a percentaged weight. Example: {"costType":"Duration","percentage":"100"}. The trip proposals are ranked according to this cost function. Attribute is not supported by all services. Default cost functions are specified by the individual services. 
 userId | String | Traveler id that requests a trip. Traveler ids from this collection are currently not used and can be any string.
 trafficTypes | Array | List of traffic types to be considered in the search for trip proposals. Results may not contain all modes. Range of values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Bike, BikeSharing, OwnBike, Car, CarSharing, and OwnCar. Bike and Car subsume BikeSharing and OwnBike or CarSharing and OwnCar respectively. Not all trafficTypes may be supported.
@@ -8608,7 +8608,7 @@ origin | Object | Start point specified by a geo location (addresses can be conv
 destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the given time is used as departure or arrival time. If not provided then it will get as departure time by default.
-viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence
+viaPoints | Array of Objects | List of stations IDs as well as geo locations that the route should pass in the given sequence
 costFunctions | Array of Objects | List of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
@@ -8755,7 +8755,7 @@ origin | Object | Start point specified by a geo location (addresses can be conv
 destination | Object | Start point specified by a geo location. Either orgin or destination might specify a time.
 time | String | Date and time of the trip. If no time is specified, the current time is used as departure time.
 departureTime | Boolean | Specifies whether the given time is used as departure or arrival time. If not provided then it will get as departure time by default.
-viaPoints | Array of Objects | List of geo locations that the route should pass in the given sequence.
+viaPoints | Array of Objects | List of stations IDs as well as geo locations that the route should pass in the given sequence.
 costFunctions | Array of Objects | Lst of cost factors (such as Distance, Duration, Price, Emission), each with a percentual weight. This bike router uses the traffic safety as optimization criterion. The other cost functions will be ignored. 
 routingConstraints | Array of Objects | List of constraints to be taken into account for various traffic types, specified by min/max values
 userId | String | Traveler id that requests a trip. For this request it is currently not used and can be any string.
@@ -9373,12 +9373,12 @@ Get list of geo locations for given parameters. Matching locations including geo
 
 attribute | json data type | comments
 --- | --- | ---
-address | String | a search string
+input | String | a search string
 lat | String | prioritized latitude 
 lng | String | prioritized Longitude
 language | String | international abbreviation for language
 + Parameters
-    + address (string, `Berlin, Mollstrasse 7`) ... Search string. Has example value.
+    + input (string, `Berlin, Mollstrasse 7`) ... Search string. Has example value.
     + lat (number, `52.4827802220`, optional) ... Prioritized latitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
     + lng (number, `13.3154296875`, optional) ... Prioritized longitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
     + language (string, `en`, optional) ... International abbreviation of language in which the content will be provided, if it is available in this language. Has example value.
