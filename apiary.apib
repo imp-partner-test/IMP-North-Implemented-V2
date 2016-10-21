@@ -897,7 +897,7 @@ type | String | `Stations`or `Cars` | yes
 uri | URI | URI to request details | no
 location | Object | GeoJson object of type `Point` in longitude, latitude order | yes 
 provider | String | Alias of service provider | yes
-availability | Double |  Currently availalbe: "=100". Currently unavailable: "=0" | no 
+availability | Double |  Currently available: "=100". Currently unavailable: "=0" | no 
 externalId | Number | Identification number of service provider | usually
 operator | String | Company operating the car fleet. Commonly same as provider  | no
 model | String | Car model | no
@@ -969,6 +969,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
                   "fuelType": "DIESEL",
                   "fuelLevel": null,
                   "imageLink": null
+                  
                 }
               ]
             }
@@ -1039,13 +1040,19 @@ fee | Object | Tarifs per distance or time | no
               "properties": [],
               "locationNote": null,
               "operatorURI": null,
-              "fee": {
-                "money": 11.4,
-                "duration": {
-                  "unit": "hour",
-                  "value": 1
+              "tariffs": [
+                 {
+                   "amount": {
+                   "unit": "Eurocent",
+                   "value": 0.31
+                 },
+                 "basis":
+                 {
+                   "unit": "minute",
+                   "value": 1
+                 }
                 }
-              }
+              ]
             }     
     
 ## Stations with Basic Info [/imp-endpoint/api/V2/Resources/CarSharing/Stations{?lat}{?lng}{?radius}{?f_cars}]
@@ -1389,8 +1396,8 @@ carId | String | Identification number of Connect. Can be retrieved through "Car
 request attribute | type | comments | required | default
 --- | --- | --- | --- | ---
 operator | String | Name of operator |  yes | no
-from | DateTime | no | Server time of Connect or service provider
-to | DateTime | no | no
+from | DateTime | | no | Server time of Connect or service provider
+to | DateTime | | no | no
 
 
 response attribute | json data type | comments
@@ -2859,67 +2866,85 @@ cancelled | Boolean | True: departure or arrival got cancelled | no
 # Group Taxi Service
 This is a group of all taxi related REST resources.
 
-## List of available Taxis with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Taxis?lat={lat}&lng={lng}&radius={radius}] 
+## List of available Taxis with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Taxis{?lat}{?lng}] 
 
-Get a list of taxis in a specified area with basic information and a URI to get more details.
-The area of interest can be defined as:
+Get a list of taxis in an area of interest a with basic information and a URI to get more details.
 
-* an (optional) bounding circle (lat={lat}&lng={lng}&radius={radius})
-* an (optional) bounding box (left_lower_lat={min_lat}&left_lower_lng={min_lng}&right_upper_lat={max_lat}&right_upper_lng={max_lng})
+parameter | type | comments | required | default | supported by all integrated services
+--- | --- | --- | --- | --- | ---
+lat, lng, (radius) | Number | Bounding circle to define search area | no | no | no
+left_lower_lat, left_lower_lat, right_upper_lat, right_upper_lng | Number | Bounding box to define search area | no | no | no
 
-The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date-time is in HTTP date format, e.g. Wed, 09 Apr 2008 23:55:38 GMT.
+response attribute | json data type | comments  | supported by all integrated services
+--- | --- | --- | ---
+metadata | Object | List of integrated services. See section "Metadata" | 
+--- | --- | --- | ---
+resources | Array | Array of taxis | yes
+--- | --- | --- | ---
+id | Number | Internal taxi identification number | yes
+description | String | Approximate location or car model | no
+type | String | (="TaxiServiceTaxi") | yes
+uri | URI | URI to request more details (where available) | no
+location | Object | GeoJson object of type `Point` in longitude, latitude order | yes
+provider | String | Service provider  | yes
+availability | Double |  Currently available: "=100". Currently unavailable: "=0"  | yes
+externalId | Number | Taxi identification number of service provider | no
+operator | String | Taxi dispatcher or taxi company | yes
+status | | to be clarified | no
+licenceId | String | License plate number | no
+properties | |  | no
+timetoArrive | number, string | Estimated time to arrive | no
 
-### Get taxis in a specified area [GET]
+### Get taxi locations [GET]
 @testable
 
-attribute | json data type | comments
---- | --- | ---
-metadata | Object | List of integrated services. See section "Metadata"
---- | --- | ---
-resources | Array | Array of taxis
---- | --- | ---
-id | Number | Internal taxi identification number
-description | String | Approximate location
-type | String | Type of taxi
-model | String | Model of taxi, e.g. MB W212
-uri | URI | URI to request more details (where available)
-location | Object | Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
-remainingTime | Object | Required time the taxi would need to reach the center of the requested region. The way the time is calculated may depend on the service provider. { "value": Number, "unit": String }
-provider | String | Service provider 
-availability | Double | Availability in percentage
-operator | String | Resource operator 
-size | Enum | Size of car 
-modFlag | Enum | Type of modification to resource [New / Modified / Relocated / Deleted]. This attribute is present only when the If-Modified-Since header is passed in the request. 
-
-Parts of the data structure might be omitted if the information is not available. 
-
 + Parameters
-    + lat (number, `52.52`) ... latitude value. Has example value.
-    + lng (number, `13.39`) ... longitude value. Has example value.
-    + radius (number, `1000`) ... radius in meter. Has example value.
-    
-+ Request
-
-    + Headers
-    
-            If-Modified-Since: Wed, 09 Apr 2008 23:55:38 GMT 
+    + lat (number, `52.52`, optional) ... latitude value. Has example value.
+    + lng (number, `13.39`, optional) ... longitude value. Has example value.
 
 + Response 200 (application/json)
-
+   
+    
         {
             "metaData": [
                 {
-                  "serviceAlias": "bettertaxi",
-                  "webUiUrl": "http://bettertaxi.de",
+                  "serviceAlias": "vmzTaxi",
+                  "webUiUrl": "http://www.vmzberlin.com/",
                   "lastUpdateTime": null,
                   "messages": []
                 }
             ],
-              "resources": []
+              "resources": [
+                {
+                  "actions": [],
+                  "id": 1488703,
+                  "description": "VW Touran",
+                  "type": "TaxiServiceTaxi",
+                  "uri": null,
+                  "location": {
+                    "coordinates": [
+                      13.3921508789,
+                      52.5235514323
+                    ],
+                    "type": "Point"
+                  },
+                  "provider": "vmzTaxi",
+                  "availability": 100,
+                  "externalId": "b512cafe-3cdd-4f16-a34c-1f569ae92b80@TaxiService",
+                  "operator": "TZB",
+                  "status": null,
+                  "licenceId": null,
+                  "properties": null,
+                  "timeToArrive": {
+                    "value": 2,
+                    "unit": "minute"
+                  },
+                  "payments": null
+                }
+            ]
         }
-        
-            
-        
+
+
 ## List of available Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Ranks?lat={lat}&lng={lng}&radius={radius}] 
 
 Get a list of taxi ranks in a specified area with basic information and a URI to get more details.
@@ -9063,7 +9088,7 @@ The User Transactions Collection resource has the following attributes:
             
 # Group Geo Locations
 
-## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?input={address}&language={language}&lat={lat}&lng={lng}&type={type}]
+## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?input={input}&language={language}&lat={lat}&lng={lng}&type={type}]
 
 Get list of geo locations for given parameters. Matching locations including geo-coordinates will be provided for a given textual address.
 
@@ -9199,7 +9224,7 @@ businessBoundary | Object | business area specified as MultiPolygon conform to t
 This is a group of all REST resources related to request heatmaps as PNG files. A heat map is a graphical representation of data where the individual values are represented as colors.
 Currently it is used to represent distribution of the resouces of two service categories, Car and Bike Sharing.
 
-## CarSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/CarSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## CarSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/CarSharing?date={date}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
 Get WMS PNG file for carSharing for a specific date (in the past, current date or in the future) and for a specific bounding box (place).
 If the date is in the past, the returned image with green areas represents historical data of car sharing availability, if the date is in the future, the returned image with blue dots represents a prediction of car sharing availability. This interface is deprecated.
 
@@ -9227,7 +9252,7 @@ If the date is in the past, the returned image with green areas represents histo
     
             ?PNG
 
-## BikeSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/BikeSharing?date={x}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## BikeSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/BikeSharing?date={date}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
 Get WMS PNG file for bike sharing for a specific date and for a specific bounding box (place). This interface is deprecated.
 
 ### Getting heatmap as PNG image [GET]
