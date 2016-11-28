@@ -2132,7 +2132,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (optional, number, `52.52`) ... latitude value. Has example value.
     + lng (optional, number, `13.39`) ... longitude value. Has example value.
     + radius (optional, number, `10000`) ... radius in meter. Has example value.
-    + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data, containing a list of possible category values combined by OR. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
+    + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data, containing a list of possible category values combined by AND. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
     + filter (optional, string, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
@@ -2600,7 +2600,7 @@ Parts of the data structure might be omitted if the information is not available
 # Group Public Transport
 This is a group of all public transport related REST resources.
 
-## Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations?lat={lat}&lng={lng}&radius={radius}&f_stations={f_stations}&filter={filter}] 
+## Public Transport Stations with Basic Info [/imp-endpoint/api/V2/Resources/PublicTransport/Stations{?lat}{?lng}{?radius}{?f_stations}{?filter}] 
 
 Get a list of public transport stations with basic information. The area of interest can be defined as
 * `lat`, `lng` (optional): a bounding circle, or
@@ -2627,7 +2627,7 @@ provider | String | Alias of service provider | yes
 availability | Double | ="100" | yes 
 externalID | Number | Identification number of service provider | usually
 operator | String | Transport company operating the service | no
-stationType | String | Main type: `CityTrainStation`, `MetroStation`, or `BusTramStation` | yes 
+stationType | String | Main type: `CityTrainStation`, `MetroStation`, or `BusTramStation`, and `PublicTransportStation`. The last value is a generic type for stations without information about deparing lines  | yes 
 platforms | String | Platforms of the station | no
 wheelChair | Boolean | Wheel chair accessibility | no
 stationTypes | List of Enum | All types: `TrainStation`, `RegioTrainStation`, `CityTrainStation`, `MetroStation`, `TramStation`, `BusStation`, `FerryStation`, `GondolaStation`, and `PublicTransportStation`. The last value is a generic type for stations without information about deparing lines | yes 
@@ -2726,7 +2726,14 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
 
 ## Time Table of a Station [/imp-endpoint/api/V2/Resources/PublicTransport/Stations/{id}/TimeTables]
 
-Get arrival and departure times of a specified station. In addition to station details, the response contains:
+Get arrival and departure times at a specified station. 
+
+parameter | type | comments | required | default | supported by all integrated services
+--- | --- | --- | --- | --- | ---
+id | Number | Internal station identification number | yes | no | -
+time | DateTime | Date and time for which the arrivals and departures shall be returned | no | Current server time of service provider | usually
+
+In addition to station details, the response contains:
 
 response attribute | json data type | descrition | supported by all integrated services
 --- | --- | --- | ---
@@ -2735,7 +2742,7 @@ metadata | Object | List of integrated services. See section "Metadata" | yes
 resources | Array | Public transport station containing arrays of arrivals and departures | yes
 --- | --- | --- | ---
 arrivals | Array of Objects | See below | no
-departures | Array of Objects | See below | usually 
+departures | Array of Objects | See below | yes 
 
 An arrival or departure object contains the following attributes:
 
@@ -2746,7 +2753,7 @@ line | String |   | yes
 trafficType | Enum | `Train`, `RegioTrain`, `CityTrain`, `Metro`, `Tram`, `Bus`, `Ferry`, `Gondola`, or `Unknown` | yes
 platform | String | Scheduled platform | no
 expectedPlatform | String | Real-time platform | no
-aimed Time | DateTime | Scheduled arrival or departure time | yes
+aimedTime | DateTime | Scheduled arrival or departure time | yes
 expectedTime | DateTime | Real-time arrival or departure time | no
 cancelled | Boolean | True: departure or arrival got cancelled | no
  
@@ -3300,11 +3307,11 @@ request attribute | type | comments | required | default | supported by all inte
 --- | --- | --- | --- | --- | ---
 origin | Object | GeoJson object of type `Point` in longitude, latitude order or `stationID`. The latter prevails. Addresses can be converted to coordinates through "Geo Locations" | yes | - | yes
 destination | Object | GeoJson object of type `Point` in longitude, latitude order or `stationID`. The latter prevails. Addresses can be converted to coordinates through "Geo Locations" | yes | - | yes
-trafficTypes | Array | Modes of transport to use when calculating trips. Result may not contain all. Range of values are `Public Transit`, `Train`, `RegioTrain`, `CityTrain`, `Metro`, `Tram`, `Bus`, `Ferry`, `Gondola`, `Bike`, `OwnBike`, `BikeSharing`, `Car`, `OwnCar`, `CarSharing`, and `Walk`. `PublicTransit` subsumes `Train`, `RegioTrain`, `CityTrain`, `Metro`, `Tram`, `Bus`, `Ferry`, and `Gondola`. `Bike` subsumes `BikeSharing` and `OwnBike`. `Car` subsumes `CarSharing` and `OwnCar` | yes | - | Yes, but supported types depends on service
-time | DateTime | Date and time of the trip. Not all integrated services support times in the past  | no | Server time of Connect or service provider | yes
+trafficTypes | Array | Modes of transport to use when calculating trips. Result may not contain all. Range of values are `Public Transit`, `Train`, `RegioTrain`, `CityTrain`, `Metro`, `Tram`, `Bus`, `Ferry`, `Gondola`, `OwnBike`, `BikeSharing`, `OwnCar`, `CarSharing`, and `Walk`. `PublicTransit` subsumes `Train`, `RegioTrain`, `CityTrain`, `Metro`, `Tram`, `Bus`, `Ferry`, and `Gondola` | yes | - | Yes, but supported types depends on service
+time | DateTime | Date and time of the trip. Not all integrated services support times in the past  | no | Server time of service provider, otherwise server time of Connect | yes
 departureTime | Boolean | `True`: time is used as departure time. `False`: time is used as arrival time | no | true | yes
 viaPoints | Array of Objects | List of geolocations or `stationsID` the trip should pass in the given sequence | no | no | no
-costFunctions | Array of Objects | Cost factors, i.e. distance, duration, price, and CO2-emission, each with a percentaged weight. Trip proposals are ranked accordingly | no | Set by integrated service | no
+costFunctions | Array of Objects | Cost factors, i.e. distance, duration, price, and CO2-emission, each with a percentaged weight. Trip proposals are ranked accordingly | no | Set by integrated service, otherwise min duration | no
 userId | String | Traveler Id that requests a trip. Currently not supported | no | no | no
 routingConstraints | Array of Objects | Constraints to be considered in the search for trip proposals. Min and max values are specified for the trafficTypes `walk`, `car`, and `bike`. | no | Set by integrated service | no
 ownVehicles | Array of Objects | List of own vehicles to be considered in calculation of route alternatives. Due to ranking according to `costFunctions`, own vehicles may not be included in trip proposals  | no | no | no
@@ -3565,6 +3572,7 @@ origin | Object | Contains the start location and departure time of this segment
 destination | Object | Contains the start location and departure time of this segment, as well as station details in case of a public transport station
 trafficType | Enum | Traffic type used in the segment. Range of values are Train, RegioTrain, CityTrain, Metro, Tram, Bus, Ferry, Walk, Car, Bike, Other, Gondola and Unknown. Other is used in segments with start/stop procedures for car/bike sharing, car rental, and car parking. 
 line | String | line information for a public transport segment
+notes | Array of Objects | note information for a public transport segment
 cost | Object | Costs of the segment including distance, duration, price, and CO2 emmision in the provided units.
 wayPoints | Object | List of way points to render the segment in a map. This information is not yet available for all services.
 guidingPoints | Object | List of guiding points with intermediate public transport stops or turn-by-turn instructions for walking, cycling, and driving. This information is not yet available for all services.
@@ -3617,6 +3625,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Walk",
                         "line": "Footpath",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -3679,6 +3688,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Bus",
                         "line": "Bus 327",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -4385,6 +4395,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Train",
                         "line": "RE1",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -5639,6 +5650,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Train",
                         "line": "RE83",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -6165,6 +6177,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Bus",
                         "line": "Bus 5100",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -7911,6 +7924,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Bus",
                         "line": "Bus 5101",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
@@ -8197,6 +8211,7 @@ Note: The trip proposals as returned by *[POST /imp-endpoint/api/V2/TripProposal
                         },
                         "trafficType": "Walk",
                         "line": "Footpath",
+                        "notes": null,
                         "cost": null,
                         "wayPoints": {
                             "coordinates": [
