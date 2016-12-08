@@ -3366,13 +3366,23 @@ If booking is not possible, the response body explains the reason why.
                             13.40693,
                             52.51914
                         ]
-                    }
-                    "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
-                    "time": "2013-05-01T12:00:00" 
+                    },
+                    "address": { "street": "1 Street", "houseno": "28" , "district" : "Al Nahda-1" }
+                    
                 },
                 "destination" : {
-                    "address": { "citycode":"12109", "city":"Berlin", "Street":"Ullsteinstraße","houseno":"114" }
-                }
+                    "address": { "street": "28th Street", "houseno": "27A" , "district" : "Hor Al Anz East" }
+                },
+                "time": "2016-12-09T15:10:00+02:00",
+                "numOfTravelers" : "1",
+                "traveler" : {
+                    "travellerId" : "1",
+                    "type": "PERSON",
+                    "givenName" : "Feras_test",
+                    "lastName" : "Feras_test",
+                    "phoneNo" : "055465833"
+                },
+                "travelOptions" : [ "Women" , "Van" ]
             }
 
 
@@ -3397,7 +3407,7 @@ If booking is not possible, the response body explains the reason why.
                             13.40693,
                             52.51914
                         ]
-                    }
+                    },
                     "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
                     "time": "2013-05-01 12:00:00" 
                 },
@@ -3474,7 +3484,7 @@ If canceling is not possible, the response body explains the reason why.
                                 13.40693,
                                 52.51914
                             ]
-                        }
+                        },
                         "address": { "citycode":"10178", "city":"Berlin", "Street":"Spandauer Straße","houseno":"9" }, 
                         "time": "2013-05-01T12:00:00" 
                     },
