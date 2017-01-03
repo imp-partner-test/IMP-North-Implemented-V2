@@ -10224,9 +10224,22 @@ Status|String|Order status of the process
 expectedTime|Calendar|eta of the taxi
 licenceId|String|License id of the taxi
 driver|Object|Phone number of the taxi driver
-location|Object|Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
+location|Object|Standard GeoJSON with 'Point'
 
-+ Model (application/json)
++Model (application/json)
+             {
+                "status": "1",
+                "expectedTime": "1442314918657",
+                "licenceId": "12345",
+                "driver": "ServiceSubscription",
+                "location": ""
+            }
+            
+### Show status of Taxi [GET]
+@testable
+
++ Response 200
+
         
 
    
