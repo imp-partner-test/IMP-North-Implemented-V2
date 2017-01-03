@@ -10223,7 +10223,11 @@ attribute | json data type | comments
 Status|String|Order status of the process
 expectedTime|Calendar|eta of the taxi
 licenceId|String|License id of the taxi
-driver|Object|Phone number of the taxi driver
+driver->phoneNo|String|Phone number of the taxi driver
+driver->pictureUrl|Object|Image of the driver can be a URL or byte array
+driver->givenName|String|Name of the driver
+driver->lastName|String|Name of the driver
+driver->rating|String|Rating of the driver
 location|Object|Standard GeoJSON with 'Point'
             
 ### Show status of Taxi [GET]
