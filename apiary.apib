@@ -2822,7 +2822,7 @@ provider | String | Alias of service provider | yes
 availability | Double | ="100" | yes 
 externalID | Number | Identification number of service provider | usually
 operator | String | Transport company operating the service | no
-stationType | String | Main type: `CityTrainStation`, `MetroStation`, or `BusTramStation`, and `PublicTransportStation`. The last value is a generic type for stations without information about deparing lines  | yes 
+stationType | String | Main type: `CityTrainStation`, `MetroStation`, `BusTramStation`, `FerryStation`, `GondolaStation`, or `PublicTransportStation`. The last value is a generic type for stations without information about deparing lines  | yes 
 platforms | String | Platforms of the station | no
 wheelChair | Boolean | Wheel chair accessibility | no
 stationTypes | List of Enum | All types: `TrainStation`, `RegioTrainStation`, `CityTrainStation`, `MetroStation`, `TramStation`, `BusStation`, `FerryStation`, `GondolaStation`, and `PublicTransportStation`. The last value is a generic type for stations without information about deparing lines | yes 
@@ -10209,7 +10209,30 @@ REQUEST
 + Response 200 
 
     [Report][]
+    
+# Group Process Status
 
+This group describes rest resources which needs to get the status of any process from the service provider.
+
+## Get the status of Taxi Service Booking [/imp-endpoint/api/V2/Processes/TaxiService/{processId}]
+
+RESPONSE:
+The status response will contains the following attributes:
+attribute | json data type | comments
+--- | --- | ---
+Status|String|Order status of the process
+expectedTime|Calendar|eta of the taxi
+licenceId|String|License id of the taxi
+driver->phoneNo|String|Phone number of the taxi driver
+driver->pictureUrl|Object|Image of the driver can be a URL or byte array
+driver->givenName|String|Name of the driver
+driver->lastName|String|Name of the driver
+driver->rating|String|Rating of the driver
+location|Object|Standard GeoJSON with 'Point' geometry type. { "type": "Point", "coordinates": ["longitude":Number, "latitude":Number] }
+
++ Model (text/plain)
+
+   
 
 
 
