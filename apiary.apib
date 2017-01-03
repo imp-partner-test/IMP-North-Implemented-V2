@@ -3499,6 +3499,83 @@ If canceling is not possible, the response body explains the reason why.
                 },
                 "actions": [ ]
             }
+            
+## Modifying a taxi [/imp-endpoint/api/V2/Processes/123?action=modify] 
+
+Modify a booking for a taxi that has been booked before. The booking id (123 in the example below) has to be provided as processID in the request.
+
+Input in request body: 
+operator name
+
+The response contains information about the originally planned taxi ride and confirmation if the modification was successful or no.
+
+Please note: 
+If modifying is not possible, the response body explains the reason why.
+
+### modify a taxi booking [POST]
+@nottestable
+    
++ Request
+
+    + Headers
+    
+            userToken: "some token"
+        
+    + Body
+    
+            {
+                 "operator": {
+                 "name": "dtcLimousine"
+                 },
+                 "origin" : {
+                 "location": { "type": "Point", "coordinates": [ 55.5087893, 25.333412 ] }, 
+                 "address": {"city":"Sharjah",
+                 "street":"Sharjah International Airport"
+                 }
+                 },
+                 "destination" : {
+                 "location": { "type": "Point", "coordinates": [ 55.3655, 25.2920 ] }, 
+                 "address": {"city":"Al Nahda-1",
+                 "street":"28, 1 Street"}
+                 },
+                 "numOfTravelers":"1",
+                 "time": "2016-12-22T15:10:00+02:00",
+                 "traveler":{
+                 "travellerId":"4",
+                 "givenName":"xyz",
+                 "lastName":"lmnop",
+                 "phoneNo":"7894569966"
+                 }
+            }
+
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            Location: /api/V2/Processes/123
+            
+    + Body
+    
+            {
+              "process": {
+                "actions": [
+                    {
+                        "name": "Cancel",
+                        "method": "PUT",
+                        "uri": "/api/V2/Processes/123?action=Cancel"
+                    },{
+                        "name": "modify",
+                        "method": "PUT",
+                        "uri": "/api/V2/Processes/123?action=modify"
+                    }
+                ],
+                "processId": "28323",
+                "confirmation": {
+                  "featureType": "MODIFICATION"
+                }
+              }
+            }
 
 # Group Intermodal Routing
 This is a group of all intermodal routing (IMR) related REST resources.
