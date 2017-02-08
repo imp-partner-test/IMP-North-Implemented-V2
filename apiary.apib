@@ -11,7 +11,7 @@ For access to the staging and production system please write an email to `connec
 (c) Siemens AG 2016 All rights reserved
 
 # General
-* All coordinates are in the WGS84 system, with longitude and latitude units of decimal degrees. Example: "coordinates": [12.9882042, 52.9718091]
+* All coordinates are in the WGS84 system, with first parameter longitude and second parameter latitude units of decimal degrees. Example: "coordinates": [12.9882042, 52.9718091]
 * Dates and time are represented in RFC-3339 format with an optional time zone offset. Example: "2014-07-10T14:23:11+02:00"
 * Connect supports English and German and defaults to English. Integrated services may support additional languages but may also not translate all content from their default language. The language can be set in the `Accept-Language header` (Example: de-DE)
 
@@ -3355,7 +3355,7 @@ If booking is not possible, the response body explains the reason why.
     
             {
                 "operator": {
-                    "name": "BetterTaxi",
+                    "name": "dubaiTaxi",
                     "userId": "MP1_1",
                     "password": "TopSecret!"
                 },
