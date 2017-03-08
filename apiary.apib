@@ -1872,7 +1872,45 @@ attribute | json data type | comments
 requestId | String | Resource id received while initiating the booking
 ticketIds | Array | Array of ticket ids 
 ticketContent | Base64Binary | Content of Ticket
-price | Object | Price of ticket with currency and value specified.    
+price | Object | Price of ticket with currency and value specified. 
+ticketType | String | Type of ticket
+productionDateTime | Calendar | Timestamp of production of ticket. 
+ticketingCategory | String | Category of ticket
+tariffInfo | String | Information about tariff zones
+validFromDay |Calendar| Ticket valid from date 
+validFromTime | Calendar| Ticket valid from time
+validToDay | Calendar| Ticket valid to day
+validToTime | Calendar | Ticket valid to time
+discountCard | String | Discount card used
+discountCardCode | String | Discount card code
+travelClass | String | Travel Class (i.e 1st or 2nd Class)
+medium | String | Type of Ticket (E-Ticket or Ticket on paper)
+tripType | String |  Type of trip ( One-way or return)
+validityPeriod | Object | validity Period of ticket
+originId | String| Station ID of origin 
+originAddress | String | Address of origin 
+destinationId | String| Station ID of destination
+destinationAddress | String | Address of destination
+vias | String | Segments in travel route
+traveller | Object | Containts information about the traveller
+fqCode | String | Maps to the fqCode provided by the ticketing service provider
+ticketingDescription | String | Type of ticket (One-way or return ticket)
+tariffInformation | String | Concatenated information about tariff 
+tariffText | String | Concatenated information about tariff 
+securityCode | String | maps to the SecurityCode provided by the ticketing service provider
+customerSegmentName | String |  Customer segment (e.g. Half-Fare travelcard).  
+usageConditons | String | Conditions under which ticket can be used
+serviceConditions | String | Special conditions for general usage
+referenceNo | String | maps to the referenceNo provided by the ticketing service provider
+travelClassText | String | Travel class mentioned in ticket
+ticketOriginLabel | String | "From:" (Translated based on language header specified)
+ticketDestinationLabel | String | "To:" (Translated based on language header specified)
+includingVatLabel | String | "Incl."  (Translated based on language header specified)
+vatLabel | String | "VAT"  (Translated based on language header specified)
+mediumDesc | String | Special information for the type of this ticket (e.g. online ticket has special conditions). 
+vat | Integer | Amount of value added tax
+
+
 HTTP Headers:
 - userToken: Token in the response received to {{host}}/imp-endpoint/api/{{version}}/Partners/User/Process?action=register
 - Accept-Language: This header specifies the language of the attribues in the buy request to be sent. Examples: de, en, fr, it. The supported languages depend on the individual services. Not all information may be translated from the default language of the service.
