@@ -3360,16 +3360,81 @@ This response contains estimated fare for trips from origin to destination.
                 "information": "An diesem Flughafen ist keine Taxibuchung möglich, bitte nutzen Sie eines der Flughafen Taxis" 
             }      
         }
+##Fare for the specified trip [/imp-endpoint/api/V2/Info/TaxiService/Fares?totalDistance={totalDistance}&totalTime={totalTime}&departureTime={departureTime}&isAirportPickup={isAirportPickup}&isVan={isVan}&isAirportPickup={isAirportPickup}&isWomen={isWomen}&isBooked={isBooked}]
+
+This response contains estimated fare for trips based on distance travelled and trip duration along with travel Options specified.
+
+### Get fare information for the trip specified by distance and duration [GET]
+@nottestable
+
++ Parameters
+    + totalDistance (number, `500`) ... is in multiplier of 10 meters. Has example value.
+    + totalTime (number, `15`) ...  Total travel time. Unit is in minutes. Has example value.
+    + departureTime (number, `53.57914`) ... latitude value of destination. Has example value.
+    + isVan (boolean, `True`) ... Boolean value to specify type of vehicle. Has example value.
+    + isAirportPickup (boolean, `True`) ... Boolean value. Has example value.
+    + isWomen (boolean, `True`) ... Boolean value. Has example value.
+    + isBooked (boolean, `True`) ... Boolean value. Has example value.
+
++ Response 200 (application/json)
+[
+  {
+    "fareQuality": null,
+    "totalDistance": null,
+    "startTime": null,
+    "arrivalTime": null,
+    "totalTime": null,
+    "costs": {
+      "flagFall": {
+        "unit": "Aed",
+        "value": 7.5
+      },
+      "total": {
+        "unit": "Aed",
+        "value": 29
+      },
+      "distance": null,
+      "luggage": null,
+      "ccard": null,
+      "minFare": null,
+      "passengers": null
+    },
+    "services": null,
+    "provider": "dtcLimousine"
+  }
+]
+
+
 
 ## Booking a taxi [/imp-endpoint/api/V2/Resources/TaxiService/Taxis/Process?action=Book] 
 
 Book a Taxi: The taxi ride is specified by providing the starting point (address and/or geo location) and the destination.
 This means that no specific, previously selected taxi is booked.
 
-Input in request body: 
-operator: name, userId and password (for authentication),
-origin of the taxi ride and optional start time,
-destination of the taxi ride.
+The data structure of the request:
+
+attribute | json data type | comments
+--- | --- | ---
+operator | Object | Serivce Provider and authentication information
+name  | String | Name of Service Provider
+userId | String | Required for authentication
+password | String | Required for authentication
+origin | Object | Description of origin
+destination | Object | Description of destination
+location | Co-ordinates | [X,Y] Co-ordinate of location
+address | String | Address of city and street
+numOfTravelers | String | Number of travellers
+time | TimeStamp | Time of booking (yyyy-MM-dd'T'HH:mm:ssZ)
+traveler | Object | traveler information
+travellerId | String | Unique ID of Traveller
+givenName | String | First name of Traveller
+lastName | String | Last name of Traveller
+phoneNo | String | Phone No. of Traveller
+email | String | Passenger email
+travelOptions | Object | Travel Options specified by passenger eg ["Woman","Van"]
+Woman | String | If the traveller is(are) a lady(ladies)
+Van | String | Choice of vehcile is a van
+
 
 Further parameters might detail the request by specifying the number of passengers, availability of child seats, extra luggage etc.
 
