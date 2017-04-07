@@ -3474,6 +3474,22 @@ If booking is not possible, the response body explains the reason why.
                 "destination" : {
                     "address": { "street": "28th Street", "houseno": "27A" , "district" : "Hor Al Anz East" }
                 },
+                "plannedRoute":{
+                      "coordinates": [
+                        [
+                         56.29339590000003,
+                            25.276890400000006
+                          ],
+                          [
+                            56.2886442,
+                            25.270915300000006
+                          ],
+                          [
+                            54.4529625,
+                            25.157674900000007
+                          ]
+                      ]
+                    },
                 "time": "2016-12-09T15:10:00+02:00",
                 "numOfTravelers" : "1",
                 "traveler" : {
@@ -3677,6 +3693,56 @@ If modifying is not possible, the response body explains the reason why.
                 }
               }
             }
+
+## Get the status of Taxi Service Booking [/imp-endpoint/api/V2/Processes/TaxiService/{processId}]
+
+RESPONSE:
+The status response will contains the following attributes:
+attribute | json data type | comments
+--- | --- | ---
+status|String|Order status of the process as received from service provider
+expectedTime|Calendar|Estimated arrival time of the taxi
+licenceId|String|License id of the taxi
+driver->phoneNo|String|Phone number of the taxi driver
+driver->pictureUrl|Object|Image of the driver can be a URL
+driver->givenName|String|Given name of the driver
+driver->lastName|String|Last name of the driver
+driver->rating|String|Rating of the driver as received from service provider
+location|Object|Last position of taxi as standard GeoJSON with 'Point'
+            
+Please note:
+As a default SiMobility Connect allows status requests of taxi bookings until 24 hours after booked time.
+
+### Show status of Taxi Booking [GET]
+@nottestable
+
++ Response 200(application/json)
+
+    + Body
+    
+            {
+                "statuses": [
+                {
+                "status": "2",
+                "driver": {
+                "driverId": null,
+                "phoneNo": null,
+                "image": {
+                "url": null,
+                "image": null,
+                "type": null
+                },
+                "givenName": null,
+                "lastName": null,
+                "rating": null
+                },
+                "licenceId": "",
+                "location": null,
+                "expectedTime": null
+                }
+              ]
+            }
+
 
 # Group Intermodal Routing
 This is a group of all intermodal routing (IMR) related REST resources.
@@ -10388,55 +10454,6 @@ REQUEST
 
     [Report][]
     
-# Group Process Status
-
-This group describes rest resources which needs to get the status of any process from the service provider.
-
-## Get the status of Taxi Service Booking [/imp-endpoint/api/V2/Processes/TaxiService/{processId}]
-
-RESPONSE:
-The status response will contains the following attributes:
-attribute | json data type | comments
---- | --- | ---
-Status|String|Order status of the process
-expectedTime|Calendar|eta of the taxi
-licenceId|String|License id of the taxi
-driver->phoneNo|String|Phone number of the taxi driver
-driver->pictureUrl|Object|Image of the driver can be a URL or byte array
-driver->givenName|String|Name of the driver
-driver->lastName|String|Name of the driver
-driver->rating|String|Rating of the driver
-location|Object|Standard GeoJSON with 'Point'
-            
-### Show status of Taxi [GET]
-@nottestable
-
-+ Response 200(application/json)
-
-    + Body
-    
-            {
-                "statuses": [
-                {
-                "status": "2",
-                "driver": {
-                "driverId": null,
-                "phoneNo": null,
-                "image": {
-                "url": null,
-                "image": null,
-                "type": null
-                },
-                "givenName": null,
-                "lastName": null,
-                "rating": null
-                },
-                "licenceId": "",
-                "location": null,
-                "expectedTime": null
-                }
-              ]
-            }
 
 
 # Group Dummy. Please do not delete.
