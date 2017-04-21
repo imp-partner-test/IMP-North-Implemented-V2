@@ -3744,6 +3744,148 @@ As a default SiMobility Connect allows status requests of taxi bookings until 24
             }
 
 
+
+## Book a water taxi [/imp-endpoint/api/V2/Resources/WaterTransport/Taxis/Process?action=book] 
+
+Book a Water Taxi: The water taxi ride is specified by providing the starting point (stationId) and the destination (stationId).
+
+The booking request will contains the following attributes:
+attribute | json data type | comments
+--- | --- | ---
+operator->name|String|Operator name 'dubaiWaterTaxi'
+time|String|Water taxi booking time in ISO-8601 format
+numOfTravelers|String|Number of traveler
+travelOptions|String|TravelOptions values will be "4" for 'commuter taxi' and "5" for 'chartering taxi'
+duration|Long|Time duration in minutes (Mandatory for travelOption charter)
+needTourGuide|Boolean|Optional attribute
+origin->stationId|String|Pickup station number
+destination->stationId|String|Destination station number
+
+### Book a water taxi [POST]
+@nottestable
+    
++ Request
+
+    + Headers
+    
+            userToken: "some token"
+        
+    + Body
+    
+            {
+              "operator": {
+                "name": "dubaiWaterTaxi"
+              },
+              "time": "2017-04-10T12:50:00+04:00",
+              "numOfTravelers": "1",
+              "travelOptions": [
+                "5"
+              ],
+              "duration": 40,
+              "needTourGuide": true,
+              "origin": {
+                "stationId": "70"
+              },
+              "destination": {
+                "stationId": "76"
+              }
+            }
+
++ Response 201 (application/json)
+            
+    + Body
+    
+            {
+              "actions": [
+                {
+                  "name": "confirm",
+                  "method": "PUT",
+                  "uri": "Processes/162876?action=confirm"
+                }
+              ],
+              "processId": "162876",
+              "confirmation": {
+                "featureType": "BOOKING",
+                "confirmationId": "39217",
+                "confirmationData": {
+                  "bookingRefNo": 39217,
+                  "isBookingAvailable": true,
+                  "tripArrivalTime": "2017-04-10T13:40:00+04:00",
+                  "nextBookingDate": null,
+                  "errorResponse": null
+                }
+              }
+            }
+            
+## Confirm water taxi [/imp-endpoint/api/V2/Processes/162876?action=confirm] 
+
+Confirming a water taxi requires a confirmation id obtained from water taxi book response.
+Also, processID has to provided in the confirm request which can be obtained from response of 
+water taxi booking.
+
+Confirm water taxi request will contain the following attribute: 
+attribute | json data type | comments
+--- | --- | ---
+numOfTravelers|Integer|Number of traveler
+confirmationId|String|Confirmation id obtained from book response
+notes|String|Customer notes
+traveler->givenName|String|Customer name
+traveler->lastName|String|Customer last name
+traveler->title|String|Title "1" for 'Mr', "2" for 'Mrs' and "3" for 'Ms'
+traveler->email|String|Customer Email
+traveler->mobileNo|String|Customer mobile number
+traveler->countryCode|String|Customer mobile country code
+
+The response contains information about the originally planned taxi ride and confirmation if the modification was successful or no.
+
+### Confirm a water taxi [POST]
+@nottestable
+    
++ Request
+
+    + Headers
+    
+            userToken: "some token"
+        
+    + Body
+    
+            {
+             "numOfTravelers":2,
+             "confirmationId":"39217",
+             "notes":"nothing",
+             "traveler":{
+                  "givenName":"mobility",
+                  "lastName":"siemens",
+                  "title":"1",
+                  "email":"mobilitysiemens@gmail.com",
+                  "mobileNo":"9876543211",
+                  "countryCode":"91"
+                }
+            }
+
+
++ Response 201 (application/json)
+            
+    + Body
+    
+            {
+              "process": {
+                "actions": [],
+                "processId": "162876",
+                "confirmation": {
+                  "featureType": "CONFIRM",
+                  "confirmationData": {
+                    "confirmed": true,
+                    "messages": [
+                      10862,
+                      "Success"
+                    ]
+                  }
+                }
+              }
+            }
+
+
 # Group Intermodal Routing
 This is a group of all intermodal routing (IMR) related REST resources.
 
