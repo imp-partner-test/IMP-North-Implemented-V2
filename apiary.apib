@@ -1425,18 +1425,16 @@ to | DateTime |
 + Parameters
     + carId (string, `2`) ... Identification number of Connect. Can be retrieved through "Car Sharing Locations with Basic Info" or "Free-floating Cars with Basic Info".
 
-
 + Request
+    + Headers
+            Accept: application/json
 
-    + Body
-    
-            { 
-                "operator": "drivenow",
-                "from": "",
-                "to": "",
-                "userId": "4711/10" 
-            }
-    
+    + Attributes
+        + operator: `drivenow` (string, required)
+        + from (string, optional) - start time of booking as dateTime
+            + Default: `server time of Connect or service provider`
+        + to (string, optional) - end time of booking as dateTime
+        + userId: `4711/10` (string, required)
         
 + Response 201 (application/json)
 
@@ -3421,6 +3419,7 @@ origin | Object | Description of origin
 destination | Object | Description of destination
 location | Co-ordinates | [X,Y] Co-ordinate of location
 address | String | Address of city and street
+noteToDriver | String | Additional information for eg. pickup details for driver
 numOfTravelers | String | Number of travellers
 time | TimeStamp | Time of booking (yyyy-MM-dd'T'HH:mm:ssZ)
 traveler | Object | traveler information
