@@ -823,7 +823,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     + lat (optional, number, `52.52`) ... Latitude value of center of bounding circle.
     + lng (optional, number, `13.39`) ... Longitude value of center of bounding circle.
     + radius (optional, number, `100`) ... Radius of bounding circle in meter.
-    + f_cars (optional, string, `{"provider":"driveNow"}`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
+    + f_cars (optional, string, `[{"provider":"driveNow"}]`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
 
 + Request
 
@@ -916,7 +916,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     + lat (optional, number, `52.52`) ... Latitude value of center of bounding circle.
     + lng (optional, number, `13.39`) ... Longitude value of center of bounding circle.
     + radius (optional, number, `100`) ... Radius of bounding circle in meter.
-    + f_cars (optional, string, `{"provider":"driveNow"}`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
+    + f_cars (optional, string, `[{"provider":"driveNow"}]`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
 
 + Request
 
@@ -1096,7 +1096,7 @@ modFlag | Enum | Type of modification to resource [New / Modified / Relocated / 
     + lat (optional, number, `52.52`) ... Latitude value of center of bounding circle.
     + lng (optional, number, `13.39`) ... Longitude value of center of bounding circle.
     + radius (optional, number, `4000`) ... Radius of bounding circle in meter.
-    + f_cars (optional, string, `{"provider":"flinkster"}`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
+    + f_cars (optional, string, `[{"provider":"flinkster"}]`) ... Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator`.
     
 + Request
     + Headers
@@ -2737,7 +2737,7 @@ usage | String | Description how to enter or use the parking space
             }
             
         
-## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&f_garages=[{categoryJson}]&filter={filter}]    
+## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces=[{sizeJson}]&f_garages=[{categoryJson}]&filter={filter}]    
 Get a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
 The area of interest can be defined as:
 
@@ -9970,7 +9970,7 @@ attribute | json data type | comments
 subscribed | Boolean | true, false 
 category | List of String | Parking, PublicTransport, TrafficInfo, TimeTables, Ticketing, BikeSharing, CarSharing, EVCharging, WMS, JourneyPlanner, CarJourneyPlanner, GeoCoding, TaxiService 
 
-Example: f_service={"subscribed": true, "category": ["PublicTransport", "CarSharing"]}
+Example: f_service=[{"subscribed": true, "category": ["PublicTransport", "CarSharing"]}]
 
 RESPONSE:
 Get a list service offerings.
