@@ -792,7 +792,7 @@ In case of station-based cars, only the URI of the Car Sharing station is return
 parameter | type | comments | required | default
 --- | --- | --- | --- | ---
 lat, lng, radius | Number | Bounding circle to define search area | no | no
-left_lower_lat, left_lower_lat, right_upper_lat, right_upper_lng | Number | Bounding box to define search area | no | no
+left_lower_lat, left_lower_lng, right_upper_lat, right_upper_lng | Number | Bounding box to define search area | no | no
 f_cars | String | Filter to retrieve cars of a specific `fuelType`, `provider`, or `operator` | no | no
 
 The (optional) If-Modified-Since can be set to a specific date-time in order to request only resources modified after a particular date-time. Date time in HTTP date format for e.g. Wed, 09 Apr 2008 23:55:38 GMT
@@ -2324,7 +2324,7 @@ HTTP Headers:
 # Group Parking
 This is a group of all parking related REST resources including Parking Garages and On-street Parking Vacancies.
     
-## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages={categoryJson}&filter={filter}]
+## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages=[{categoryJson}]&filter={filter}]
 Get a list of all parking garages in an area of interest specified by query parameters together with an URI to acquire more details. Parking garages can be filtered by category.
 The area of interest can be defined as:
 
@@ -2739,7 +2739,7 @@ usage | String | Description how to enter or use the parking space
             }
             
         
-## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&f_garages={categoryJson}&filter={filter}]    
+## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&f_garages=[{categoryJson}]&filter={filter}]    
 Get a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
 The area of interest can be defined as:
 
