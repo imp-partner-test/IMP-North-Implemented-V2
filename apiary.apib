@@ -2365,7 +2365,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (optional, number, `52.52`) ... latitude value. Has example value.
     + lng (optional, number, `13.39`) ... longitude value. Has example value.
     + radius (optional, number, `10000`) ... radius in meter. Has example value.
-    + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data, containing a list of possible category values combined by AND. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
+    + categoryJson (optional, string, `[{"category":["P+R"]}]`) ... String `categoryJson` category json data, containing a list of possible category values combined by AND. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
     + filter (optional, string, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
@@ -2761,7 +2761,7 @@ Parts of the data structure might be omitted if the information is not available
     + lng (number, `13.39`) ... longitude value. Has example value.
     + radius (number, `1000`) ... radius in meter. Has example value.
     + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
-    + categoryJson (optional, string, `{"category":["P+R"]}`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
+    + categoryJson (optional, string, `[{"category":["P+R"]}]`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
     + filter (optional, string, `Large PR`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
 + Request
 
