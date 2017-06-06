@@ -31,7 +31,7 @@ messages | Array | Array of strings with warnings and error messages. Common exa
 # Group Bike Sharing
 This is a group of all bike sharing related REST resources.
     
-## Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/Stations?lat={lat}&lng={lng}&radius={radius}&filter={filter}]    
+## Bike Sharing Stations [/imp-endpoint/api/V2/Resources/BikeSharing/Stations{?lat}{?lng}{?radius}{?filter}]    
 Get a list of all bike sharing stations in an area of interest specified by query parameters.
 The area of interest can be defined as:
 
@@ -426,7 +426,7 @@ comments | String |
             }
         }
 
-## Get floating bikes [/imp-endpoint/api/V2/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]    
+## Get floating bikes [/imp-endpoint/api/V2/Resources/BikeSharing/Bikes{?lat}{?lng}{?radius}]    
 Get a list of all floating bikes in an area of interest specified by query parameters.
 The area of interest can be defined as:
 
@@ -567,10 +567,6 @@ comments | String |
     + bikeId (string, `1`) ... Bike to be booked. String `id` as retrieved through *[/imp-endpoint/api/V2/Resources/BikeSharing/Bikes?lat={lat}&lng={lng}&radius={radius}]* or similar.
 
 + Request
-    + Attributes
-        + id: `15` (number, optional)
-            + Default: `20`
-
     + Body
     
             { 
@@ -1425,17 +1421,15 @@ to | DateTime |
 + Parameters
     + carId (string, `2`) ... Identification number of Connect. Can be retrieved through "Car Sharing Locations with Basic Info" or "Free-floating Cars with Basic Info".
 
-+ Request
-    + Headers
-            Accept: application/json
++ Attributes
+    + operator: `drivenow` (string, required)
+    + from (string, optional) - start time of booking as dateTime
+        + Default: `server time of Connect or service provider`
+    + to (string, optional) - end time of booking as dateTime
+    + userId: `4711/10` (string, required)
 
-    + Attributes
-        + operator: `drivenow` (string, required)
-        + from (string, optional) - start time of booking as dateTime
-            + Default: `server time of Connect or service provider`
-        + to (string, optional) - end time of booking as dateTime
-        + userId: `4711/10` (string, required)
-        
++ Request (application/json)
+
 + Response 201 (application/json)
 
         {
@@ -2322,7 +2316,7 @@ HTTP Headers:
 # Group Parking
 This is a group of all parking related REST resources including Parking Garages and On-street Parking Vacancies.
     
-## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages?lat={lat}&lng={lng}&radius={radius}&f_garages=[{categoryJson}]&filter={filter}]
+## Parking Garages with Basic Info [/imp-endpoint/api/V2/Resources/Parking/Garages{?lat}{?lng}{?radius}{?f_garages}{?filter}]
 Get a list of all parking garages in an area of interest specified by query parameters together with an URI to acquire more details. Parking garages can be filtered by category.
 The area of interest can be defined as:
 
@@ -2363,7 +2357,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (optional, number, `52.52`) ... latitude value. Has example value.
     + lng (optional, number, `13.39`) ... longitude value. Has example value.
     + radius (optional, number, `10000`) ... radius in meter. Has example value.
-    + categoryJson (optional, string, `[{"category":["P+R"]}]`) ... String `categoryJson` category json data, containing a list of possible category values combined by AND. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
+    + f_garages (optional, string, `[{"category":["P+R"]}]`) ... containing a list of possible category values combined by AND. Example value `{"category":["P%2BR"]}` or `{"category":["P"]}`, P%2BR stands for P+R
     + filter (optional, string, `Berlin`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
@@ -2576,7 +2570,7 @@ entrance | String |
                 "entrance": null
             }
 
-## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces={sizeJson}&filter={filter}]
+## OnStreet Parking Spaces [/imp-endpoint/api/V2/Resources/Parking/OnStreetSpaces{?lat}{?lng}{?radius}{?f_onStreetSpaces}{?filter}]
 Get a list of OnStreet parking spaces for specified size in an area of interest specified by query parameters together with an URI to acquire more details. OnStreet parking spaces can be filtered by the space size (Small, Medium or Large).
 The area of interest can be defined as:
 
@@ -2616,7 +2610,7 @@ Parts of the data structure might be omitted if the information is not available
     + lat (optional, number, `48.13`) ... latitude value. Has example value.
     + lng (optional, number, `11.59`) ... longitude value. Has example value.
     + radius (optional, number, `5000`) ... radius in meter. Has example value.
-    + sizeJson (optional, string, `{"size":"Medium"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`
+    + f_onStreetSpaces (optional, string, `{"size":"Medium"}`) ... Example value `{"size":"Large"}` or `{"size":"Medium"}`
     + filter (optional, string, `Medium`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
     
 + Request
@@ -2737,7 +2731,7 @@ usage | String | Description how to enter or use the parking space
             }
             
         
-## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking?lat={lat}&lng={lng}&radius={radius}&f_onStreetSpaces=[{sizeJson}]&f_garages=[{categoryJson}]&filter={filter}]    
+## Parking Garages or OnStreet parking spaces or both [/imp-endpoint/api/V2/Resources/Parking{?lat}{?lng}{?radius}&{?f_onStreetSpaces}{?f_garages}{?filter}]    
 Get a list of all parking garages or OnStreet parking spaces or both in an area of interest. The parking possibilities can be filtered by garage category (viz. P+R or P) or space size (Small, Medium or Large).
 The area of interest can be defined as:
 
@@ -2758,8 +2752,8 @@ Parts of the data structure might be omitted if the information is not available
     + lat (number, `52.52`) ... latitude value. Has example value.
     + lng (number, `13.39`) ... longitude value. Has example value.
     + radius (number, `1000`) ... radius in meter. Has example value.
-    + sizeJson (optional, string, `{"size":"Large"}`) ... String `sizeJson` size json data. Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
-    + categoryJson (optional, string, `[{"category":["P+R"]}]`) ... String `categoryJson` category json data. Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
+    + f_onStreetSpaces (optional, string, `{"size":"Large"}`) ... Example value `{"size":"Large"}` or `{"size":"Medium"}`or `{"size":"Small"}
+    + f_garages (optional, string, `[{"category":["P+R"]}]`) ... Example value `{"category" : ["P%2BR"]}` or `{"category": ["P"]}`
     + filter (optional, string, `Large PR`) ... free text filter value. Multiple strings are combined by or. Examples `Berlin`, `{Berlin}`, `{Berlin Mitte}`
 + Request
 
@@ -3183,7 +3177,7 @@ timetoArrive | number, string | Estimated time to arrive | no
         }
 
 
-## List of available Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Ranks?lat={lat}&lng={lng}&radius={radius}] 
+## List of available Taxi Ranks with Basic Info [/imp-endpoint/api/V2/Resources/TaxiService/Ranks{?lat}{?lng}{?radius}] 
 
 Get a list of taxi ranks in a specified area with basic information and a URI to get more details.
 The area of interest can be defined as:
@@ -3258,7 +3252,7 @@ Parts of the data structure might be omitted if the information is not available
             ]
         }
         
-## Fare for the trip specified by origin and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&radius={radius}] 
+## Fare for the trip specified by origin and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares{?origin_lat}&{?origin_lng}{?radius}] 
 
 This response contains an estimated fare for trips from origin with distance.
 
@@ -3276,8 +3270,8 @@ costs | Object | Contains total costs, flag fall and distance costs as well as s
 services | Object | Set of available services
 
 + Parameters
-    + lat (number, `52.482780222078205`) ... latitude value. Has example value.
-    + lng (number, `13.3154296875`) ... longitude value. Has example value.
+    + origin_lat (number, `52.482780222078205`) ... latitude value. Has example value.
+    + origin_lng (number, `13.3154296875`) ... longitude value. Has example value.
     + radius (number, `2000`) ... distance in meter. Has example value.
 
 + Response 200 (application/json)
@@ -3313,7 +3307,7 @@ services | Object | Set of available services
             }      
         }
 
-## Fare for the trip specified by origin and destination [/imp-endpoint/api/V2/Info/TaxiService/Fares?origin_lat={lat}&origin_lng={lng}&dest_lat={dlat}&dest_lng={dlng}] 
+## Fare for the trip specified by origin and destination [/imp-endpoint/api/V2/Info/TaxiService/Fares{?origin_lat}{?origin_lng}{?dest_lat}{?dest_lng}] 
 
 This response contains estimated fare for trips from origin to destination.
 
@@ -3321,10 +3315,10 @@ This response contains estimated fare for trips from origin to destination.
 @nottestable
 
 + Parameters
-    + lat (number, `52.482780222078205`) ... latitude value of origin. Has example value.
-    + lng (number, `13.3154296875`) ... longitude value of origin. Has example value.
-    + dlat (number, `53.57914`) ... latitude value of destination. Has example value.
-    + dlng (number, `13.40603`) ... longitude value of destination. Has example value.
+    + origin_lat (number, `52.482780222078205`) ... latitude value of origin. Has example value.
+    + origin_lng (number, `13.3154296875`) ... longitude value of origin. Has example value.
+    + dest_lat (number, `53.57914`) ... latitude value of destination. Has example value.
+    + dest_lng (number, `13.40603`) ... longitude value of destination. Has example value.
 
 + Response 200 (application/json)
 
@@ -3358,7 +3352,7 @@ This response contains estimated fare for trips from origin to destination.
                 "information": "An diesem Flughafen ist keine Taxibuchung möglich, bitte nutzen Sie eines der Flughafen Taxis" 
             }      
         }
-##Fare for the trip specified by time and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares?totalDistance={totalDistance}&totalTime={totalTime}&departureTime={departureTime}&isVan={isVan}&isAirportPickup={isAirportPickup}&isWomen={isWomen}&isBooked={isBooked}]
+##Fare for the trip specified by time and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares{?totalDistance}{?totalTime}{?departureTime}{?isVan}{?isAirportPickup}{?isWomen}&{?isBooked}]
 
 This response contains estimated fare for trips based on distance travelled and trip duration along with travel Options specified.
 
@@ -3491,6 +3485,7 @@ If booking is not possible, the response body explains the reason why.
                     },
                 "time": "2016-12-09T15:10:00+02:00",
                 "numOfTravelers" : "1",
+                "noteToDriver" : "لكل حرف" ,
                 "traveler" : {
                     "travellerId" : "1",
                     "type": "PERSON",
@@ -4101,40 +4096,40 @@ Notes:
 ### Get Trip Proposals by IMR Planner  [POST]
 @testable
 
-+ Request
++ Attributes
+    + origin (object, required)
+        + location (object, required)
+            + type: Point (string, required)
+            + coordinates: 13.41, 52.49 (array[number], required)
+    + destination (object, required)
+        + location (object, required)
+            + type: Point (string, required)
+            + coordinates: 13.38, 52.52 (array[number], required)
+    + trafficTypes: Train (array[string], required)
+        + (enum)
+            + Public Transit
+            + Train
+            + RegioTrain
+            + CityTrain
+            + Metro
+            + Tram
+            + Bus
+            + Ferry
+            + Gondola
+            + OwnBike
+            + BikeSharing
+            + OwnCar
+            + CarSharing
+    + time: `2016-09-27T18:10:00+02:00` (string, optional)
+        + Default: "Current server time"
+    + departureTime: true (boolean, optional)
+        + Default: true
+    + costFunctions (array)
+        + (object)
+            + costType: Duration, Distance, Emission, Price (enum)
+            + percentage: 100 (number)
 
-    + Headers
-    
-            Content-Type: application/json
-            Accept: application/json
-
-    + Body
-    
-            {
-            "origin": { 
-                "location": {"type": "Point", "coordinates": [13.41, 52.49]}
-                },
-            "destination": { 
-                "location": {"type": "Point", "coordinates": [13.38, 52.52]}
-                },
-            "trafficTypes":["CityTrain", "Metro","Bus", "OwnCar", "Walk"],
-            "time": "2016-09-27T18:10:00+02:00",
-            "departureTime":"true",
-            "costFunctions":[{"costType":"Duration","percentage":"100"},
-                             {"costType":"Distance","percentage":0},
-                             {"costType":"Emission","percentage":0},
-                             {"costType":"Price","percentage":0}
-                             ],
-            "routingConstraints": [ {"routingConstraintType": "Distance",
-                                      "trafficType": "Walk", 
-                                      "min": { "value": 0,   "unit": "Meter" }, 
-                                      "max": { "value": 600, "unit": "Meter" }
-                                      } ],
-            "ownVehicles":[{"trafficType":"Car", "useParking":true,"useParkAndRide":false,
-            "location":{"type": "Point", "coordinates": [13.06, 52.39]}}],
-            "maxRoutingResponses": 2,
-            "useTrafficSituation" : true
-            }
++ Request (application/json)
 
 + Response 200
 
@@ -9133,7 +9128,7 @@ This is an optional header. The default language is "English" if header is not s
 # Group Incidents / Traffic Info
 This is a group of all incidents related REST resources.
 
-## List of Incidents [/imp-endpoint/api/V2/Info/Incidents?lat={lat}&lng={lng}&radius={radius}] 
+## List of Incidents [/imp-endpoint/api/V2/Info/Incidents{?lat}{?lng}{?radius}] 
 
 Get a list of recent general incidents (incidents that affect public AND individual transport) in a specified area of interest with an URI to get more details.
 The area of interest can be defined as:
@@ -9239,7 +9234,7 @@ externalResourceId | String | ID in external provider system
 
     [List of Incidents][]
     
-## List of individual transport Incidents [/imp-endpoint/api/V2/Info/Incidents/IndividualTransport?lat={lat}&lng={lng}&radius={radius}] 
+## List of individual transport Incidents [/imp-endpoint/api/V2/Info/Incidents/IndividualTransport{?lat}{?lng}{?radius}] 
 
 Get list of recent incidents that affect individual transport only in a specified area of interest.
 The area of interest can be defined as:
@@ -9325,7 +9320,7 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
     [List of individual transport Incidents][]
 
 
-## List of public transport Incidents [/imp-endpoint/api/V2/Info/Incidents/PublicTransport?lat={lat}&lng={lng}&radius={radius}] 
+## List of public transport Incidents [/imp-endpoint/api/V2/Info/Incidents/PublicTransport{?lat}{?lng}{?radius}] 
 
 Get a list of recent incidents that affect public transport only in a specified area.
 The area of interest can be defined as:
@@ -9430,7 +9425,7 @@ The data structure contains the attributes as in *[/imp-endpoint/api/V2/Info/Inc
 # Group WMS
 This is a group of all REST resources delivered as WMS.
 
-## WMS PNG file for Points of Interest [/imp-endpoint/api/V2/Resources?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}&serviceNames={categories}]
+## WMS PNG file for Points of Interest [/imp-endpoint/api/V2/Resources{?left_lower_lat}{?left_lower_lng}{?right_upper_lng}{?right_upper_lat}{?width}{?heigth}{?serviceNames}]
 Get WMS PNG file for points of interests specified by (several) service categories (e.g. PublicTransport, Parking, etc.)
 
 ### Getting a WMS PNG file [GET] 
@@ -9439,13 +9434,13 @@ Get WMS PNG file for points of interests specified by (several) service categori
 Please note, the accept-header of this request must be set to "image/png".
 
 + Parameters
-    + lllat (number, `52.482780222078205`) ... Left lower latitude
-    + lllng (number, `13.3154296875`) ... Left lower longitude    
-    + rulng (number, `13.359375`) ... Right upper longitude
-    + rulat (number, `52.50953477032729`) ... Right upper latitude
-    + categories (string, `Parking,PublicTransport`) ... Service names, comma-separated list of service categories (currently offered as WMS layers by VMZ), e.g. PublicTransport, Parking
-    + h (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
-    + w (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + left_lower_lat (number, `52.482`) ... Left lower latitude
+    + left_lower_lng (number, `13.315`) ... Left lower longitude    
+    + right_upper_lng (number, `13.359`) ... Right upper longitude
+    + right_upper_lat (number, `52.509`) ... Right upper latitude
+    + width (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + heigth (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
+    + serviceNames (string, `Parking,PublicTransport`) ... Service names, comma-separated list of service categories (currently offered as WMS layers by VMZ), e.g. PublicTransport, Parking
 
 + Request
 
@@ -9460,7 +9455,7 @@ Please note, the accept-header of this request must be set to "image/png".
             ?PNG
 
 
-## WMS PNG file for Public Transport Stations [/imp-endpoint/api/V2/Resources/PublicTransport?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
+## WMS PNG file for Public Transport Stations [/imp-endpoint/api/V2/Resources/PublicTransport{?left_lower_lat}{?left_lower_lng}{?right_upper_lng}{?right_upper_lat}{?width}{?heigth}]
 Get WMS PNG file for public transport stations
 
 ### Getting a public transport stations WMS PNG file [GET] 
@@ -9468,12 +9463,12 @@ Get WMS PNG file for public transport stations
 Please note: The accept-header of this request must be set to "image/png"
 
 + Parameters
-    + lllat (number, `52.482780222078205`) ... Left lower latitude
-    + lllng (number, `13.3154296875`) ... Left lower longitude    
-    + rulng (number, `13.359375`) ... Right upper longitude
-    + rulat (number, `52.50953477032729`) ... Right upper latitude
-    + h (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
-    + w (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + left_lower_lat (number, `52.482`) ... Left lower latitude
+    + left_lower_lng (number, `13.315`) ... Left lower longitude    
+    + right_upper_lng (number, `13.359`) ... Right upper longitude
+    + right_upper_lat (number, `52.509`) ... Right upper latitude
+    + width (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + heigth (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
 
 + Request
 
@@ -9488,7 +9483,7 @@ Please note: The accept-header of this request must be set to "image/png"
             ?PNG
 
 
-## WMS PNG file for Current Traffic [/imp-endpoint/api/V2/Info/TrafficInfo?left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={w}&heigth={h}]
+## WMS PNG file for Current Traffic [/imp-endpoint/api/V2/Info/TrafficInfo{?left_lower_lat}{?left_lower_lng}{?right_upper_lng}{?right_upper_lat}{?width}{?heigth}]
 Get WMS PNG file for current traffic
 
 ### Getting a current traffic WMS PNG file [GET] 
@@ -9496,12 +9491,12 @@ Get WMS PNG file for current traffic
 Please note: The accept-header of this request must be set to "image/png"
 
 + Parameters
-    + lllat (number, `52.482780222078205`) ... Left lower latitude
-    + lllng (number, `13.3154296875`) ... Left lower longitude    
-    + rulng (number, `13.359375`) ... Right upper longitude
-    + rulat (number, `52.50953477032729`) ... Right upper latitude
-    + h (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
-    + w (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + left_lower_lat (number, `52.482`) ... Left lower latitude
+    + left_lower_lng (number, `13.315`) ... Left lower longitude    
+    + right_upper_lng (number, `13.359`) ... Right upper longitude
+    + right_upper_lat (number, `52.509`) ... Right upper latitude
+    + width (optional, number, `250`) ... Width of map output in pixels (semantics according to WMS GetMap request). The default value is width=250.
+    + heigth (optional, number, `250`) ... Height of map output in pixels (semantics according to WMS GetMap request). The default value is height=250.
 
 + Request
 
@@ -9650,7 +9645,7 @@ Starts "User Token Generation" Process
     [User Token][]
 
 
-## User Transactions Collection [/imp-endpoint/api/V2/Partners/User/Transactions?startDate={startDate}&endDate={endDate}]
+## User Transactions Collection [/imp-endpoint/api/V2/Partners/User/Transactions{?startDate}{?endDate}]
 
 The User Transactions Collection resource has the following attributes: 
 
@@ -9700,7 +9695,7 @@ The User Transactions Collection resource has the following attributes:
             
 # Group Geo Locations
 
-## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations?input={input}&language={language}&lat={lat}&lng={lng}&type={type}]
+## Geo Locations [/imp-endpoint/api/V2/Info/GeoLocations{?input}{?language}{?lat}{?lng}{?type}]
 
 Get list of geo locations for given parameters. Matching locations including geo-coordinates will be provided for a given textual address.
 
@@ -9716,8 +9711,8 @@ language | String | international abbreviation for language
 type |ENUM | type of locations "station", "address", "poi", or "all"
 + Parameters
     + input (string, `Berlin, Mollstrasse 7`) ... Search string. Has example value.
-    + lat (number, `52.4827802220`, optional) ... Prioritized latitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
-    + lng (number, `13.3154296875`, optional) ... Prioritized longitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
+    + lat (number, `52.482`, optional) ... Prioritized latitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
+    + lng (number, `13.315`, optional) ... Prioritized longitude value. The results will be ranked according to the given geo-coordinate. Rigth now this parameter has no effect. Has example value.
     + language (string, `en`, optional) ... International abbreviation of language in which the content will be provided, if it is available in this language. Has example value.
     + type (string, `station`, optional) ...  type of locations. Has example value.
 + Response 200 (application/json)
@@ -9836,7 +9831,7 @@ businessBoundary | Object | business area specified as MultiPolygon conform to t
 This is a group of all REST resources related to request heatmaps as PNG files. A heat map is a graphical representation of data where the individual values are represented as colors.
 Currently it is used to represent distribution of the resouces of two service categories, Car and Bike Sharing.
 
-## CarSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/CarSharing?date={date}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## CarSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/CarSharing{?date}{?left_lower_lat}{?left_lower_lng}{?right_upper_lng}{?right_upper_lat}{?width}{?height}]    
 Get WMS PNG file for carSharing for a specific date (in the past, current date or in the future) and for a specific bounding box (place).
 If the date is in the past, the returned image with green areas represents historical data of car sharing availability, if the date is in the future, the returned image with blue dots represents a prediction of car sharing availability. This interface is deprecated.
 
@@ -9845,12 +9840,12 @@ If the date is in the past, the returned image with green areas represents histo
 
 + Parameters
     + date (required, number, `1404892800000`) ... A date in the past for historical data / in the future for predictions. Has example value.
-    + lllat (required, number, `52.482780222078205`) ... Lower left latitude
-    + lllng (required, number, `13.3154296875`) ... Lower left longitude   
-    + rulng (required, number, `13.359375`) ... Right upper longitude
-    + rulat (required, number, `52.50953477032729`) ... Right upper latitude
-    + wdval (required, number, `480`) ... Width of image in pixels
-    + htval (required, number, `800`) ... Height of image in pixels
+    + left_lower_lat (required, number, `52.482`) ... Lower left latitude
+    + left_lower_lng (required, number, `13.315`) ... Lower left longitude   
+    + right_upper_lng (required, number, `13.359`) ... Right upper longitude
+    + right_upper_lat (required, number, `52.509`) ... Right upper latitude
+    + width (required, number, `480`) ... Width of image in pixels
+    + height (required, number, `800`) ... Height of image in pixels
     
 + Request
 
@@ -9864,20 +9859,20 @@ If the date is in the past, the returned image with green areas represents histo
     
             ?PNG
 
-## BikeSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/BikeSharing?date={date}&left_lower_lat={lllat}&left_lower_lng={lllng}&right_upper_lng={rulng}&right_upper_lat={rulat}&width={wdval}&height={htval}]    
+## BikeSharing Heatmap [/imp-endpoint/api/V2/Info/Heatmap/BikeSharing{?date}{?left_lower_lat}{?left_lower_lng}{?right_upper_lng}{?right_upper_lat}{?width}{?height}]    
 Get WMS PNG file for bike sharing for a specific date and for a specific bounding box (place). This interface is deprecated.
 
 ### Getting heatmap as PNG image [GET]
 @nottestable
 
 + Parameters
-    + date (required, number, `1404892800000`) ... A date in the past (later also in the future) Has example value.
-    + lllat (required, number, `52.482780222078205`) ... Lower left latitude
-    + lllng (required, number, `13.3154296875`) ... Lower left longitude    
-    + rulng (required, number, `13.359375`) ... Right upper longitude
-    + rulat (required, number, `52.50953477032729`) ... Right upper latitude
-    + wdval (required, number, `255`) ... Width of image in pixels
-    + htval (required, number, `255`) ... Height of image in pixels
+    + date (required, number, `1404892800000`) ... A date in the past for historical data / in the future for predictions. Has example value.
+    + left_lower_lat (required, number, `52.482`) ... Lower left latitude
+    + left_lower_lng (required, number, `13.315`) ... Lower left longitude   
+    + right_upper_lng (required, number, `13.359`) ... Right upper longitude
+    + right_upper_lat (required, number, `52.509`) ... Right upper latitude
+    + width (required, number, `255`) ... Width of image in pixels
+    + height (required, number, `255`) ... Height of image in pixels
 
 + Request
 
@@ -10568,7 +10563,7 @@ businessBoundary | Object | List of MultiPolygon in Geojson format.
 
 This is a group of all REST resources related to reporting.
 
-## Report [/imp-endpoint/api/V2/Reporting/CustomReport?reportName={reportName}] 
+## Report [/imp-endpoint/api/V2/Reporting/CustomReport{?reportName}] 
 
 RESPONSE:
 The response contains an image representing the report.
