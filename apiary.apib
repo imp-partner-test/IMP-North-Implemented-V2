@@ -61,9 +61,22 @@ Warning messages are provided when request attributes are ignored or unsupported
 - Unknown
 
 ### Message (object)
-+ code (string)
++ code (enum)
+    + 
+    + service.unavailable
+    + service.not.available.in.region
+    + trafficType.Car.not.supported
+    + service.has.been.filtered
+    + origin.equal.or.too.close.to.destination
+    + date.time.not.in.allowed.period
+    + invalid.trip.origin
+    + invalid.trip.destination
 + message (string)
-+ type (string) - `INFO`, `WARNING`, or `ERROR`
++ type (enum)
+    + 
+    + INFO
+    + WARNING
+    + ERROR
 
 ### Address (object)
 + citycode (string, nullable) 
@@ -1710,7 +1723,7 @@ Get a list of bikes at a specific station.
     + availability: 100 (number) - Current availability in percentage. "=0" or "=100" in case of floating bike
     + externalId: 3165145 (string) - Identification number of service provider
     + operator: `nextbike Berlin` (string) - Company operating the bike fleet. Commonly same as provider
-    + unitId: 14665 (number)
+    + unitId: 254723 (number)
 
 ### Get Bike with Details at a Station [GET] 
 Get details of a specific bike at a specific station.
@@ -2199,7 +2212,7 @@ This response contains estimated fare for trips from origin to destination.
                 }      
             }
 
-##Fare for the trip specified by time and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares{?totalDistance}{?totalTime}{?departureTime}{?isVan}{?isAirportPickup}{?isWomen}&{?isBooked}]
+##Fare for the trip specified by time and distance [/imp-endpoint/api/V2/Info/TaxiService/Fares{?totalDistance}{?totalTime}{?departureTime}{?isVan}{?isAirportPickup}{?isWomen}&{?isBooked}&{?filter}]
 This response contains estimated fare for trips based on distance travelled and trip duration along with travel Options specified.
 
 ### Get fare information for the trip specified by distance and duration [GET]
@@ -2211,7 +2224,8 @@ This response contains estimated fare for trips based on distance travelled and 
     + isVan (boolean, `True`) ... Boolean value to specify type of vehicle. 
     + isAirportPickup (boolean, `True`) ... Boolean value. 
     + isWomen (boolean, `True`) ... Boolean value. 
-    + isBooked (boolean, `True`) ... Boolean value. 
+    + isBooked (boolean, `True`) ... Boolean value.
+    + filter (string, `{"provider":"dubaiTaxi"}`) ... Json value used to receive provider specific response
 
 + Response 200 (application/json)
 
