@@ -2589,7 +2589,7 @@ status|String|Order status of the process as received from service provider
 expectedTime|Calendar|Estimated arrival time of the taxi
 licenceId|String|License id of the taxi
 driver->phoneNo|String|Phone number of the taxi driver
-driver->pictureUrl|Object|Image of the driver can be a URL
+driver->pictureUrl|String|Image of the driver will be a URL
 driver->givenName|String|Given name of the driver
 driver->lastName|String|Last name of the driver
 driver->rating|String|Rating of the driver as received from service provider
@@ -2610,11 +2610,7 @@ Note: As a default, SiMobility Connect allows status requests of taxi bookings u
                 "driver": {
                 "driverId": null,
                 "phoneNo": null,
-                "image": {
-                "url": null,
                 "image": null,
-                "type": null
-                },
                 "givenName": null,
                 "lastName": null,
                 "rating": null
