@@ -2268,7 +2268,7 @@ password | String | Required for authentication
 origin | Object | Description of origin
 destination | Object | Description of destination
 location | Co-ordinates | [X,Y] Co-ordinate of location
-address | String | Address of city and street
+address | String | Address of city , street , street number , postal code
 noteToDriver | String | Additional information for eg. pickup details for driver
 numOfTravelers | String | Number of travellers
 time | TimeStamp | Time of booking (yyyy-MM-dd'T'HH:mm:ssZ)
@@ -2316,7 +2316,7 @@ If booking is not possible, the response body explains the reason why.
                             52.51914
                         ]
                     },
-                    "address": { "street": "1 Street", "houseno": "28" , "district" : "Al Nahda-1" }
+                    "address": { "street": "1 Street", "houseno": "28" , "district" : "Al Nahda-1" , "city" : "Muenchen" , "streetNumber":"12B" , "poBox" : "002598"}
                     
                 },
                 "destination" : {
