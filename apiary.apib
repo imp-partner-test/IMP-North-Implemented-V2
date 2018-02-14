@@ -630,7 +630,7 @@ A segment can contain a a sequence of wayPoints and guidingPoints.
 A wayPoint describes an intermediate geo location useful for displaying a trip course in a map.
 A guidingPoint can be an intermediate public transport station or a turn-by-turn instruction. It gives a traveler hints on how to travel, e.g. whenever to change the road at a crossing. GuidingPoints are a subset of wayPoints.
 
-For a car and bike-sharing-segments `provider`, `operator` and `unitId` are provided. For public transport segments `stationId` and `direction` are provided. For `Train`, `RegioTrain`, `CityTrain`, and `Metro`, `platform` and `expectedPlatform` may be provided.
+For a car and bike-sharing-segments `operatorId`(deprecated), `provider`(use instead of operatorId), `operator`(use instead of operatorId) and `unitId` are provided. For public transport segments `stationId` and `direction` are provided. For `Train`, `RegioTrain`, `CityTrain`, and `Metro`, `platform` and `expectedPlatform` may be provided.
 
 Note: The trip proposals as returned by "Get Trip Proposals" are internally stored only for a certain time; afterward they expire and details are no longer available. The current expiration time is 10 minutes. Trip proposals can be based on real-time-data and should not be kept longer than necesseary.
 
